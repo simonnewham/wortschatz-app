@@ -1,4 +1,4 @@
-import { useTheme } from '@react-navigation/native';
+import { Theme, useTheme } from '@react-navigation/native';
 import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../components/CancelSubmitButton';
@@ -15,7 +15,7 @@ const initialForm = {
 
 export default function AddWord() {
     const theme = useTheme();
-
+    const styles = useMemo(() => getStyles(theme), []);
     const [isEnabled, setIsEnabled] = useState(false);
     const [form, setForm] = useState(initialForm);
 
@@ -25,46 +25,11 @@ export default function AddWord() {
 
     const onSubmit = async () => {
         try {
-
+            alert(JSON.stringify(form));
         } catch (e) {
             // saving error
         }
     }
-
-    const styles = useMemo(() => {
-        return StyleSheet.create({
-            container: {
-                flex: 3,
-                flexDirection: 'column',
-                flexGrow: 1,
-                backgroundColor: theme.colors.background
-            },
-            formContainer: {
-                flex: 2,
-                flexDirection: 'column',
-                width: '100%',
-                height: '100%',
-                padding: 10,
-                minWidth: 40,
-                flexGrow: 3
-            },
-            input: {
-                height: 40,
-                borderWidth: 1,
-                marginVertical: 10,
-                padding: 5,
-                width: '100%',
-                maxWidth: '100%',
-                borderRadius: 4,
-                backgroundColor: theme.colors.card,
-                color: theme.colors.text
-            },
-            text: {
-                fontSize: 14,
-                color: theme.colors.text
-            }
-        });
-    }, []);
 
     return (
         <View style={[styles.container]}>
@@ -97,10 +62,45 @@ export default function AddWord() {
             </ScrollView>
 
             <View style={{ flex: 1 }}>
-                <CancelSubmitButton/>
+                <CancelSubmitButton onSubmit={onSubmit}/>
             </View>
         </View>
     );
 }
+
+const getStyles = (theme: Theme) => {
+    return StyleSheet.create({
+        container: {
+            flex: 3,
+            flexDirection: 'column',
+            flexGrow: 1,
+            backgroundColor: theme.colors.background
+        },
+        formContainer: {
+            flex: 2,
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%',
+            padding: 10,
+            minWidth: 40,
+            flexGrow: 3
+        },
+        input: {
+            height: 40,
+            borderWidth: 1,
+            marginVertical: 10,
+            padding: 5,
+            width: '100%',
+            maxWidth: '100%',
+            borderRadius: 4,
+            backgroundColor: theme.colors.card,
+            color: theme.colors.text
+        },
+        text: {
+            fontSize: 14,
+            color: theme.colors.text
+        }
+    });
+};
 
 

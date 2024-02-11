@@ -4,7 +4,12 @@ import { useMemo } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { Text } from './Themed';
 
-export function CancelSubmitButton(props: any) {
+export interface ICancelSubmitButtonProps {
+    onSubmit: () => void;
+    onCancel?: () => void;
+}
+
+export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
     const theme = useTheme();
 
     const styles = useMemo(() => {

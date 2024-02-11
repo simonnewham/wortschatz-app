@@ -8,6 +8,8 @@ export const Colors = {
       tint: tintColorLight,
       tabIconDefault: '#ccc',
       tabIconSelected: tintColorLight,
+      listEven: '#bdbdbd',
+      listOdd: '#f3f6f4'
     },
     dark: {
       text: '#fff',
@@ -15,5 +17,7 @@ export const Colors = {
       tint: tintColorDark,
       tabIconDefault: '#ccc',
       tabIconSelected: tintColorDark,
+      listEven: '#5b5b5b',
+      listOdd: '#5b5b5b'
     },
 }
