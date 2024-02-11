@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native';
-import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { CancelSubmitButton } from '../components/CancelSubmitButton';
 import { WordCategory } from '../constants/WordCategory';
 
 const initialForm = {
@@ -25,29 +25,35 @@ export default function AddWord() {
 
     const onSubmit = async () => {
         try {
-           
-          } catch (e) {
+
+        } catch (e) {
             // saving error
-          }
+        }
     }
 
     const styles = useMemo(() => {
         return StyleSheet.create({
             container: {
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                width: '100%',
+                flex: 3,
+                flexDirection: 'column',
+                flexGrow: 1,
                 backgroundColor: theme.colors.background
+            },
+            formContainer: {
+                flex: 2,
+                flexDirection: 'column',
+                width: '100%',
+                height: '100%',
+                padding: 10,
+                minWidth: 40,
+                flexGrow: 3
             },
             input: {
                 height: 40,
                 borderWidth: 1,
                 marginVertical: 10,
                 padding: 5,
-                width: 640,
-                minWidth: 40,
+                width: '100%',
                 maxWidth: '100%',
                 borderRadius: 4,
                 backgroundColor: theme.colors.card,
@@ -56,19 +62,14 @@ export default function AddWord() {
             text: {
                 fontSize: 14,
                 color: theme.colors.text
-            },
-            button: {
-                height: 50,
-                borderRadius: 4,
-                padding: 5,
-                width: '100%'
             }
         });
     }, []);
 
     return (
         <View style={[styles.container]}>
-            <View style={[{ width: '100%', padding: 5 }]}>
+            <ScrollView style={[styles.formContainer]}>
+
                 <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
 
                 <View>
@@ -93,19 +94,10 @@ export default function AddWord() {
 
                 <Text style={[styles.text]}>Tags</Text>
                 <TextInput style={styles.input} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+            </ScrollView>
 
-                <View style={{ width: 640, minWidth: 40, maxWidth: '100%', padding: 2 }}>
-                    <Pressable style={[styles.button, { backgroundColor: 'grey' }]}
-                        onPress={() => router.replace('/home')}>
-                        <Text style={[styles.text, { margin: 'auto' }]}>Cancel</Text>
-                    </Pressable>
-                </View>
-                <View style={{ width: 640, minWidth: 40, maxWidth: '100%', padding: 2 }}>
-                    <Pressable style={[styles.button, { backgroundColor: 'green' }]}
-                        onPress={onSubmit}>
-                        <Text style={[styles.text, { color: 'white', margin: 'auto' }]}>Add</Text>
-                    </Pressable>
-                </View>
+            <View style={{ flex: 1 }}>
+                <CancelSubmitButton/>
             </View>
         </View>
     );
