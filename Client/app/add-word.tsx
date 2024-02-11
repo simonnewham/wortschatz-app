@@ -2,24 +2,33 @@ import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { WordCategory } from '../constants/WordCategory';
+
+const initialForm = {
+    nativeWord: '',
+    nativeWordGender: '',
+    nativeWordCategory: WordCategory.Noun,
+    translateWord: '',
+    tags: '',
+    usage: ''
+}
 
 export default function AddWord() {
     const theme = useTheme();
 
     const [isEnabled, setIsEnabled] = useState(false);
-
-    const initialForm = {
-        gender: '',
-        germanWord: '',
-        englishWord: '',
-        usage: '',
-        tags: ''
-    }
-
     const [form, setForm] = useState(initialForm);
 
     const handleFormUpdate = (text: string, value: string) => {
         setForm(prev => ({ ...prev, [value]: text }));
+    }
+
+    const onSubmit = async () => {
+        try {
+           
+          } catch (e) {
+            // saving error
+          }
     }
 
     const styles = useMemo(() => {
@@ -70,14 +79,14 @@ export default function AddWord() {
 
                 {!isEnabled &&
                     <TextInput style={[styles.input, { marginRight: 5 }]}
-                        placeholder='der, die, das...' onChangeText={text => handleFormUpdate(text, 'gender')}></TextInput>
+                        placeholder='der, die, das...' onChangeText={text => handleFormUpdate(text, 'nativeWordGender')}></TextInput>
                 }
                 <TextInput style={[styles.input]}
-                    onChangeText={text => handleFormUpdate(text, 'germanWord')}></TextInput>
+                    onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
 
                 <Text style={[styles.text]}>English</Text>
                 <TextInput style={styles.input}
-                    onChangeText={text => handleFormUpdate(text, 'englishWord')}></TextInput>
+                    onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
 
                 <Text style={[styles.text]}>Usage</Text>
                 <TextInput style={styles.input} onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
@@ -93,7 +102,7 @@ export default function AddWord() {
                 </View>
                 <View style={{ width: 640, minWidth: 40, maxWidth: '100%', padding: 2 }}>
                     <Pressable style={[styles.button, { backgroundColor: 'green' }]}
-                        onPress={() => alert(`Added ${JSON.stringify(form)}`)}>
+                        onPress={onSubmit}>
                         <Text style={[styles.text, { color: 'white', margin: 'auto' }]}>Add</Text>
                     </Pressable>
                 </View>
