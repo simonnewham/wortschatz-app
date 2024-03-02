@@ -1,9 +1,10 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { useMemo } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { WordListItem } from "../components/WordListItem";
-import { WordCategory } from "../constants/WordCategory";
-import { IWordListItem } from "../models/IWordListItem";
+import { IWordListItem } from "../../models/IWordListItem";
+import { WordCategory } from "../../constants/WordCategory";
+import { WordListItem } from "../../components/WordListItem";
+
 
 export default function WordList() {
     const theme = useTheme();
@@ -88,8 +89,6 @@ const getStyles = (theme: Theme) => {
         header: {
             flexDirection: 'row',
             flex: 3,
-            borderBottomWidth: 1,
-            borderColor: theme.colors.text,
             padding: 10
         },
         headerItem: {

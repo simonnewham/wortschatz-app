@@ -19,12 +19,19 @@ export default function Home() {
             </View>
             <View style={{ padding: 10, width: 540, maxWidth: '100%' }}>
                 <Pressable style={[styles.button, { backgroundColor: 'black' }]} onPress={() => router.push('/add-word')}>
-                    <Text style={[styles.buttonText, { color: 'white' }]}>Add new word</Text>
+                    <Text style={[styles.buttonText, { color: 'white' }]}>
+                        Add new word
+                    </Text>
                 </Pressable>
                 <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={() => router.push('/add-phrase')}>
-                    <Text style={[styles.buttonText, { color: 'white' }]}>Add a new phrase</Text></Pressable>
-                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={() => router.push('/word-list')}>
-                    <Text style={[styles.buttonText, { color: 'black' }]}>View your word list</Text></Pressable>
+                    <Text style={[styles.buttonText, { color: 'white' }]}>
+                        Add a new phrase</Text>
+                </Pressable>
+                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={() => router.push('/(word-list-tabs)')}>
+                    <Text style={[styles.buttonText, { color: 'black' }]}>
+                        View your Wortschatz
+                    </Text>
+                </Pressable>
             </View>
         </View>
     );
@@ -32,12 +39,11 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
         flexDirection: 'column',
-
     },
     header: {
         paddingBottom: 20

@@ -51,9 +51,8 @@ function RootLayoutNav() {
         <Stack.Screen name="home" options={{ headerShown: true, headerTitle: 'WortSchatz', headerBackVisible: false }} />
         <Stack.Screen name="add-word" options={{ headerShown: true, headerTitle: 'Add Word' }} />
         <Stack.Screen name="add-phrase" options={{ headerShown: true, headerTitle: 'Add Phrase' }} />
-        <Stack.Screen name="word-list" options={{ headerShown: true, headerTitle: 'Word List' }} />
-        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
+        <Stack.Screen name="(word-list-tabs)" options={{ headerShown: true, headerTitle: 'Word List' }} />
+        {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} />  */}
       </Stack>
     </ThemeProvider>
   );
