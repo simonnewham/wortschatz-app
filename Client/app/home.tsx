@@ -1,20 +1,19 @@
 import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
+import { useMemo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { auth } from '../firebase.config';
 
 export default function Home() {
     const theme = useTheme();
+
+    const user = useMemo(() => auth.currentUser, []);
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <View>
                 <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                    Welcome to Wortschatz! 🇩🇪
-                </Text>
-            </View>
-            <View>
-                <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
-                    Your personal German learning companion
+                    Welcome back {user?.email}!
                 </Text>
             </View>
             <View style={{ padding: 10, width: 540, maxWidth: '100%' }}>

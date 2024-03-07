@@ -74,8 +74,6 @@ const getStyles = (theme: Theme) => {
         header: {
             flexDirection: 'row',
             flex: 3,
-            // borderBottomWidth: 1,
-            // borderColor: theme.colors.text,
             padding: 10
         },
         headerItem: {
