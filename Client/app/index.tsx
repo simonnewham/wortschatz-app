@@ -8,7 +8,7 @@ export default function App() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stack.Screen options={{ headerShown: false, headerTitle: "WortSchatz" }} />
+            <Stack.Screen options={{ headerShown: true, headerTitle: "WortSchatz" }} />
             <View style={styles.container}>
                 <Login />
             </View>
@@ -20,6 +20,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        maxWidth: "100%",
         alignItems: 'center',
         justifyContent: 'center',
     }

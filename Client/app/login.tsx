@@ -48,33 +48,27 @@ export default function Login() {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <View>
-                <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                    Welcome to Wortschatz! 🇩🇪
+            <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
+                Welcome to Wortschatz! 🇩🇪
+            </Text>
+            <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
+                Your personal German learning companion
+            </Text>
+
+            <TextInput style={[styles.button, styles.textInput]} placeholder='Email' value={email}
+                onChangeText={setEmail} ></TextInput>
+            <TextInput style={[styles.button, styles.textInput]} placeholder='Password'
+                secureTextEntry value={password} onChangeText={setPassword}></TextInput>
+
+            <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={onLogin}>
+                <Text style={[styles.buttonText, { color: 'white' }]}>
+                    Login</Text>
+            </Pressable>
+            <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
+                <Text style={[styles.buttonText, { color: 'black' }]}>
+                    Register
                 </Text>
-            </View>
-            <View>
-                <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
-                    Your personal German learning companion
-                </Text>
-            </View>
-            <View style={{ padding: 10, width: 540, maxWidth: '100%' }}>
-                <View>
-                    <TextInput style={[styles.button, styles.textInput]} placeholder='Email' value={email}
-                        onChangeText={setEmail} ></TextInput>
-                    <TextInput style={[styles.button, styles.textInput]} placeholder='Password'
-                        secureTextEntry value={password} onChangeText={setPassword}></TextInput>
-                </View>
-                <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={onLogin}>
-                    <Text style={[styles.buttonText, { color: 'white' }]}>
-                        Login</Text>
-                </Pressable>
-                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
-                    <Text style={[styles.buttonText, { color: 'black' }]}>
-                        Register
-                    </Text>
-                </Pressable>
-            </View>
+            </Pressable>
         </View>
     );
 }
@@ -85,8 +79,10 @@ const getStyles = (theme: Theme) => {
             flex: 2,
             alignItems: 'center',
             justifyContent: 'center',
-            width: '100%',
             flexDirection: 'column',
+            width: 540,
+            maxWidth: "100%",
+            padding: 10
         },
         header: {
             paddingBottom: 20
@@ -104,7 +100,6 @@ const getStyles = (theme: Theme) => {
         },
         textInput: {
             color: theme.colors.text,
-            padding: 5
         }
     });
 };
