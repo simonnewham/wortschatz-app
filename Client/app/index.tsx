@@ -1,16 +1,16 @@
 import { Stack } from 'expo-router';
 import { StyleSheet, View, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Home from './home';
+import Login from './login';
 
 export default function App() {
     const colorScheme = useColorScheme();
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stack.Screen options={{ headerTitle: "WortSchatz" }} />
+            <Stack.Screen options={{ headerShown: true, headerTitle: "WortSchatz" }} />
             <View style={styles.container}>
-                <Home />
+                <Login />
             </View>
 
         </SafeAreaView>
@@ -20,6 +20,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        maxWidth: "100%",
         alignItems: 'center',
         justifyContent: 'center',
     }
