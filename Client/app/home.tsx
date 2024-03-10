@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'white',
         width: '100%',
-        margin: 2
+        margin: 2,
+    },
+    buttonDisabled: {
+        opacity: 0.5
     }
 });

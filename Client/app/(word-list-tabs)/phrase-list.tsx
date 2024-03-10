@@ -1,36 +1,26 @@
 import { Theme, useTheme } from "@react-navigation/native";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { PhraseListItem } from "../../components/PhraseListItem";
 import { IPhrase } from "../../models/IPhrase";
-
+import { FireStore } from "../../services/FirestoreService";
 
 export default function PhraseList() {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), []);
-    
-    const data: IPhrase[] = useMemo(() => {
-        return [
-            {
-                id: 1,
-                nativePhrase: 'Guten Morgen',
-                translatePhrase: 'Good Morning',
-                tags: ['breakfast'],
-                createdDate: new Date
-            },
-            {
-                id: 2,
-                nativePhrase: 'Schonen Abend',
-                translatePhrase: 'Good evening',
-                tags: ['evening'],
-                createdDate: new Date
-            }
-        ]
+    const [data, setData] = useState<IPhrase[]>([]);
+
+    useEffect(() => {
+        const fetchWords = async () => {
+            const phraseList = await FireStore.GetPhrases();
+            setData(phraseList);
+        }
+        fetchWords();
     }, []);
 
     return (
         <View style={[styles.container]}>
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <View style={styles.header}>
                     <View style={[styles.headerItem, {}]}>
                         <Text style={styles.text} >German</Text>
@@ -43,11 +33,11 @@ export default function PhraseList() {
                     </View>
                 </View>
             </View>
-            <View style={{flex: 9, flexGrow: 10}}>
+            <View style={{ flex: 9, flexGrow: 10 }}>
                 <FlatList
                     data={data}
                     renderItem={({ item, index }) =>
-                        <PhraseListItem item={item} index={index}  />
+                        <PhraseListItem item={item} index={index} />
                     }
                 />
             </View>

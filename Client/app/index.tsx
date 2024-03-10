@@ -6,6 +6,8 @@ import Login from './login';
 export default function App() {
     const colorScheme = useColorScheme();
 
+    // todo: check auth and route to home
+    
     return (
         <SafeAreaView style={styles.container}>
             <Stack.Screen options={{ headerShown: true, headerTitle: "WortSchatz" }} />

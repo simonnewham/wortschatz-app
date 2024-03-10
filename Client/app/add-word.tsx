@@ -3,12 +3,15 @@ import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../components/CancelSubmitButton';
 import { WordCategory } from '../constants/WordCategory';
+import { FireStore } from '../services/FirestoreService';
+import { IWord } from '../models/IWord';
 
-const initialForm = {
+const initialForm: IWord = {
     nativeWord: '',
     nativeWordGender: '',
     nativeWordCategory: WordCategory.Noun,
     translateWord: '',
+    translateWordGender: '',
     tags: '',
     usage: ''
 }
@@ -24,11 +27,9 @@ export default function AddWord() {
     }
 
     const onSubmit = async () => {
-        try {
-            alert(JSON.stringify(form));
-        } catch (e) {
-            // saving error
-        }
+        // todo: validation
+        await FireStore.AddWord(form)
+        setForm(initialForm);
     }
 
     return (
@@ -44,25 +45,25 @@ export default function AddWord() {
                 </View>
 
                 {!isEnabled &&
-                    <TextInput style={[styles.input, { marginRight: 5 }]}
+                    <TextInput style={[styles.input, { marginRight: 5 }]} value={form.nativeWordGender}
                         placeholder='der, die, das...' onChangeText={text => handleFormUpdate(text, 'nativeWordGender')}></TextInput>
                 }
-                <TextInput style={[styles.input]}
+                <TextInput style={[styles.input]} value={form.nativeWord}
                     onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
 
                 <Text style={[styles.text]}>English</Text>
-                <TextInput style={styles.input}
+                <TextInput style={styles.input} value={form.translateWord}
                     onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
 
                 <Text style={[styles.text]}>Usage</Text>
-                <TextInput style={styles.input} onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
+                <TextInput style={styles.input}  value={form.usage} onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
 
                 <Text style={[styles.text]}>Tags</Text>
-                <TextInput style={styles.input} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                <TextInput style={styles.input}value={form.tags}  onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
             </ScrollView>
 
             <View style={{ flex: 1 }}>
-                <CancelSubmitButton onSubmit={onSubmit}/>
+                <CancelSubmitButton onSubmit={onSubmit} />
             </View>
         </View>
     );

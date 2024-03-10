@@ -1,51 +1,26 @@
 import { Theme, useTheme } from "@react-navigation/native";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { IWordListItem } from "../../models/IWordListItem";
-import { WordCategory } from "../../constants/WordCategory";
 import { WordListItem } from "../../components/WordListItem";
-
+import { IWordListItem } from "../../models/IWordListItem";
+import { FireStore } from "../../services/FirestoreService";
 
 export default function WordList() {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), []);
-    
-    const data: IWordListItem[] = useMemo(() => {
-        return [
-            {
-                id: 1,
-                nativeWord: 'entdecken',
-                nativeWordGender: undefined,
-                nativeWordCategory: WordCategory.Verb,
-                tags: ['reisen'],
-                translateWord: 'to discover',
-                createdDate: new Date
-            },
-            {
-                id: 2,
-                nativeWord: 'Ausicht',
-                nativeWordGender: 'die',
-                nativeWordCategory: WordCategory.Noun,
-                tags: ['reisen'],
-                translateWord: 'View',
-                createdDate: new Date
-            },
-            {
-                id: 3,
-                nativeWord: 'laufen',
-                nativeWordCategory: WordCategory.Verb,
-                tags: ['sport'],
-                translateWord: 'run',
-                createdDate: new Date
-            }
-        ]
-    }, []);
+    const [data, setData] = useState<IWordListItem[]>([]);
 
-  
+    useEffect(() => {
+        const fetchWords = async () => {
+            const wordList = await FireStore.GetWords();
+            setData(wordList);
+        }
+        fetchWords();
+    }, []);
 
     return (
         <View style={[styles.container]}>
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <View style={styles.header}>
                     <View style={[styles.headerItem, {}]}>
                         <Text style={styles.text} >German</Text>
@@ -58,11 +33,11 @@ export default function WordList() {
                     </View>
                 </View>
             </View>
-            <View style={{flex: 9, flexGrow: 10}}>
+            <View style={{ flex: 9, flexGrow: 10 }}>
                 <FlatList
                     data={data}
                     renderItem={({ item, index }) =>
-                        <WordListItem item={item} index={index}  />
+                        <WordListItem item={item} index={index} />
                     }
                 />
             </View>

@@ -2,8 +2,10 @@ import { useTheme, Theme } from '@react-navigation/native';
 import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../components/CancelSubmitButton';
+import { FireStore } from '../services/FirestoreService';
+import { IPhrase } from '../models/IPhrase';
 
-const initialForm = {
+const initialForm: IPhrase = {
     nativePhrase: '',
     translatePhrase: '',
     tags: '',
@@ -19,26 +21,23 @@ export default function AddPhrase() {
     }
 
     const onSubmit = async () => {
-        try {
-            alert(JSON.stringify(form));
-        } catch (e) {
-            // saving error
-        }
+        await FireStore.AddPhrase(form);
+        setForm(initialForm);
     }
 
     return (
         <View style={[styles.container]}>
             <ScrollView style={[styles.formContainer]}>
                 <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
-                <TextInput style={[styles.input]} multiline={true}
+                <TextInput style={[styles.input]} multiline={true} value={form.nativePhrase}
                     onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
 
                 <Text style={[styles.text]}>English</Text>
-                <TextInput style={styles.input} multiline={true}
+                <TextInput style={styles.input} multiline={true} value={form.translatePhrase}
                     onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
 
                 <Text style={[styles.text]}>Tags</Text>
-                <TextInput style={styles.input} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                <TextInput style={styles.input} value={form.tags} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
             </ScrollView>
             <View style={{ flex: 1 }}>
                 <CancelSubmitButton onSubmit={onSubmit} />

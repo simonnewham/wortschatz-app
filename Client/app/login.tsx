@@ -1,6 +1,6 @@
 import { Theme, useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
@@ -13,6 +13,9 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // todo: trigger toast
+    const [error, setError] = useState(false);
+
     useEffect(() => {
         const unsub = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -22,26 +25,31 @@ export default function Login() {
         return unsub;
     }, []);
 
-    const onSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+    const onSignUp = async () => {
+        setError(false);
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            if (userCredential) {
                 const user = userCredential.user;
                 // todo: store in session
-            })
-            .catch((error) => {
-                alert(error);
-                // todo: show error
-            });
+            }
+        }
+        catch (e) {
+            setError(true);
+            // todo: show error
+        }
     }
 
     const onLogin = () => {
+        setError(false);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 // todo: store in session
             })
             .catch((error) => {
-                alert(error);
+                // alert(error);
+                setError(true);
                 // todo: show error
             });
     }
@@ -54,11 +62,12 @@ export default function Login() {
             <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
                 Your personal German learning companion
             </Text>
-
             <TextInput style={[styles.button, styles.textInput]} placeholder='Email' value={email}
                 onChangeText={setEmail} ></TextInput>
             <TextInput style={[styles.button, styles.textInput]} placeholder='Password'
                 secureTextEntry value={password} onChangeText={setPassword}></TextInput>
+
+            {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
 
             <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={onLogin}>
                 <Text style={[styles.buttonText, { color: 'white' }]}>
@@ -99,7 +108,9 @@ const getStyles = (theme: Theme) => {
             margin: 2
         },
         textInput: {
-            color: theme.colors.text,
+            backgroundColor: "#212125",
+            color: "white",
+            padding: 10
         }
     });
 };

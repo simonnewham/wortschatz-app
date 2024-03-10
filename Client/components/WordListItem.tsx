@@ -53,7 +53,6 @@ const getStyles = (theme: Theme, index: number, colorScheme: ColorSchemeName) =>
         rowContainer: {
             padding: 10,
             backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listOdd,
-            borderBottomWidth: 1
         },
         row: {
             flexDirection: 'row',
