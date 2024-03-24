@@ -2,11 +2,10 @@ import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useMemo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { auth } from '../firebase.config';
-import { Image } from 'expo-image';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Card } from '../components/Card';
 import { Footer } from '../components/Footer';
-import { ScrollView } from 'react-native-gesture-handler';
+import { auth } from '../firebase.config';
 
 export default function Home() {
     const theme = useTheme();
@@ -14,66 +13,73 @@ export default function Home() {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <ScrollView>
-                <Card backgroundColour='#121212'>
-                    <View style={{ alignItems: 'center' }}>
-                        <Image style={{ width: 50, height: 50 }} source='../assets/images/favicon.png'></Image>
-                        <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                            Welcome back {user?.email}
-                        </Text>
-                    </View>
-                </Card>
+            <ScrollView style={{ width: 720, maxWidth: '100%', }}>
+                <View style={{ alignItems: 'center' }}>
+                    <Card backgroundColour='#121212'>
+                        <View style={{ alignItems: 'center' }}>
+                            {/* <Image style={{ width: 50, height: 50 }} source='../assets/images/favicon.png'></Image> */}
+                            <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
+                                Welcome back {user?.email}
+                            </Text>
+                        </View>
+                    </Card>
+                </View>
 
-                <Card backgroundColour='#121212'>
-                    <View style={{ alignItems: 'center' }}>
-                        <View style={{ padding: 10, width: 640, maxWidth: '100%' }}>
-                            <Pressable style={[styles.button, { backgroundColor: 'black' }]} onPress={() => router.push('/add-word')}>
-                                <Text style={[styles.buttonText, { color: 'white' }]}>
-                                    Add new word
+                <View style={{ alignItems: 'center' }}>
+                    <Card backgroundColour='#121212'>
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={{ padding: 10, width: 640, maxWidth: '100%' }}>
+                                <Pressable style={[styles.button, { backgroundColor: 'black' }]} onPress={() => router.push('/add-word')}>
+                                    <Text style={[styles.buttonText, { color: 'white' }]}>
+                                        Add new word
+                                    </Text>
+                                </Pressable>
+                                <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={() => router.push('/add-phrase')}>
+                                    <Text style={[styles.buttonText, { color: 'white' }]}>
+                                        Add a new phrase</Text>
+                                </Pressable>
+                                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={() => router.push('/(word-list-tabs)')}>
+                                    <Text style={[styles.buttonText, { color: 'black' }]}>
+                                        View your Wortschatz
+                                    </Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </Card>
+                </View>
+
+                <View style={{ alignItems: 'center' }}>
+                    {/* TODO: Move out */}
+                    <Card backgroundColour='#121212'>
+                        <View style={{ flex: 2, flexDirection: 'row', width: '100%' }}>
+                            <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
+                                <Text style={styles.headerText}>Total Words</Text>
+                                <Text style={styles.overviewText}>?</Text>
+                                <Text style={styles.headerText}>Last Word</Text>
+                                <Text style={styles.overviewText}>?</Text>
+                            </View>
+                            <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
+                                <Text style={styles.headerText}>
+                                    Total Phrases
                                 </Text>
-                            </Pressable>
-                            <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={() => router.push('/add-phrase')}>
-                                <Text style={[styles.buttonText, { color: 'white' }]}>
-                                    Add a new phrase</Text>
-                            </Pressable>
-                            <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={() => router.push('/(word-list-tabs)')}>
-                                <Text style={[styles.buttonText, { color: 'black' }]}>
-                                    View your Wortschatz
+                                <Text style={styles.overviewText}>
+                                    ?
                                 </Text>
-                            </Pressable>
+                                <Text style={styles.headerText}>
+                                    Last Phrase
+                                </Text>
+                                <Text style={styles.overviewText}>
+                                    ?
+                                </Text>
+                            </View>
                         </View>
-                    </View>
-
-                </Card>
-
-                {/* TODO: Move out */}
-                <Card backgroundColour='#121212'>
-                    <View style={{ flex: 2, flexDirection: 'row', width: '100%' }}>
-                        <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                            <Text style={styles.headerText}>Total Words</Text>
-                            <Text style={styles.overviewText}>?</Text>
-                            <Text style={styles.headerText}>Last Word</Text>
-                            <Text style={styles.overviewText}>?</Text>
-                        </View>
-                        <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                            <Text style={styles.headerText}>
-                                Total Phrases
-                            </Text>
-                            <Text style={styles.overviewText}>
-                                ?
-                            </Text>
-                            <Text style={styles.headerText}>
-                                Last Phrase
-                            </Text>
-                            <Text style={styles.overviewText}>
-                                ?
-                            </Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Footer />
+                    </Card>
+                </View>
+               
             </ScrollView>
+            <View style={{ alignItems: 'flex-end', width: 720, maxWidth: '100%' }}>
+                <Footer />
+            </View>
         </View>
     );
 }
@@ -84,6 +90,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         flexDirection: 'column',
+        justifyContent: 'center',
     },
     header: {
         paddingBottom: 20

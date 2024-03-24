@@ -46,7 +46,7 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="home" options={{ headerShown: true, headerTitle: 'Wortschatz 🇩🇪', headerRight: () => <SignOut/>}}/>
+        <Stack.Screen name="home" options={{ headerShown: true, headerTitle: 'Wortschatz 🇩🇪🇦🇹🇨🇭', headerRight: () => <SignOut/>}}/>
         <Stack.Screen name="add-word" options={{ headerShown: true, headerTitle: 'Add Word' }} />
         <Stack.Screen name="add-phrase" options={{ headerShown: true, headerTitle: 'Add Phrase' }} />
         <Stack.Screen name="(word-list-tabs)" options={{ headerShown: true, headerTitle: 'Word List' }} />
