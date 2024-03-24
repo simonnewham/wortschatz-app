@@ -37,7 +37,7 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootLayoutNav/>;
 }
 
 function RootLayoutNav() {

@@ -17,7 +17,8 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
             buttonContainer: {
                 flex: 2,
                 flexDirection: 'row',
-                alignItems: 'flex-end'
+                alignItems: 'flex-end',
+                maxWidth: '100%'
             },
             button: {
                 height: 50,
@@ -34,13 +35,13 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
 
     return (
         <View style={[styles.buttonContainer]}>
-            <View style={{ flex: 1, width: '100%', padding: 2 }}>
+            <View style={{ flex: 1, padding: 2 }}>
                 <Pressable style={[styles.button, { backgroundColor: 'grey' }]}
                     onPress={() => router.replace('/home')}>
                     <Text style={[styles.text, { margin: 'auto' }]}>Cancel</Text>
                 </Pressable>
             </View>
-            <View style={{ flex: 1, width: '100%', padding: 2 }}>
+            <View style={{ flex: 1,padding: 2 }}>
                 <Pressable style={[styles.button, { backgroundColor: 'green' }]}
                     onPress={props.onSubmit}>
                     <Text style={[styles.text, { color: 'white', margin: 'auto' }]}>Add</Text>

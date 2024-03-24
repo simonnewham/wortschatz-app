@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../components/CancelSubmitButton';
 import { FireStore } from '../services/FirestoreService';
 import { IPhrase } from '../models/IPhrase';
+import { Card } from '../components/Card';
 
 const initialForm: IPhrase = {
     nativePhrase: '',
@@ -28,20 +29,27 @@ export default function AddPhrase() {
     return (
         <View style={[styles.container]}>
             <ScrollView style={[styles.formContainer]}>
-                <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
-                <TextInput style={[styles.input]} multiline={true} value={form.nativePhrase}
-                    onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
+                <Card>
+                    <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
+                    <TextInput style={[styles.input]} multiline={true} value={form.nativePhrase} placeholder='deutsch...'
+                        placeholderTextColor={'gray'}
+                        onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
+                </Card>
+                <Card>
+                    <Text style={[styles.text]}>English</Text>
+                    <TextInput style={styles.input} multiline={true} value={form.translatePhrase} placeholder='english...'
+                        placeholderTextColor={'gray'}
+                        onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
 
-                <Text style={[styles.text]}>English</Text>
-                <TextInput style={styles.input} multiline={true} value={form.translatePhrase}
-                    onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
-
-                <Text style={[styles.text]}>Tags</Text>
-                <TextInput style={styles.input} value={form.tags} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                    <Text style={[styles.text]}>Tags</Text>
+                    <TextInput style={styles.input} value={form.tags} placeholder='tags...' placeholderTextColor={'gray'}
+                        onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                </Card>
             </ScrollView>
-            <View style={{ flex: 1 }}>
+            <View style={{ width: 720, maxWidth: '100%' }}>
                 <CancelSubmitButton onSubmit={onSubmit} />
             </View>
+
         </View>
     );
 }
@@ -49,19 +57,19 @@ export default function AddPhrase() {
 const getStyles = (theme: Theme) => {
     return StyleSheet.create({
         container: {
-            flex: 3,
+            flex: 1,
+            alignItems: 'center',
             flexDirection: 'column',
-            flexGrow: 1,
-            backgroundColor: theme.colors.background
+            justifyContent: 'center',
+            backgroundColor: theme.colors.background,
+            width: "100%",
         },
         formContainer: {
-            flex: 2,
             flexDirection: 'column',
-            width: '100%',
             height: '100%',
-            padding: 5,
-            minWidth: 40,
-            flexGrow: 3
+            padding: 10,
+            width: 720,
+            maxWidth: '100%'
         },
         input: {
             height: 40,
@@ -69,7 +77,6 @@ const getStyles = (theme: Theme) => {
             marginVertical: 10,
             padding: 5,
             width: '100%',
-            maxWidth: '100%',
             borderRadius: 4,
             backgroundColor: theme.colors.card,
             color: theme.colors.text
@@ -80,6 +87,3 @@ const getStyles = (theme: Theme) => {
         }
     });
 };
-
-
-

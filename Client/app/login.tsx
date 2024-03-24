@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { auth } from '../firebase.config';
+import { Card } from '../components/Card';
+import { Footer } from '../components/Footer';
 
 export default function Login() {
     const theme = useTheme();
@@ -56,28 +58,35 @@ export default function Login() {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                Welcome to Wortschatz! 🇩🇪
-            </Text>
-            <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
-                Your personal German learning companion
-            </Text>
-            <TextInput style={[styles.button, styles.textInput]} placeholder='Email' value={email}
-                onChangeText={setEmail} ></TextInput>
-            <TextInput style={[styles.button, styles.textInput]} placeholder='Password'
-                secureTextEntry value={password} onChangeText={setPassword}></TextInput>
+            <Card>
+                <View style={{ alignItems: 'center' }}>
+                    <Text style={{ fontSize: 24, paddingBottom: 5 }}>🇩🇪🇦🇹🇨🇭</Text>
+                    <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
+                        Welcome to Wortschatz
+                    </Text>
 
-            {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
+                    <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
+                        Your personal German learning companion
+                    </Text>
+                    <TextInput style={[styles.button, styles.textInput]} placeholder='Email' placeholderTextColor='gray' value={email}
+                        onChangeText={setEmail} ></TextInput>
+                    <TextInput style={[styles.button, styles.textInput]} placeholder='Password' placeholderTextColor='gray'
+                        secureTextEntry value={password} onChangeText={setPassword}></TextInput>
 
-            <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={onLogin}>
-                <Text style={[styles.buttonText, { color: 'white' }]}>
-                    Login</Text>
-            </Pressable>
-            <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
-                <Text style={[styles.buttonText, { color: 'black' }]}>
-                    Register
-                </Text>
-            </Pressable>
+                    {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
+
+                    <Pressable style={[styles.button, { backgroundColor: 'red' }]} onPress={onLogin}>
+                        <Text style={[styles.buttonText, { color: 'white' }]}>
+                            Login</Text>
+                    </Pressable>
+                    <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
+                        <Text style={[styles.buttonText, { color: 'black' }]}>
+                            Register
+                        </Text>
+                    </Pressable>
+                </View>
+            </Card>
+            <Footer />
         </View>
     );
 }
@@ -85,7 +94,7 @@ export default function Login() {
 const getStyles = (theme: Theme) => {
     return StyleSheet.create({
         container: {
-            flex: 2,
+            flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
@@ -103,7 +112,7 @@ const getStyles = (theme: Theme) => {
             height: 50,
             borderRadius: 4,
             borderWidth: 1,
-            borderColor: 'white',
+            borderColor: 'gray',
             width: '100%',
             margin: 2
         },
