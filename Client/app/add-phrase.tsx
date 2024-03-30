@@ -16,14 +16,21 @@ export default function AddPhrase() {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), []);
     const [form, setForm] = useState(initialForm);
+    const [error, setError] = useState(false);
 
     const handleFormUpdate = (text: string, value: string) => {
         setForm(prev => ({ ...prev, [value]: text }));
     }
 
     const onSubmit = async () => {
-        await FireStore.AddPhrase(form);
-        setForm(initialForm);
+        // todo: validation
+        if (!form.nativePhrase) {
+            setError(true);
+        }
+        else {
+            await FireStore.AddPhrase(form);
+            setForm(initialForm);
+        }
     }
 
     return (
@@ -31,18 +38,27 @@ export default function AddPhrase() {
             <ScrollView style={[styles.formContainer]}>
                 <Card>
                     <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
-                    <TextInput style={[styles.input]} multiline={true} value={form.nativePhrase} placeholder='deutsch...'
+                    <TextInput style={[styles.input, { borderColor: error ? 'red' : 'gray' }]}
+                        multiline={true}
+                        value={form.nativePhrase}
+                        placeholder='deutsch...'
                         placeholderTextColor={'gray'}
                         onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
                 </Card>
                 <Card>
                     <Text style={[styles.text]}>English</Text>
-                    <TextInput style={styles.input} multiline={true} value={form.translatePhrase} placeholder='english...'
+                    <TextInput style={styles.input}
+                        multiline={true}
+                        value={form.translatePhrase}
+                        placeholder='english...'
                         placeholderTextColor={'gray'}
                         onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
 
                     <Text style={[styles.text]}>Tags</Text>
-                    <TextInput style={styles.input} value={form.tags} placeholder='tags...' placeholderTextColor={'gray'}
+                    <TextInput style={styles.input}
+                        value={form.tags}
+                        placeholder='tags...'
+                        placeholderTextColor={'gray'}
                         onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
                 </Card>
             </ScrollView>

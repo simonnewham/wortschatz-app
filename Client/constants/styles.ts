@@ -9,7 +9,9 @@ export const Colors = {
       tabIconDefault: '#ccc',
       tabIconSelected: tintColorLight,
       listEven: '#bdbdbd',
-      listOdd: '#fff'
+      listOdd: '#fff',
+      card: '#bdbdbd',
+      cardShadow: '#808080'
     },
     dark: {
       text: '#fff',
@@ -18,6 +20,7 @@ export const Colors = {
       tabIconDefault: '#ccc',
       tabIconSelected: tintColorDark,
       listEven: '#212125',
-      listOdd: '#000'
+      card: '#121212',
+      cardShadow: '#1a1919'
     },
 }

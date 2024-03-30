@@ -23,14 +23,21 @@ export default function AddWord() {
     const [isEnabled, setIsEnabled] = useState(false);
     const [form, setForm] = useState(initialForm);
 
+    const [error, setError] = useState(false);
+
     const handleFormUpdate = (text: string, value: string) => {
         setForm(prev => ({ ...prev, [value]: text }));
     }
 
     const onSubmit = async () => {
         // todo: validation
-        await FireStore.AddWord(form)
-        setForm(initialForm);
+        if (!form.nativeWord) {
+            setError(true);
+        }
+        else {
+            await FireStore.AddWord(form)
+            setForm(initialForm);
+        }
     }
 
     return (
@@ -44,22 +51,39 @@ export default function AddWord() {
                         <Text style={[styles.text]}>verb</Text>
                     </View>
                     {!isEnabled &&
-                        <TextInput style={[styles.input, { marginRight: 5 }]} value={form.nativeWordGender} placeholderTextColor={'gray'}
-                            placeholder='der, die, das...' onChangeText={text => handleFormUpdate(text, 'nativeWordGender')}></TextInput>
+                        <TextInput style={[styles.input, { marginRight: 5 }]}
+                            value={form.nativeWordGender}
+                            placeholderTextColor={'gray'}
+                            placeholder='der, die, das...'
+                            onChangeText={text => handleFormUpdate(text, 'nativeWordGender')}></TextInput>
                     }
-                    <TextInput style={[styles.input]} value={form.nativeWord} placeholder='deutsch wort...' placeholderTextColor={'gray'}
+                    <TextInput style={[styles.input, { borderColor: error ? 'red' : 'gray' }]}
+                        value={form.nativeWord}
+                        placeholder='deutsch wort...'
+                        placeholderTextColor={'gray'}
                         onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
                 </Card>
 
                 <Card>
                     <Text style={[styles.text]}>English</Text>
-                    <TextInput style={styles.input} value={form.translateWord} placeholder='english word...' placeholderTextColor={'gray'}
+                    <TextInput style={styles.input}
+                        value={form.translateWord}
+                        placeholder='english word...'
+                        placeholderTextColor={'gray'}
                         onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
                     <Text style={[styles.text]}>Usage</Text>
-                    <TextInput style={styles.input} placeholder='usages...' placeholderTextColor={'gray'} value={form.usage} onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
+                    <TextInput style={styles.input}
+                        placeholder='usages...'
+                        placeholderTextColor={'gray'}
+                        value={form.usage}
+                        onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
 
                     <Text style={[styles.text]}>Tags</Text>
-                    <TextInput style={styles.input} placeholder='tags...' placeholderTextColor={'gray'} value={form.tags} onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                    <TextInput style={styles.input}
+                        placeholder='tags...'
+                        placeholderTextColor={'gray'}
+                        value={form.tags}
+                        onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
                 </Card>
 
             </ScrollView>
@@ -104,5 +128,3 @@ const getStyles = (theme: Theme) => {
         }
     });
 };
-
-

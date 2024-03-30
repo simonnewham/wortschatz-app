@@ -68,10 +68,16 @@ export default function Login() {
                     <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
                         Your personal German learning companion
                     </Text>
-                    <TextInput style={[styles.button, styles.textInput]} placeholder='Email' placeholderTextColor='gray' value={email}
-                        onChangeText={setEmail} ></TextInput>
-                    <TextInput style={[styles.button, styles.textInput]} placeholder='Password' placeholderTextColor='gray'
-                        secureTextEntry value={password} onChangeText={setPassword}></TextInput>
+                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
+                        placeholder='Email'
+                        placeholderTextColor='gray'
+                        value={email}
+                        onChangeText={setEmail} />
+                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
+                        placeholder='Password' placeholderTextColor='gray'
+                        secureTextEntry
+                        value={password}
+                        onChangeText={setPassword}/>
 
                     {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
 

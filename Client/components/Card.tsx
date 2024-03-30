@@ -1,5 +1,7 @@
+import { useTheme } from "@react-navigation/native";
 import { PropsWithChildren } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, useColorScheme } from "react-native";
+import { Colors } from "../constants/styles";
 
 interface ICardProps {
     backgroundColour?: string,
@@ -7,12 +9,16 @@ interface ICardProps {
 }
 
 export function Card(props: PropsWithChildren<ICardProps>) {
-    return <View style={[styles.container, { backgroundColor: props.backgroundColour ?? '#121212' }]}>
+    const colorScheme = useColorScheme();
+    const theme = useTheme();
+
+    return <View style={[styles.container,
+    { backgroundColor: props.backgroundColour ?? Colors[colorScheme ?? 'light'].card, shadowColor: Colors[colorScheme ?? 'light'].cardShadow }]}>
         {props.title && <>
-            <Text style={{color: 'white', fontSize: 14, margin: 5}}>{props.title}</Text>
-           
-            </>}
-        <View style={styles.contentContainer}>
+            <Text style={{ color: theme.colors.text, fontSize: 14, margin: 5 }}>{props.title}</Text>
+
+        </>}
+        <View>
             {props.children}
         </View>
 
@@ -26,10 +32,6 @@ const styles = StyleSheet.create({
         width: 720,
         maxWidth: '100%',
         marginVertical: 10,
-        shadowOffset: { width: 5, height: 5 },
-        shadowColor: '#1a1919'
-    },
-    contentContainer: {
-       
+        shadowOffset: { width: 5, height: 5 }
     }
 });
