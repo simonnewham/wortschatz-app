@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+Client/database-debug.log
+Client/ui-debug.log
+Client/.firebase/hosting.ZGlzdA.cache

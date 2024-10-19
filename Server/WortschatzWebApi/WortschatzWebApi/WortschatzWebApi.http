@@ -1,0 +1,6 @@
+@WortschatzWebApi_HostAddress = http://localhost:5153
+
+GET {{WortschatzWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
