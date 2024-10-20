@@ -6,7 +6,7 @@ services:
     image: mcr.microsoft.com/mssql/server:latest
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "yourStrongPassword"
+      SA_PASSWORD: "#Str0ngPassw0rd"
     ports:
       [1433:1433]
   webapi:
