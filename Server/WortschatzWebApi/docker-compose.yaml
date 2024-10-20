@@ -1,0 +1,21 @@
+version: '3.4'
+
+services: 
+  sqlserver:
+    container_name: SqlServer
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "yourStrongPassword"
+    ports:
+      [1433:1433]
+  webapi:
+    container_name: WebApi
+    image: wortschatz
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      ["5000:80"]
+    depends_on:
+      [sqlserver]

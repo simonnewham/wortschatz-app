@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WortschatzWebApi", "WortschatzWebApi\WortschatzWebApi.csproj", "{866223B9-8FD5-4CAA-AE50-BCECCBD11CBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.Core", "Wortschatz.Core\Wortschatz.Core.csproj", "{7A0A980F-017D-49ED-A25D-489122C7791F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.DataLayer", "Wortschatz.DataLayer\Wortschatz.DataLayer.csproj", "{081B85BE-849F-4D78-89DB-14C01DE617AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.WebApi", "Wortschatz.WebApi\Wortschatz.WebApi.csproj", "{37F14526-263B-45B1-A3AF-E6097FD478C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,17 @@ Global
 		{866223B9-8FD5-4CAA-AE50-BCECCBD11CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{866223B9-8FD5-4CAA-AE50-BCECCBD11CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{866223B9-8FD5-4CAA-AE50-BCECCBD11CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A0A980F-017D-49ED-A25D-489122C7791F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A0A980F-017D-49ED-A25D-489122C7791F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A0A980F-017D-49ED-A25D-489122C7791F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A0A980F-017D-49ED-A25D-489122C7791F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{081B85BE-849F-4D78-89DB-14C01DE617AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{081B85BE-849F-4D78-89DB-14C01DE617AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{081B85BE-849F-4D78-89DB-14C01DE617AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{081B85BE-849F-4D78-89DB-14C01DE617AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F14526-263B-45B1-A3AF-E6097FD478C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F14526-263B-45B1-A3AF-E6097FD478C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F14526-263B-45B1-A3AF-E6097FD478C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F14526-263B-45B1-A3AF-E6097FD478C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
