@@ -1,0 +1,8 @@
+docker build -t wortschatz .
+
+docker compose build
+docker compose up
+
+dotnet ef migrations add InitialCreate --project Wortschatz.Core --startup-project Wortschatz.WebApi
+
+dotnet ef database update --project Wortschatz.Core --startup-project Wortschatz.WebApi
