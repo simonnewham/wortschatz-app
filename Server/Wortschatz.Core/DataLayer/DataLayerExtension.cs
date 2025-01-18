@@ -5,7 +5,7 @@ namespace Wortschatz.Core.DataLayer;
 
 public static class DataLayerExtensions
 {
-    public static IServiceCollection AddDataContext(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddDataContext(this IServiceCollection services, string? connectionString)
     {
         services.AddDbContext<DataContext>(options =>
         {

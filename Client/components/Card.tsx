@@ -14,14 +14,12 @@ export function Card(props: PropsWithChildren<ICardProps>) {
 
     return <View style={[styles.container,
     { backgroundColor: props.backgroundColour ?? Colors[colorScheme ?? 'light'].card, shadowColor: Colors[colorScheme ?? 'light'].cardShadow }]}>
-        {props.title && <>
+        {props.title &&
             <Text style={{ color: theme.colors.text, fontSize: 14, margin: 5 }}>{props.title}</Text>
-
-        </>}
+        }
         <View>
             {props.children}
         </View>
-
     </View>
 }
 

@@ -51,7 +51,7 @@ export namespace FireStore {
                 });
             }
         } catch (e) {
-            alert("Error getting words");
+            alert(`Error getting words ${e}`);
         }
         return resp;
     }

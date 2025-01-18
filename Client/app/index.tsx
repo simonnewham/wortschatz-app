@@ -10,11 +10,10 @@ export default function App() {
     
     return (
         <SafeAreaView style={styles.container}>
-            <Stack.Screen options={{ headerShown: true, headerTitle: "WortSchatz" }} />
+            <Stack.Screen options={{ headerShown: false }} />
             <View style={styles.container}>
                 <Login />
             </View>
-
         </SafeAreaView>
     );
 }

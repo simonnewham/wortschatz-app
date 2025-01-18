@@ -90,6 +90,9 @@ export default function Login() {
                             Register
                         </Text>
                     </Pressable>
+                    <Text style={[styles.buttonText, { paddingTop: 10, color: 'white' }]}>
+                            Forgot Password?
+                        </Text>
                 </View>
             </Card>
             <Footer />

@@ -1,4 +1,5 @@
-namespace Wortschatz.Core.DataLayer;
+using Wortschatz.Core.DataLayer;
+using Wortschatz.Core.Models;
 
 internal class Program
 {
@@ -9,11 +10,21 @@ internal class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+        // Swagger
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDataContext(builder.Configuration.GetConnectionString("DefaultConnectionString"));
+        // DB
+        builder.Services.AddDataContext(
+            builder.Configuration.GetConnectionString("DefaultConnectionString"));
+
+        // Auth
+        builder.Services.AddAuthorization()
+            .AddIdentityApiEndpoints<User>()
+            .AddEntityFrameworkStores<DataContext>();
+
+        builder.Services.AddAuthentication();
 
         var app = builder.Build();
 
@@ -23,6 +34,8 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.MapIdentityApi<User>();
 
         app.UseHttpsRedirection();
         app.UseAuthorization();

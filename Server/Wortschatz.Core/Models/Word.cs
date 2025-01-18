@@ -10,9 +10,11 @@ public class Word : BaseEntity
 
     public string? TranslateWordGender { get; set; }
 
-    public IEnumerable<string>? Tags { get; set; }
-
     public string? Usage { get; set; }
+
+    public WordType? WordType { get; set; }
+
+    public IEnumerable<WordTag>? WordTags { get; set; }
 
     public required User User { get; set; }
 }

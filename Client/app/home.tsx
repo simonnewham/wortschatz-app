@@ -49,7 +49,7 @@ export default function Home() {
                                 <Pressable style={[styles.button, { backgroundColor: 'black' }]}
                                     onPress={() => router.push('/add-word')}>
                                     <Text style={[styles.buttonText, { color: 'white' }]}>
-                                        Add new word
+                                       Neues Wort Erstellen / Add new word
                                     </Text>
                                 </Pressable>
                                 <Pressable style={[styles.button, { backgroundColor: 'red' }]}
@@ -57,12 +57,21 @@ export default function Home() {
                                     <Text style={[styles.buttonText, { color: 'white' }]}>
                                         Add a new phrase</Text>
                                 </Pressable>
-                                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]}
-                                    onPress={() => router.push('/(word-list-tabs)')}>
-                                    <Text style={[styles.buttonText, { color: 'black' }]}>
-                                        View your Wortschatz
-                                    </Text>
-                                </Pressable>
+                                <View style={{flex: 2, flexDirection: "row"}}>
+                                    <Pressable style={[styles.button, { flex: 1, backgroundColor: 'yellow' }]}
+                                        onPress={() => router.push('/(word-list-tabs)')}>
+                                        <Text style={[styles.buttonText, { color: 'black' }]}>
+                                            View your Wortschatz
+                                        </Text>
+                                    </Pressable>
+                                    <Pressable style={[styles.button, { flex: 1, backgroundColor: 'yellow' }]}
+                                        onPress={() => router.push('/views/view-tips')}>
+                                        <Text style={[styles.buttonText, { color: 'black' }]}>
+                                            View tips
+                                        </Text>
+                                    </Pressable>
+                                </View>
+        
                             </View>
                         </View>
                     </Card>
@@ -105,6 +114,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
+        fontSize: 14,
         padding: 10
     },
     buttonText: {
@@ -116,15 +126,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'gray',
         width: '100%',
-        margin: 2,
+        marginVertical: 2
+        //margin: 2,
     },
     headerText: {
         color: 'gray',
-        fontSize: 18,
+        fontSize: 14,
         padding: 5
     },
     overviewText: {
         color: 'white',
-        fontSize: 24
+        fontSize: 18
     }
 });
