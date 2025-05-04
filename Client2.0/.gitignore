@@ -7,8 +7,10 @@ node_modules/
 .expo/
 dist/
 web-build/
+expo-env.d.ts
 
 # Native
+.kotlin/
 *.orig.*
 *.jks
 *.p8
@@ -33,12 +35,5 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-Client/database-debug.log
-Client/ui-debug.log
-Client/.firebase/hosting.ZGlzdA.cache
 
-# server
-obj
-bin
-/.vs
-/Server/.vs
+app-example

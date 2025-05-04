@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication/" />
-    <Folder Include="Extensions/" />
+    <Compile Remove="Authentication\**" />
+    <Compile Remove="Extensions\**" />
+    <EmbeddedResource Remove="Authentication\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <None Remove="Authentication\**" />
+    <None Remove="Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services/" />
   </ItemGroup>
 

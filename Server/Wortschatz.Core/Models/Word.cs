@@ -1,14 +1,14 @@
+using Wortschatz.Core.Static;
+
 namespace Wortschatz.Core.Models;
 
 public class Word : BaseEntity
 {
     public required string NativeWord { get; set; }
 
-    public string? NativeWordGender { get; set; }
+    public ArtikelType? Artikel { get; set; }
 
     public required string TranslateWord { get; set; }
-
-    public string? TranslateWordGender { get; set; }
 
     public string? Usage { get; set; }
 

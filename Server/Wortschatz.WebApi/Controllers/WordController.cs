@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using Wortschatz.Core.DataLayer;
 using Wortschatz.Core.Models;
@@ -7,29 +7,21 @@ using Wortschatz.Core.Models;
 namespace Wortschatz.WebApi.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("[controller]")]
 public class WordController : ControllerBase
 {
-    public WordController(DataContext dataContext,
-        ILogger<Word> logger)
+    public WordController(DataContext dataContext)
     {
         this.dataContext = dataContext;
-        _logger = logger;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Word>> GetWords()
+    [EnableQuery]
+    public async Task<IEnumerable<Word>> Get()
     {
         var words = await dataContext.Words.ToListAsync();
         return words;
-    }
-
-    [HttpGet("{id}")]
-    public async Task<Word> GetWord(string id)
-    {
-        var word = await dataContext.Words.FirstAsync(t => t.Id == Guid.Parse(id));
-        return word;
     }
 
     [HttpDelete("{id}")]
@@ -44,10 +36,14 @@ public class WordController : ControllerBase
     [HttpPost]
     public async Task<Word> AddWord([FromBody] Word wordDto)
     {
-        var word = await dataContext.Words.AddAsync(wordDto);
-        return word.Entity;
+        var entity = await dataContext.Words.AddAsync(wordDto);
+
+        var word = entity.Entity;
+
+        dataContext.SaveChanges();
+
+        return word;
     }
 
     private readonly DataContext dataContext;
-    private readonly ILogger<Word> _logger;
 }
