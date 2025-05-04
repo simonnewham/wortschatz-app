@@ -1,7 +1,7 @@
 export interface IPhrase{
-    id: number;
+    id?: string;
     nativePhrase: string;
     translatePhrase: string;
-    tags: string[];
-    createdDate: Date;
+    tags: string;
+    // todo: on list createdDate: Date;
 }

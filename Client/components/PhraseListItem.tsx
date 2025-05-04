@@ -1,7 +1,7 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { useMemo } from "react";
 import { ColorSchemeName, Pressable, StyleSheet, View, useColorScheme } from "react-native";
-import { Colors } from "../constants/styles";
+import { Colors } from "../constants/Colors";
 import { IPhrase } from "../models/IPhrase";
 import { Text } from './Themed';
 
@@ -44,7 +44,7 @@ const getStyles = (theme: Theme, index: number, colorScheme: ColorSchemeName) =>
         },
         rowContainer: {
             padding: 10,
-            backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listOdd,
+            backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listEven,
             borderBottomWidth: 1
         },
         row: {

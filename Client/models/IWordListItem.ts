@@ -1,12 +1,12 @@
 import { WordCategory } from "../constants/WordCategory";
 
 export interface IWordListItem {
-    id: number;
+    id?: string;
     nativeWord: string;
-    nativeWordGender?: string;
+    nativeWordGender: string;
     nativeWordCategory: WordCategory;
-    tags: string[];
+    tags: string;
     translateWord: string;
-    translateWordGender?: string;
+    translateWordGender: string;
     createdDate: Date;
 }

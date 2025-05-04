@@ -1,10 +1,10 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { useMemo } from "react";
-import { StyleSheet, View, Pressable, useColorScheme, ColorSchemeName } from "react-native";
+import { ColorSchemeName, Pressable, StyleSheet, useColorScheme, View } from "react-native";
+import { Colors } from "../constants/Colors";
+import { WordCategory } from "../constants/WordCategory";
 import { IWordListItem } from '../models/IWordListItem';
 import { Text } from './Themed';
-import { WordCategory } from "../constants/WordCategory";
-import { Colors } from "../constants/styles";
 
 export interface IWordListItemProps {
     item: IWordListItem,
@@ -52,8 +52,7 @@ const getStyles = (theme: Theme, index: number, colorScheme: ColorSchemeName) =>
         },
         rowContainer: {
             padding: 10,
-            backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listOdd,
-            borderBottomWidth: 1
+            backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listEven,
         },
         row: {
             flexDirection: 'row',

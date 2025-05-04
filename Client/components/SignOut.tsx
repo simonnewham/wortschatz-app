@@ -1,15 +1,13 @@
 import { useTheme } from "@react-navigation/native";
-import { router } from 'expo-router';
 import { useMemo } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { Text } from './Themed';
-import { auth } from "../firebase.config";
 
 export function SignOut() {
     const theme = useTheme();
 
     const onSignOut = () => {
-        auth.signOut().then(() => router.replace('/'));
+       // auth.signOut().then(() => router.replace('/'));
     }
 
     const styles = useMemo(() => {
