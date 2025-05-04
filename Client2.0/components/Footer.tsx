@@ -8,9 +8,9 @@ export function Footer() {
     return (
         <Card>
             <View style={{ alignItems: 'center' }}>
-                <Text style={[{ color: theme.colors.text, fontSize: 12, paddingBottom: 5 }]}>
+                {/* <Text style={[{ color: theme.colors.text, fontSize: 12, paddingBottom: 5 }]}>
                     About Wortschatz
-                </Text>
+                </Text> */}
                 <Text style={[{ color: theme.colors.text, fontSize: 12 }]}>
                     Designed in Zürich 🇨🇭
                 </Text>

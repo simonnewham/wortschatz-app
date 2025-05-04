@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card } from '../../components/Card';
-import { Footer } from '../../components/Footer';
 
 export default function Home() {
     const theme = useTheme();
@@ -87,9 +86,6 @@ export default function Home() {
                 </View>
 
             </ScrollView>
-            <View style={{ alignItems: 'flex-end', width: 720, maxWidth: '100%' }}>
-                <Footer />
-            </View>
         </View>
     );
 }
