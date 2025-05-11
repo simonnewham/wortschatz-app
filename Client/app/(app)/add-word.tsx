@@ -120,7 +120,8 @@ const getStyles = (theme: Theme) => {
             width: '100%',
             borderRadius: 4,
             backgroundColor: theme.colors.card,
-            color: theme.colors.text
+            color: theme.colors.text,
+            borderColor: 'gray',
         },
         text: {
             fontSize: 14,

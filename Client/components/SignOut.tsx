@@ -1,3 +1,5 @@
+import { useAuthSession } from "@/providers/SessionProvider";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { useMemo } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -6,17 +8,25 @@ import { Text } from './Themed';
 export function SignOut() {
     const theme = useTheme();
 
-    const onSignOut = () => {
-       // auth.signOut().then(() => router.replace('/'));
+    const { signOut } = useAuthSession();
+
+    const onSignOut = async () => {
+        await signOut();
     }
 
     const styles = useMemo(() => {
         return StyleSheet.create({
             buttonContainer: {
-                marginRight: 10
+                marginRight: 20
             },
             button: {
-                width: '100%'
+                borderColor: 'gray',
+                borderWidth: 1,
+                borderRadius: 4,
+                flexDirection: 'row',
+                gap: 10,
+                paddingHorizontal: 20,
+                paddingVertical: 7,
             },
             text: {
                 fontSize: 15,
@@ -26,11 +36,11 @@ export function SignOut() {
     }, []);
 
     return (
-        <View style={[styles.buttonContainer]}> 
-                <Pressable style={[styles.button]}
-                    onPress={onSignOut}>
-                    <Text style={[styles.text, { margin: 'auto' }]}>Sign Out</Text>
-                </Pressable>
+        <View style={[styles.buttonContainer]}>
+            <Pressable style={[styles.button]} onPress={onSignOut}>
+                <MaterialIcons name="logout" size={24} color="gray" />
+                <Text style={[styles.text, { margin: 'auto' }]}>Sign Out</Text>
+            </Pressable>
         </View>
     )
 }

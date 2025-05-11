@@ -1,6 +1,7 @@
+import { SignOut } from '@/components/SignOut';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -26,15 +27,22 @@ export default function Home() {
         fetchWords();
     }, []);
 
+
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+            <Stack.Screen
+                options={{
+                    headerShown : true,
+                    headerTitle: () =>  <Image style={{ width: 200, height: 50 }} source={require('../../assets/images/logo.jpg')} />,
+                    headerRight: () => <SignOut />
+                }}
+            />
             <ScrollView style={{ width: 720, maxWidth: '100%', }}>
                 <View style={{ alignItems: 'center' }}>
                     <Card>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={{ width: 50, height: 50 }} source='../../assets/images/favicon.png' />
                             <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                                Hello
+                                Hallo
                             </Text>
                         </View>
                     </Card>
@@ -47,7 +55,7 @@ export default function Home() {
                                 <Pressable style={[styles.button, { backgroundColor: 'black' }]}
                                     onPress={() => router.push('/add-word')}>
                                     <Text style={[styles.buttonText, { color: 'white' }]}>
-                                        Neues Wort Erstellen / Add new word
+                                        Neues Wort Erstellen
                                     </Text>
                                 </Pressable>
                                 <Pressable style={[styles.button, { backgroundColor: 'red' }]}
@@ -112,7 +120,6 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         width: '100%',
         marginVertical: 2
-        //margin: 2,
     },
     headerText: {
         color: 'gray',

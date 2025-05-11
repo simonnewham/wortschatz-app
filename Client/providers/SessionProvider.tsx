@@ -2,19 +2,20 @@ import { createContext, use, type PropsWithChildren } from 'react';
 import { useStorageState } from '../hooks/useStorageState';
 
 const AuthContext = createContext<{
-  signIn: () => void;
-  signOut: () => void;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   session?: string | null;
+  userInfo?: any;
   isLoading: boolean;
 }>({
-  signIn: () => null,
-  signOut: () => null,
+  signIn: async () => { },
+  signOut: async () => { },
   session: null,
-  isLoading: false,
+  userInfo: undefined,
+  isLoading: false
 });
 
-// This hook can be used to access the user info.
-export function useSession() {
+export function useAuthSession() {
   const value = use(AuthContext);
   if (!value) {
     throw new Error('useSession must be wrapped in a <SessionProvider />');
@@ -23,17 +24,17 @@ export function useSession() {
   return value;
 }
 
-export function SessionProvider({ children }: PropsWithChildren) {
-  const [[isLoading, session], setSession] = useStorageState('session');
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [[isLoading, session], setSession] = useStorageState('Authentication');
 
   return (
     <AuthContext
       value={{
-        signIn: () => {
-          // Perform sign-in logic here
+        signIn: async (email: string, password: string) => {
           setSession('xxx');
+
         },
-        signOut: () => {
+        signOut: async () => {
           setSession(null);
         },
         session,

@@ -1,10 +1,10 @@
 import { Redirect, Stack } from 'expo-router';
 import { Text } from 'react-native';
-import { useSession } from '../../providers/SessionProvider';
+import { useAuthSession } from '../../providers/SessionProvider';
 
 
 export default function AppLayout() {
-  const { session, isLoading } = useSession();
+  const { session, isLoading } = useAuthSession();
   
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -14,5 +14,5 @@ export default function AppLayout() {
     return <Redirect href="/login" />;
   }
 
-  return <Stack  />;
+  return <Stack />;
 }
