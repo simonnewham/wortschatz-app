@@ -9,14 +9,23 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
         builder.Services.AddControllers()
-            .AddOData(
-                options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
+            .AddOData(options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
 
         // Swagger
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:8081")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
+
 
         // DB
         builder.Services.AddDbContext<DataContext>(options =>
@@ -41,6 +50,7 @@ internal class Program
 
         app.MapIdentityApi<User>();
 
+        app.UseCors();
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();

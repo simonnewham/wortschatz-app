@@ -1,55 +1,51 @@
-import { useAuthSession } from '@/providers/SessionProvider';
+import { useStyling } from '@/hooks/useStyling';
+import { useAuthSession } from '@/providers/AuthProvider';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Theme, useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Card } from '../components/Card';
 
 export default function Login() {
     const theme = useTheme();
-    const styles = useMemo(() => getStyles(theme), []);
+    const styles = useStyling();
 
-    const { signIn } = useAuthSession();
+    const { login, register } = useAuthSession();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [error, setError] = useState(false);
-
-    const onSignUp = async () => {
-        setError(false);
-        try {
-            await signIn(email, password);
-            router.replace('/(app)');
-        }
-        catch (e) {
-            setError(true);
-        }
-    }
 
     const onLogin = async () => {
         setError(false);
-        try {
-            await signIn(email, password);
-            router.replace('/(app)');
-        }
-        catch (e) {
+        login(email, password).then(() =>
+            router.replace('/(app)')
+        ).catch((e) => {
             setError(true);
-        }
+        });
+    }
+
+    const onRegister = async () => {
+        register(email, password).then(() =>
+            // Call login on success
+            void onLogin()
+        ).catch((e) => {
+            setError(true);
+        });
     }
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <Image style={{ padding: 10, width: 400, height: 100 }} source={require('../assets/images/logo.jpg')} />
-            <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
+            <Text style={[{ paddingBottom: 20, fontStyle: 'italic', color: theme.colors.text }]}>
                 Your personal German learning companion
             </Text>
             <Card>
                 <View style={{ alignItems: 'center' }}>
-                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
+                    <TextInput style={[styles.button, styles.textInput, { marginBottom: 10, borderColor: error ? 'red' : 'gray' }]}
                         placeholder='Email'
                         placeholderTextColor='gray'
                         value={email}
@@ -65,7 +61,7 @@ export default function Login() {
                         <Text style={[{ color: 'white' }]}>
                             Login</Text>
                     </Pressable>
-                    <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
+                    <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onRegister}>
                         <MaterialIcons name="person-add" size={24} color="black" />
                         <Text style={[{ color: 'black' }]}>
                             Anmelden
@@ -78,39 +74,4 @@ export default function Login() {
             </Card>
         </View>
     );
-}
-
-const getStyles = (theme: Theme) => {
-    return StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            backgroundColor: theme.colors.background,
-            width: "100%",
-        },
-        header: {
-            paddingBottom: 20
-        },
-        button: {
-            height: 50,
-            borderRadius: 4,
-            borderWidth: 1,
-            borderColor: 'gray',
-            width: '100%',
-            maxWidth: 500,
-            alignItems: 'center',
-            flexDirection: 'row',
-            margin: 5,
-            justifyContent: 'center',
-            gap: 10,
-            paddingVertical: 20,
-        },
-        textInput: {
-            backgroundColor: "#212125",
-            color: "white",
-            padding: 10
-        }
-    });
 };
