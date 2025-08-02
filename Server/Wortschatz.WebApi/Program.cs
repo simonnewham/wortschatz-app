@@ -11,8 +11,7 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers()
-            .AddOData(options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
+        builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
 
         // Services
         builder.Services.AddWortschatzServices();
@@ -49,9 +48,7 @@ internal class Program
         {
             options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:8081")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    policy.WithOrigins("http://localhost:8081").AllowAnyHeader().AllowAnyMethod();
                 });
         });
 
@@ -65,6 +62,7 @@ internal class Program
         builder.Services.AddAuthorization()
             .AddIdentityApiEndpoints<User>()
             .AddEntityFrameworkStores<DataContext>();
+
         builder.Services.AddAuthentication();
 
         var app = builder.Build();
@@ -77,11 +75,11 @@ internal class Program
         }
 
         app.MapIdentityApi<User>();
-
         app.UseCors();
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
+
         app.Run();
     }
 }

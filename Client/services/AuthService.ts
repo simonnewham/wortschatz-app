@@ -74,11 +74,11 @@ class AuthService {
 
     // TODO: Only for web
     getToken() {
-        return localStorage.getItem(Token_Key);
+        return localStorage.getItem(Token_Key) ?? undefined;
     }
 
     setToken(accessToken: string) {
-        localStorage.setItem(Token_Key, `Bearer ${accessToken}`);
+        localStorage.setItem(Token_Key, accessToken);
     }
 
     clearToken() {
@@ -89,12 +89,12 @@ class AuthService {
         const token = this.getToken();
         return {
             'Content-Type': 'application/json',
-            ...(token && { Authorization: token }),
+            ...(token && { Authorization: `Bearer ${token}` }),
         };
     }
 
     private readonly baseUrl;
-    
+
 }
 
 // Export a singleton instance

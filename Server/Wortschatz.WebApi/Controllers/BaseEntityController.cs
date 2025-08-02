@@ -25,20 +25,20 @@ namespace Wortschatz.WebApi.Controllers
             return await baseEntityService.DeleteAsync(id);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<TUpdate> Create([FromBody] TAdd addDto)
         {
             return await baseEntityService.AddAsync(addDto);
         }
 
-        [HttpPost("Update")]
+        [HttpPost("update")]
         public async Task<TUpdate> Update([FromBody] TUpdate updateDto)
         {
             return await baseEntityService.UpdateAsync(updateDto);
         }
 
 
-        [HttpPost("GetList")]
+        [HttpPost("getList")]
         [EnableQuery]
         public async Task<IEnumerable<T>> GetList()
         {

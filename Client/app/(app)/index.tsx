@@ -46,7 +46,7 @@ export default function Home() {
                     <Card>
                         <View style={{ alignItems: 'center' }}>
                             <Text style={[customStyles.header, { fontSize: 20, color: theme.colors.text }]}>
-                                Hallo {userInfo?.Username || 'Wortschatz'}!
+                                Hallo {userInfo?.userName || 'Wortschatz'}!
                             </Text>
                         </View>
                     </Card>

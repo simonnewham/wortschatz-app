@@ -1,11 +1,13 @@
+import { IUserInfo } from '@/models/IUserInfo';
 import authService from '@/services/AuthService';
-import { createContext, use, type PropsWithChildren } from 'react';
+import userService from '@/services/UserService';
+import { createContext, use, useState, type PropsWithChildren } from 'react';
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => Promise<boolean | void>;
   register: (email: string, password: string) => Promise<boolean | void>;
   logout: () => Promise<boolean | void>;
-  userInfo?: any;
+  userInfo?: IUserInfo | null;
 }>({
   login: async () => { },
   register: async () => { },
@@ -23,12 +25,18 @@ export function useAuthSession() {
 }
 
 export function AuthProvider({ children }: PropsWithChildren) {
+  const [user, setUser] = useState<IUserInfo | null>(null);
+  
   return (
     <AuthContext
       value={{
         login: async (email: string, password: string) => {
           const result = await authService.login({ email: email, password: password })
           if (result.success) {
+            const userInfo = await userService.getUserInfo();
+            console.log('User Info:', userInfo);
+            setUser(userInfo);
+            
             return true;
           }
 
@@ -45,9 +53,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
           authService.logout();
           return true;
         },
-        userInfo: {
-          Username: 'Demo User'
-        }, // Assuming this method exists to get user info
+        userInfo: user
       }}>
       {children}
     </AuthContext>
