@@ -14,7 +14,5 @@ public class Word : BaseEntity
 
     public WordType? WordType { get; set; }
 
-    public IEnumerable<WordTag>? WordTags { get; set; }
-
-    public required User User { get; set; }
+    public IEnumerable<WordTag>? Tags { get; set; }
 }

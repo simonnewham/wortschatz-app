@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.WebApi", "Wortsc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.Core", "Wortschatz.Core\Wortschatz.Core.csproj", "{A3AB725D-43B3-40CB-86F4-AABE74637964}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortschatz.Service", "Wortschatz.Service\Wortschatz.Service.csproj", "{9123A957-FBFF-4C4E-8E67-69DA837BA077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A3AB725D-43B3-40CB-86F4-AABE74637964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3AB725D-43B3-40CB-86F4-AABE74637964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3AB725D-43B3-40CB-86F4-AABE74637964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9123A957-FBFF-4C4E-8E67-69DA837BA077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9123A957-FBFF-4C4E-8E67-69DA837BA077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9123A957-FBFF-4C4E-8E67-69DA837BA077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9123A957-FBFF-4C4E-8E67-69DA837BA077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

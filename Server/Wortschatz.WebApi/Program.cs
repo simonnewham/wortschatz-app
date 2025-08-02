@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Wortschatz.Core.DataLayer;
 using Wortschatz.Core.Models;
+using Wortschatz.Service.Extensions;
 
 internal class Program
 {
@@ -12,9 +14,36 @@ internal class Program
         builder.Services.AddControllers()
             .AddOData(options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
 
+        // Services
+        builder.Services.AddWortschatzServices();
+
         // Swagger
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header
+            });
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                }
+            });
+        });
 
         builder.Services.AddCors(options =>
         {
@@ -25,7 +54,6 @@ internal class Program
                         .AllowAnyMethod();
                 });
         });
-
 
         // DB
         builder.Services.AddDbContext<DataContext>(options =>
