@@ -5,7 +5,7 @@ class UserService {
     constructor() {
     }
 
-    public async getUserInfo(): Promise<IUserInfo> {
+    public async getUserInfo(): Promise<IUserInfo | null> {
         const response = await dataService.Get('User/getUserInfo');
 
         if (response.ok) {
@@ -17,7 +17,7 @@ class UserService {
             };
         }
 
-        throw new Error('Failed to fetch user info');
+       return null;
     }
 }
 

@@ -1,11 +1,12 @@
+import bseEntityDataService from '@/services/BaseEntityDataService';
 import { Theme, useTheme } from '@react-navigation/native';
+import { Stack } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../../components/CancelSubmitButton';
 import { Card } from '../../components/Card';
 import { WordCategory } from '../../constants/WordCategory';
 import { IWord } from '../../models/IWord';
-
 
 const initialForm: IWord = {
     nativeWord: '',
@@ -20,29 +21,44 @@ const initialForm: IWord = {
 export default function AddWord() {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), []);
+
     const [isEnabled, setIsEnabled] = useState(false);
     const [form, setForm] = useState(initialForm);
-
     const [error, setError] = useState(false);
+    const [message, setMessage] = useState<string | null>(null);
 
     const handleFormUpdate = (text: string, value: string) => {
         setForm(prev => ({ ...prev, [value]: text }));
     }
 
     const onSubmit = async () => {
-        // todo: validation
+        setMessage(null);
+
         if (!form.nativeWord) {
             setError(true);
         }
         else {
-            // await FireStore.AddWord(form)
-            // setForm(initialForm);
+            const result = await bseEntityDataService.Create('Word', form);
+            if (result.ok) {
+                setForm(initialForm);
+                setMessage('Word added successfully!');
+            }
+            else {
+                setMessage('Failed to add word. Please try again.');
+            }
         }
     }
 
     return (
         <View style={[styles.container]}>
+            <Stack.Screen
+                options={{
+                    headerShown: true,
+                    headerTitle: 'Add a new word'
+                }}
+            />
             <ScrollView style={[styles.formContainer]}>
+                {message && <Text style={{ color: 'green', textAlign: 'center' }}>{message}</Text>}
                 <Card >
                     <Text style={[styles.text]}>Deutsch</Text>
                     <View>
@@ -85,9 +101,7 @@ export default function AddWord() {
                         value={form.tags}
                         onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
                 </Card>
-
             </ScrollView>
-
             <View style={{ width: 710, maxWidth: '100%' }}>
                 <CancelSubmitButton onSubmit={onSubmit} />
             </View>

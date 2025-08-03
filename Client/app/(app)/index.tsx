@@ -55,7 +55,7 @@ export default function Home() {
                 <View style={{ alignItems: 'center' }}>
                     <Card>
                         <View style={{ alignItems: 'center' }}>
-                            <View style={{ padding: 10, width: 640, maxWidth: '100%' }}>
+                            <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
                                 <Pressable style={[styles.button, { backgroundColor: 'black' }]}
                                     onPress={() => router.push('/add-word')}>
                                     <Text style={[customStyles.buttonText, { color: 'white' }]}>

@@ -1,7 +1,7 @@
 import { IUserInfo } from '@/models/IUserInfo';
 import authService from '@/services/AuthService';
 import userService from '@/services/UserService';
-import { createContext, use, useState, type PropsWithChildren } from 'react';
+import { createContext, use, useEffect, useState, type PropsWithChildren } from 'react';
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => Promise<boolean | void>;
@@ -25,8 +25,21 @@ export function useAuthSession() {
 }
 
 export function AuthProvider({ children }: PropsWithChildren) {
+  // Need to fetch user info on refresh
   const [user, setUser] = useState<IUserInfo | null>(null);
-  
+
+  useEffect(() => {
+    if (authService.isAuthenticated()) {
+     userService.getUserInfo().then((userInfo) => {
+        if (userInfo) {
+          setUser(userInfo);
+        } else {
+          authService.logout();
+        }
+      });
+    }
+  }, []);
+
   return (
     <AuthContext
       value={{
@@ -34,9 +47,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
           const result = await authService.login({ email: email, password: password })
           if (result.success) {
             const userInfo = await userService.getUserInfo();
-            console.log('User Info:', userInfo);
             setUser(userInfo);
-            
+
             return true;
           }
 
@@ -59,3 +71,4 @@ export function AuthProvider({ children }: PropsWithChildren) {
     </AuthContext>
   );
 }
+
