@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -61,6 +62,7 @@ internal class Program
         // Auth
         builder.Services.AddAuthorization()
             .AddIdentityApiEndpoints<User>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<DataContext>();
 
         builder.Services.AddAuthentication();

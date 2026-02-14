@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Card } from '../components/Card';
+import '../global.css';
 
 export default function Login() {
     const theme = useTheme();
@@ -40,31 +41,34 @@ export default function Login() {
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <Image style={{ padding: 10, width: 400, height: 100 }} source={require('../assets/images/logo.jpg')} />
-            <Text style={[{ paddingBottom: 20, fontStyle: 'italic', color: theme.colors.text }]}>
+            <Text className='text-italic pb-2' style={[{ color: theme.colors.text }]}>
                 Your personal German learning companion
             </Text>
             <Card>
-                <View style={{ alignItems: 'center' }}>
-                    <TextInput style={[styles.button, styles.textInput, { marginBottom: 10, borderColor: error ? 'red' : 'gray' }]}
+                <View className='items-center m-5'>
+                    <TextInput className='p-2 mb-4 rounded-md w-1/2 h-10 text-white border-2 border-stone-300'
                         placeholder='Email'
                         placeholderTextColor='gray'
                         value={email}
                         onChangeText={setEmail} />
-                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
-                        placeholder='Password' placeholderTextColor='gray'
+                    <TextInput className='p-2 mb-4 rounded-md w-1/2 h-10 text-white border-2 border-stone-300'
+                        placeholder='Password'
+                        placeholderTextColor='gray'
                         secureTextEntry
                         value={password}
                         onChangeText={setPassword} />
                     {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
-                    <Pressable style={[styles.button, { marginTop: 15, backgroundColor: 'red' }]} onPress={onLogin}>
+                    <Pressable className='h-10 w-1/2 rounded-md mt-2 bg-sky-900 items-center flex-row gap-2 justify-center'
+                        onPress={onLogin}>
                         <MaterialIcons name="login" size={24} color="white" />
-                        <Text style={[{ color: 'white' }]}>
+                        <Text className='text-white'>
                             Login</Text>
                     </Pressable>
-                    <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onRegister}>
-                        <MaterialIcons name="person-add" size={24} color="black" />
-                        <Text style={[{ color: 'black' }]}>
-                            Anmelden
+                    <Pressable className='h-10 w-1/2 rounded-md mt-2 bg-sky-950 items-center flex-row gap-2 justify-center'
+                        onPress={onRegister}>
+                        <MaterialIcons name="person-add" size={24} color="white" />
+                        <Text className='text-white'>
+                            Register
                         </Text>
                     </Pressable>
                     {/* <Text style={[styles.buttonText, { paddingTop: 50, color: 'white' }]}>

@@ -20,6 +20,21 @@ namespace Wortschatz.WebApi.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="updateUserDto"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<UpdateUserDto> Register([FromBody] AddUserDto updateUserDto)
+        {
+            var result = await userService.AddUserAsync(updateUserDto);
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         [HttpGet("getUserInfo")]
         public UserInfoDto? GetUserDetails()

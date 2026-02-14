@@ -9,10 +9,6 @@ namespace Wortschatz.Service.Services;
 public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntityService<T, TAdd, TUpdate, TDetail, TList> where T : BaseEntity
 {
 
-    private readonly DataContext _dataContext;
-    private readonly IUserService _userService;
-    private readonly DbSet<T> _dbSet;
-
     public BaseEntityService(DataContext context, IUserService userService)
     {
         _dataContext = context ?? throw new ArgumentNullException(nameof(context));
@@ -42,7 +38,8 @@ public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntitySe
     {
         var userId = _userService.GetUserId();
 
-        return await _dbSet.Where(t => t.CreatedByUserId == null || t.CreatedByUserId == userId)
+        return await _dbSet
+            .Where(t => t.CreatedByUserId == null || t.CreatedByUserId == userId)
             .ToListAsync();
     }
 
@@ -103,4 +100,8 @@ public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntitySe
 
         return true;
     }
+
+    private readonly DataContext _dataContext;
+    private readonly IUserService _userService;
+    private readonly DbSet<T> _dbSet;
 }

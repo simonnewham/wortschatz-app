@@ -46,7 +46,7 @@ class AuthService {
 
     public async register(userDetails: ICredentials) {
         try {
-            const response = await fetch(`${this.baseUrl}/register`, {
+            const response = await fetch(`${this.baseUrl}/User/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

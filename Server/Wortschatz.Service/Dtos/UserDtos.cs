@@ -1,10 +1,26 @@
-﻿namespace Wortschatz.Service.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Wortschatz.Service.Dtos
 {
-    public class UpdateUserDto
+    public class BaseUserDto
     {
         public string? FirstName { get; set; } = string.Empty;
 
         public string? LastName { get; set; } = string.Empty;
+    }
+
+    public class AddUserDto : BaseUserDto
+    {
+        [Required]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        public string Password { get; set; } = string.Empty;
+    }
+
+    public class UpdateUserDto : BaseUserDto
+    {
+        public Guid Id { get; set; }
     }
 
     public class UserInfoDto : UpdateUserDto

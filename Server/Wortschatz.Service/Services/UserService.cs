@@ -1,8 +1,10 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wortschatz.Core.DataLayer;
 using Wortschatz.Core.Models;
+using Wortschatz.Core.Static;
 using Wortschatz.Service.Dtos;
 using Wortschatz.Service.Services.Interfaces;
 
@@ -10,12 +12,13 @@ namespace Wortschatz.Service.Services
 {
     public class UserService : IUserService
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly DataContext context;
-
-        public UserService(IHttpContextAccessor httpContextAccessor, DataContext context)
+        public UserService(
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<User> userManager,
+            DataContext context)
         {
             this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
             this.context = context;
         }
 
@@ -35,6 +38,35 @@ namespace Wortschatz.Service.Services
             var userName = user.FindFirstValue(ClaimTypes.Name);
 
             return userName!;
+        }
+
+        public async Task<UpdateUserDto> AddUserAsync(AddUserDto addUserDto)
+        {
+            var user = new User()
+            {
+                UserName = addUserDto.Email,
+                FirstName = addUserDto.FirstName,
+                LastName = addUserDto.LastName
+            };
+
+            var result = await userManager.CreateAsync(user, addUserDto.Password);
+            await userManager.AddToRoleAsync(user, UserRoles.User);
+
+            if (result.Succeeded)
+            {
+                // TODO: Email and logging 
+
+                return new UpdateUserDto
+                {
+                    FirstName = addUserDto.FirstName,
+                    LastName = addUserDto.LastName
+                };
+            }
+            else
+            {
+                throw new Exception("Registration failed");
+            }
+
         }
 
         public UpdateUserDto UpdateUser(UpdateUserDto userUpdateDto)
@@ -64,7 +96,6 @@ namespace Wortschatz.Service.Services
         private ClaimsPrincipal GetClaimsPrincipal()
         {
             var user = httpContextAccessor.HttpContext?.User;
-
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -86,5 +117,9 @@ namespace Wortschatz.Service.Services
                 PhraseCount = await phrases.CountAsync(),
             };
         }
+
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<User> userManager;
+        private readonly DataContext context;
     }
 }

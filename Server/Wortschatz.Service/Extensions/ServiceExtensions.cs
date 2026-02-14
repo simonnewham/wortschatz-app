@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Wortschatz.Core.Models;
+using Wortschatz.Service.DataGenerators;
 using Wortschatz.Service.Dtos;
 using Wortschatz.Service.Services;
 using Wortschatz.Service.Services.Interfaces;
@@ -11,6 +12,7 @@ namespace Wortschatz.Service.Extensions
         public static IServiceCollection AddWortschatzServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddHostedService<DefaultDataGenerator>();
 
             // Generics
             services.AddScoped<IBaseEntityService<Word, WordAddDto, WordUpdateDto, WordUpdateDto, WordListDto>,

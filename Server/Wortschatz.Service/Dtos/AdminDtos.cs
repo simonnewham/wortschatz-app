@@ -1,6 +1,6 @@
 ﻿namespace Wortschatz.Service.Dtos
 {
-    public class AdminCountsDto
+    public record AdminCountsDto
     {
         public int WordCount { get; set; }
 

@@ -21,7 +21,7 @@ class BaseEntityDataService {
     }
 
     public async GetDetail(entity: string, id?: string): Promise<Response> {
-        return dataService.Get(`${entity}`, id);
+        return dataService.GetById(`${entity}`, id);
     }
 
 }

@@ -23,6 +23,7 @@ namespace Wortschatz.Service.Services
             return new AdminCountsDto
             {
                 WordCount = wordCount,
+                PhraseCount = phraseCount,
                 UserCount = userCount
             };
         }

@@ -18,6 +18,13 @@ namespace Wortschatz.Service.Services.Interfaces
         string GetUserName();
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userUpdateDto"></param>
+        /// <returns></returns>
+        Task<UpdateUserDto> AddUserAsync(AddUserDto userUpdateDto);
+
+        /// <summary>
         /// Update the current user.
         /// </summary>
         UpdateUserDto UpdateUser(UpdateUserDto userUpdateDto);

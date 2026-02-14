@@ -5,7 +5,7 @@ class DataService {
         this.baseUrl = process.env.EXPO_PUBLIC_WORTSCHATZ_API_URL || 'http://localhost:5153';
     }
 
-    public async Get(endpoint: string, id?: string): Promise<Response> {
+    public async Get(endpoint: string): Promise<Response> {
         const response = fetch(`${this.baseUrl}/${endpoint}`, {
             method: 'GET',
             headers: authService.getAuthHeaders()
@@ -14,8 +14,17 @@ class DataService {
         return response;
     }
 
+    public async GetById(endpoint: string, id?: string): Promise<Response> {
+        const response = fetch(`${this.baseUrl}/${endpoint}/${id}`, {
+            method: 'GET',
+            headers: authService.getAuthHeaders()
+        });
+
+        return response;
+    }
+
     public async Delete(endpoint: string, id: string): Promise<Response> {
-        const response = fetch(`${this.baseUrl}/${endpoint}`, {
+        const response = fetch(`${this.baseUrl}/${endpoint}/${id}`, {
             method: 'Delete',
             headers: authService.getAuthHeaders()
         });
