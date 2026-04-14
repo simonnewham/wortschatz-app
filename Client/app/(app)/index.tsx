@@ -1,10 +1,8 @@
-import { SettingsButton } from '@/components/SettingsButton';
-import { SignOut } from '@/components/SignOut';
 import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
-import { Image } from 'expo-image';
-import { router, Stack } from 'expo-router';
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -34,41 +32,37 @@ export default function Home() {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Stack.Screen
-                options={{
-                    headerShown: true,
-                    headerTitle: () => <Image style={{ width: 200, height: 50 }} source={require('../../assets/images/logo.jpg')} />,
-                    headerRight: () => <><SignOut /><SettingsButton /></>
-                }}
-            />
             <ScrollView style={{ width: 860, maxWidth: '100%', }}>
                 <View style={{ alignItems: 'center' }}>
-                    <Card>
+                    <Card className='bg-gradient-to-r from-cyan-600 to-blue-800'>
                         <View style={{ alignItems: 'center' }}>
-                            <Text style={[customStyles.header, { fontSize: 20, color: theme.colors.text }]}>
-                                Hallo {userInfo?.userName || 'Wortschatz'}!
+                            <Text className='font-sans text-white' style={[customStyles.header, { fontSize: 20 }]}>
+                                {userInfo?.userName || '<<username>>'}
                             </Text>
                         </View>
                     </Card>
                 </View>
-
                 <View style={{ alignItems: 'center' }}>
                     <Card>
                         <View style={{ alignItems: 'center' }}>
                             <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
-                                <Pressable style={[styles.button, { backgroundColor: 'black' }]}
+                                <Pressable className='bg-gradient-to-r from-cyan-500 to-blue-600 rounded-md' style={[styles.button]}
                                     onPress={() => router.push('/add-word')}>
-                                    <Text style={[customStyles.buttonText, { color: 'white' }]}>
-                                        Neues Wort Erstellen
+                                    <MaterialIcons name="add" size={20} color="white" />
+                                    <Text className='font-sans' style={[customStyles.buttonText, { color: 'white' }]}>
+                                        Add a new Word
                                     </Text>
                                 </Pressable>
-                                <Pressable style={[styles.button, { backgroundColor: 'red' }]}
+                                <Pressable className='bg-gradient-to-r from-cyan-500 to-blue-600 rounded-md' style={[styles.button]}
                                     onPress={() => router.push('/add-phrase')}>
-                                    <Text style={[customStyles.buttonText, { color: 'white' }]}>
+                                    <MaterialIcons name="add" size={20} color="white" />
+                                    <Text className='font-sans' style={[customStyles.buttonText, { color: 'white' }]}>
                                         Add a new phrase</Text>
                                 </Pressable>
-                                <Pressable style={[styles.button, { backgroundColor: 'yellow' }]}>
-                                    <Text style={[customStyles.buttonText, { color: 'black' }]}>
+                                <Pressable className='bg-gradient-to-r from-cyan-500 to-blue-600 rounded-md' style={[styles.button]}
+                                    onPress={() => router.push('/word-list')}>
+                                    <MaterialIcons name="view-list" size={20} color="white" />
+                                    <Text className='font-sans' style={[customStyles.buttonText, { color: 'white' }]}>
                                         View your Wortschatz
                                     </Text>
                                 </Pressable>
@@ -76,7 +70,9 @@ export default function Home() {
                         </View>
                     </Card>
                 </View>
-
+                {/* <View style={{ alignItems: 'center' }}>
+                    <AddWordComponent />
+                </View> */}
                 <View style={{ alignItems: 'center' }}>
                     {/* TODO: Move out */}
                     <Card>
@@ -107,8 +103,8 @@ const customStyles = StyleSheet.create({
         fontSize: 14,
         padding: 10
     },
-     buttonText: {
-        margin: 'auto'
+    buttonText: {
+
     },
     headerText: {
         color: 'gray',

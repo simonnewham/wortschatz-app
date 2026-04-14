@@ -1,6 +1,6 @@
 import authService from '@/services/AuthService';
-import { Redirect, Stack } from 'expo-router';
-
+import { Redirect } from 'expo-router';
+import { NavigationDrawer } from './(drawer)/navigation-drawer';
 
 export default function AppLayout() {
   // TODO: Add async storage or context for auth state
@@ -9,5 +9,7 @@ export default function AppLayout() {
     return <Redirect href="/login" />;
   }
 
-  return <Stack />;
+  return (
+    <NavigationDrawer />
+  );
 }

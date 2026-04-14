@@ -12,7 +12,7 @@ export function Footer() {
                     Designed in Zürich, Switzerland
                 </Text>
                 <Text style={[{ color: theme.colors.text, fontSize: 12 }]}>
-                   Version: {process.env.EXPO_PUBLIC_VERSION}
+                    Version: 1.0.0
                 </Text>
             </View>
         </Card>)

@@ -19,13 +19,11 @@ export function useStyling() {
         formContainer: {
             flexDirection: 'column',
             height: '100%',
-            padding: 10,
-            width: 860,
             maxWidth: '100%'
         },
         cardContainer: {
             borderRadius: 4,
-            padding: 10,
+            padding: 5,
             width: 800,
             maxWidth: '100%',
             marginVertical: 10,
@@ -46,35 +44,40 @@ export function useStyling() {
             fontSize: 14,
             color: theme.colors.text
         },
-         textInput: {
+        textInput: {
             backgroundColor: "#212125",
             color: "white",
             padding: 10,
-             margin: 'auto'
+            margin: 'auto'
         },
         headerButton: {
-            borderColor: 'gray',
-            borderWidth: 1,
-            borderRadius: 4,
             flexDirection: 'row',
-            gap: 10,
-            paddingHorizontal: 20,
-            paddingVertical: 7,
+            verticalAlign: 'middle',
+            gap: 5,
+            paddingHorizontal: 5,
+            paddingVertical: 8,
         },
-                button: {
+        button: {
             height: 50,
-            borderRadius: 4,
             borderWidth: 1,
             borderColor: 'gray',
             width: '100%',
-            maxWidth: 500,
-            alignItems: 'center',
+            maxWidth: 450,
             flexDirection: 'row',
-            margin: 5,
+            gap: 1,
             justifyContent: 'center',
-            gap: 10,
+            alignItems: 'center',
+            margin: 5,
             paddingVertical: 20,
         },
+        picker: {
+            width: '100%',
+            padding: 5,
+            marginVertical: 10,
+            backgroundColor: theme.colors.card,
+            color: theme.colors.text,
+            borderColor: theme.colors.text,
+        }
     }), [theme]);
 
     return styles;

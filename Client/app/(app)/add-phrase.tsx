@@ -1,9 +1,11 @@
 import { IPhrase } from '@/models/IPhrase';
 import bseEntityDataService from '@/services/BaseEntityDataService';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Theme, useTheme } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { router } from 'expo-router';
+import Drawer from 'expo-router/drawer';
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../../components/CancelSubmitButton';
 import { Card } from '../../components/Card';
 
@@ -38,12 +40,19 @@ export default function AddPhrase() {
 
     return (
         <View style={[styles.container]}>
-            <Stack.Screen
+            <Drawer.Screen
                 options={{
-                    headerShown: true,
-                    headerTitle: 'Add a new phrase'
+                    headerTitle: 'Add a new phrase',
+                    headerLeft: () => (
+                        <Pressable className='p-2' onPress={() => router.back()}>
+                            <MaterialIcons name="arrow-back" size={20} color="black" />
+                        </Pressable>
+                    ),
                 }}
             />
+            <Card>
+                <CancelSubmitButton onSubmit={onSubmit} />
+            </Card>
             <ScrollView style={[styles.formContainer]}>
                 {message && <Text style={{ backgroundColor: message.success ? 'green' : 'red', padding: 5, borderRadius: 5, color: 'white', textAlign: 'center' }}>
                     {message.message}
@@ -74,9 +83,6 @@ export default function AddPhrase() {
                         onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
                 </Card>
             </ScrollView>
-            <View style={{ width: 720, maxWidth: '100%' }}>
-                <CancelSubmitButton onSubmit={onSubmit} />
-            </View>
         </View>
     );
 }
@@ -95,7 +101,6 @@ const getStyles = (theme: Theme) => {
             flexDirection: 'column',
             height: '100%',
             padding: 10,
-            width: 720,
             maxWidth: '100%'
         },
         input: {
