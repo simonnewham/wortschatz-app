@@ -31,15 +31,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<IUserInfo | null>(null);
 
   useEffect(() => {
-    if (authService.isAuthenticated()) {
-      userService.getUserInfo().then((userInfo) => {
-        if (userInfo) {
-          setUser(userInfo);
-        } else {
-          authService.logout();
-        }
-      });
+    const checkAuth = async () => {
+      if (await authService.isAuthenticated()) {
+        userService.getUserInfo().then((userInfo) => {
+          if (userInfo) {
+            setUser(userInfo);
+          } else {
+            authService.logout();
+          }
+        });
+      }
     }
+    checkAuth();
   }, []);
 
   return (
