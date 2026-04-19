@@ -19,8 +19,8 @@ namespace Wortschatz.WebApi.Controllers
             return entity;
         }
 
-        [HttpDelete]
-        public async Task<bool> Delete(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<bool> Delete([FromQuery]Guid id)
         {
             return await baseEntityService.DeleteAsync(id);
         }

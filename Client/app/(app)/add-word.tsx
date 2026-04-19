@@ -10,7 +10,7 @@ export default function AddWord() {
     const styles = useStyling();
 
     return (
-        <View style={[styles.container]}>
+        <View className="bg-gradient-to-r from-zinc-700 to-zinc-950" style={[styles.container]}>
             <Drawer.Screen
                 options={{
                     headerTitle: 'Add a new word',
@@ -21,7 +21,9 @@ export default function AddWord() {
                     ),
                 }}
             />
-            <AddWordComponent />
+            <View className="rounded-md bg-white" style={{ width: '95%', height: '95%' }}>
+                <AddWordComponent />
+            </View>
         </View>
     );
 }

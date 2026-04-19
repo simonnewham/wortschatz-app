@@ -12,7 +12,7 @@ export class Word {
         this.usage = '';
     }
 
-    id?: number;
+    id?: string;
     nativeWord: string;
     nativeWordGender?: WordGender;
     nativeWordCategory: WordCategory;

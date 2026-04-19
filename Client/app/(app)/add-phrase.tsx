@@ -1,5 +1,5 @@
 import { IPhrase } from '@/models/IPhrase';
-import bseEntityDataService from '@/services/BaseEntityDataService';
+import baseEntityDataService from '@/services/BaseEntityDataService';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Theme, useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
@@ -28,7 +28,7 @@ export default function AddPhrase() {
 
     const onSubmit = async () => {
         setMessage(null);
-        const result = await bseEntityDataService.Create('Phrase', form);
+        const result = await baseEntityDataService.Create('Phrase', form);
         if (result.ok) {
             setForm(initialForm);
             setMessage({ success: true, message: 'Phrase added successfully!' });

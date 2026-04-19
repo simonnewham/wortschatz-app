@@ -1,13 +1,19 @@
 import authService from '@/services/AuthService';
-import { Redirect } from 'expo-router';
+import { router } from 'expo-router';
+import { useEffect } from 'react';
 import { NavigationDrawer } from './(drawer)/navigation-drawer';
 
 export default function AppLayout() {
-  // TODO: Add async storage or context for auth state
 
-  if (!authService.isAuthenticated()) {
-    return <Redirect href="/login" />;
-  }
+  useEffect(() => {
+    const auth = async () => {
+      if (!await authService.isAuthenticated()) {
+        router.replace("/login");
+      }
+    }
+    auth()
+  }, [])
+
 
   return (
     <NavigationDrawer />

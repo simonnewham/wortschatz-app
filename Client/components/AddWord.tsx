@@ -1,7 +1,7 @@
 import { WordGender } from "@/constants/WordGender";
 import { useStyling } from "@/hooks/useStyling";
 import { Word } from "@/models/IWord";
-import bseEntityDataService from "@/services/BaseEntityDataService";
+import baseEntityDataService from "@/services/BaseEntityDataService";
 import { Picker } from "@react-native-picker/picker";
 import { Label } from "@react-navigation/elements";
 import { useState } from "react";
@@ -28,7 +28,7 @@ export function AddWordComponent() {
             setError(true);
         }
         else {
-            const result = await bseEntityDataService.Create('Word', form);
+            const result = await baseEntityDataService.Create('Word', form);
             if (result.ok) {
                 setForm(new Word());
                 setMessage('Word added successfully!');

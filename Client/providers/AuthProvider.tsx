@@ -7,11 +7,13 @@ const AuthContext = createContext<{
   login: (email: string, password: string) => Promise<boolean | void>;
   register: (email: string, password: string) => Promise<boolean | void>;
   logout: () => Promise<boolean | void>;
+  refreshUserInfo: () => Promise<void>;
   userInfo?: IUserInfo | null;
 }>({
   login: async () => { },
   register: async () => { },
   logout: async () => { },
+  refreshUserInfo: async () => { },
   userInfo: undefined,
 });
 
@@ -30,7 +32,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (authService.isAuthenticated()) {
-     userService.getUserInfo().then((userInfo) => {
+      userService.getUserInfo().then((userInfo) => {
         if (userInfo) {
           setUser(userInfo);
         } else {
@@ -53,6 +55,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
           }
 
           throw new Error('Login failed');
+        },
+        refreshUserInfo: async () => {
+          const userInfo = await userService.getUserInfo();
+          setUser(userInfo);
         },
         register: async (email: string, password: string) => {
           const result = await authService.register({ email: email, password: password })

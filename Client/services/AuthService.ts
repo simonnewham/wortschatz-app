@@ -1,3 +1,4 @@
+import userService from "./UserService";
 
 export interface ICredentials {
     email: string;
@@ -8,12 +9,17 @@ const Token_Key = 'authToken';
 
 class AuthService {
     constructor() {
-        this.baseUrl = process.env.EXPO_PUBLIC_WORTSCHATZ_API_URL || 'http://localhost:5153';
+        this.baseUrl = process.env.EXPO_PUBLIC_WORTSCHATZ_API_URL;
     }
 
-    public isAuthenticated() {
-        // TODO: Implement a more robust check for authentication
-        return !!this.getToken();
+    public async isAuthenticated() {
+        try {
+            const user = await userService.getUserInfo();
+            return user?.id != null;
+        } catch (error: any) {
+            this.logout();
+            return false;
+        }
     }
 
     public async login(credentials: ICredentials) {
@@ -74,15 +80,15 @@ class AuthService {
 
     // TODO: Only for web
     getToken() {
-        return localStorage.getItem(Token_Key) ?? undefined;
+        return localStorage?.getItem(Token_Key) ?? undefined;
     }
 
     setToken(accessToken: string) {
-        localStorage.setItem(Token_Key, accessToken);
+        localStorage?.setItem(Token_Key, accessToken);
     }
 
     clearToken() {
-        localStorage.removeItem(Token_Key);
+        localStorage?.removeItem(Token_Key);
     }
 
     getAuthHeaders() {

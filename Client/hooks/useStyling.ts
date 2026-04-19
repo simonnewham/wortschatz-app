@@ -11,7 +11,7 @@ export function useStyling() {
             alignItems: 'center',
             flexDirection: 'column',
             justifyContent: 'center',
-            width: "100%",
+            width: "100%"
         },
         headerContainer: {
             marginRight: 20
@@ -24,7 +24,7 @@ export function useStyling() {
         cardContainer: {
             borderRadius: 4,
             padding: 5,
-            width: 800,
+            width: 600,
             maxWidth: '100%',
             marginVertical: 10,
             shadowOffset: { width: 5, height: 5 }

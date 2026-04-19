@@ -115,6 +115,8 @@ namespace Wortschatz.Service.Services
             {
                 WordCount = await words.CountAsync(),
                 PhraseCount = await phrases.CountAsync(),
+                LastWord = words.OrderByDescending(t => t.CreatedDate).FirstOrDefault()?.NativeWord,
+                LastPhrase = phrases.OrderByDescending(t => t.CreatedDate).FirstOrDefault()?.NativePhrase,
             };
         }
 

@@ -6,18 +6,26 @@ class UserService {
     }
 
     public async getUserInfo(): Promise<IUserInfo | null> {
-        const response = await dataService.Get('User/getUserInfo');
+        try {
+            const response = await dataService.Get('User/getUserInfo');
 
-        if (response.ok) {
-            const data = await response.json();
-            return {
-                userName: data.userName,
-                firstName: data.firstName,
-                lastName: data.lastName
-            };
+            if (response.ok && response.status !== 401) {
+                const data = await response.json();
+                return {
+                    id: data.id,
+                    role: data.role,
+                    userName: data.userName,
+                    firstName: data.firstName,
+                    lastName: data.lastName
+                };
+            }
+
+            return null;
         }
+        catch {
 
-       return null;
+            return null;
+        }
     }
 }
 

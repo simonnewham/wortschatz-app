@@ -8,6 +8,8 @@ import { Text } from './Themed';
 export interface ICancelSubmitButtonProps {
     onSubmit: () => void;
     onCancel?: () => void;
+    submitText?: string;
+    cancelText?: string;
 }
 
 export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
@@ -40,14 +42,14 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                 <Pressable className="p-2 rounded-md" style={[styles.button, { backgroundColor: 'grey' }]}
                     onPress={() => router.replace('/(app)')}>
                     <MaterialIcons name="cancel" size={20} color="white" />
-                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>Cancel</Text>
+                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
             </View>
             <View>
                 <Pressable className="p-2 rounded-md" style={[styles.button, { backgroundColor: 'green' }]}
                     onPress={props.onSubmit}>
                     <MaterialIcons name="add" size={20} color="white" />
-                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>Add</Text>
+                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.submitText ?? 'Add'}</Text>
                 </Pressable>
             </View>
         </View>

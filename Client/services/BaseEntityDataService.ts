@@ -26,5 +26,5 @@ class BaseEntityDataService {
 
 }
 
-const bseEntityDataService = new BaseEntityDataService();
-export default bseEntityDataService;
+const baseEntityDataService = new BaseEntityDataService();
+export default baseEntityDataService;

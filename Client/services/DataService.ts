@@ -25,7 +25,7 @@ class DataService {
 
     public async Delete(endpoint: string, id: string): Promise<Response> {
         const response = fetch(`${this.baseUrl}/${endpoint}/${id}`, {
-            method: 'Delete',
+            method: 'DELETE',
             headers: authService.getAuthHeaders()
         });
 
