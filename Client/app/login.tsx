@@ -1,130 +1,109 @@
-import { useSession } from '@/providers/SessionProvider';
-import { Theme, useTheme } from '@react-navigation/native';
-import { useEffect, useMemo, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useStyling } from '@/hooks/useStyling';
+import { useAuthSession } from '@/providers/AuthProvider';
+import { MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Card } from '../components/Card';
+import '../global.css';
 
 export default function Login() {
-    const theme = useTheme();
-    const styles = useMemo(() => getStyles(theme), []);
+    const styles = useStyling();
 
-    const { signIn } = useSession();
+    const { login, register } = useAuthSession();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // todo: trigger toast
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        // const unsub = auth.onAuthStateChanged((user) => {
-        //     if (user) {
-        //         router.replace('/home');
-        //     }
-        // })
-        // return unsub;
-    }, []);
-
-    const onSignUp = async () => {
+    const onLogin = async () => {
         setError(false);
-        try {
-            // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // if (userCredential) {
-            //     const user = userCredential.user;
-            //     // todo: store in session
-            // }
-        }
-        catch (e) {
+        setIsLoading(true);
+        login(email, password).then(() => {
+            setIsLoading(false);
+            router.replace('/(app)');
+        }).catch((e) => {
+            setIsLoading(false);
             setError(true);
-            // todo: show error
-        }
+        });
     }
 
-    const onLogin = () => {
+    const onRegister = async () => {
         setError(false);
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         const user = userCredential.user;
-        //         // todo: store in session
-        //     })
-        //     .catch((error) => {
-        //         // alert(error);
-        //         setError(true);
-        //         // todo: show error
-        //     });
+        setIsLoading(true);
+        register(email, password).then(() =>
+            // Call login on success
+            onLogin()
+        ).catch((e) => {
+            setIsLoading(false);
+            setError(true);
+        });
     }
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Card>
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.header, { fontSize: 20, color: theme.colors.text }]}>
-                        Welcome to Wortschatz
+        <View className='bg-neutral' style={[styles.container]}>
+            <Card className='bg-gradient-to-r from-zinc-700 to-zinc-950'>
+                <View className='items-center m-5'>
+                    <Text className='font-sans font-bold text-3xl pb-2 text-white'>
+                        Wortschatz
                     </Text>
-                    <Text style={[styles.header, { fontStyle: 'italic', color: theme.colors.text }]}>
+                    <Text className='font-sans italic pb-2 text-white'>
                         Your personal German learning companion
                     </Text>
-                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
+                </View>
+            </Card>
+            <Card>
+                <View className='items-center m-5 min-w-lg'>
+                    <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
                         placeholder='Email'
                         placeholderTextColor='gray'
                         value={email}
                         onChangeText={setEmail} />
-                    <TextInput style={[styles.button, styles.textInput, { borderColor: error ? 'red' : 'gray' }]}
-                        placeholder='Password' placeholderTextColor='gray'
+                    <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
+                        placeholder='Password'
+                        placeholderTextColor='gray'
                         secureTextEntry
                         value={password}
                         onChangeText={setPassword} />
+                    {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
 
-                    {error && <Text style={{ padding: 10, color: 'red' }}>An error occurred, please try again.</Text>}
-
-                    <Pressable style={[styles.button, { marginTop: 15, backgroundColor: 'red' }]} onPress={onLogin}>
-                        <Text style={[styles.buttonText, { color: 'white' }]}>
-                            Login</Text>
+                    <Pressable
+                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-gradient-to-r from-zinc-700 to-zinc-950
+                            items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                        onPress={onLogin}
+                        disabled={isLoading}>
+                        {isLoading ? (
+                            <ActivityIndicator size="small" color="#ffffff" />
+                        ) : (
+                            <>
+                                <MaterialIcons name="login" size={24} color="white" />
+                                <Text className='text-white'>Login</Text>
+                            </>
+                        )}
                     </Pressable>
-                    <Pressable style={[styles.button, { backgroundColor: 'yellow' }]} onPress={onSignUp}>
-                        <Text style={[styles.buttonText, { color: 'black' }]}>
-                            Register
-                        </Text>
+                    <Pressable
+                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-4 border-zinc-800
+                            items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                        onPress={onRegister}
+                        disabled={isLoading}>
+                        {isLoading ? (
+                            <ActivityIndicator size="small" color="black" />
+                        ) : (
+                            <>
+                                <MaterialIcons name="person-add" size={24} color="black" />
+                                <Text className='text-black'>
+                                    Register
+                                </Text>
+                            </>
+                        )}
                     </Pressable>
-                    <Text style={[styles.buttonText, { paddingTop: 50, color: 'white' }]}>
+                    <Text className='font-sans pt-5 italic text-black underline'>
                         Forgot Password?
                     </Text>
                 </View>
             </Card>
         </View>
     );
-}
-
-const getStyles = (theme: Theme) => {
-    return StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            width: 540,
-            maxWidth: "100%",
-            padding: 10
-        },
-        header: {
-            paddingBottom: 20
-        },
-        buttonText: {
-            margin: 'auto'
-        },
-        button: {
-            height: 50,
-            borderRadius: 4,
-            borderWidth: 1,
-            borderColor: 'gray',
-            width: '100%',
-            margin: 2
-        },
-        textInput: {
-            backgroundColor: "#212125",
-            color: "white",
-            padding: 10
-        }
-    });
 };

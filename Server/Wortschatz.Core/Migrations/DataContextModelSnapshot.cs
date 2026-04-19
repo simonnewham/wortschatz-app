@@ -155,10 +155,40 @@ namespace Wortschatz.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Wortschatz.Core.Models.Phrase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NativePhrase")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranslatePhrase")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Phrases");
+                });
+
             modelBuilder.Entity("Wortschatz.Core.Models.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
@@ -170,7 +200,7 @@ namespace Wortschatz.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Wortschatz.Core.Models.User", b =>
@@ -250,6 +280,12 @@ namespace Wortschatz.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("Artikel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -257,29 +293,17 @@ namespace Wortschatz.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NativeWordGender")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TranslateWord")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TranslateWordGender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Usage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("WordType")
+                    b.Property<int?>("WordType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Words");
                 });
@@ -288,6 +312,9 @@ namespace Wortschatz.Core.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
@@ -305,7 +332,7 @@ namespace Wortschatz.Core.Migrations
 
                     b.HasIndex("WordId");
 
-                    b.ToTable("WordTag");
+                    b.ToTable("WordTags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -359,17 +386,6 @@ namespace Wortschatz.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wortschatz.Core.Models.Word", b =>
-                {
-                    b.HasOne("Wortschatz.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Wortschatz.Core.Models.WordTag", b =>
                 {
                     b.HasOne("Wortschatz.Core.Models.Tag", "Tag")
@@ -379,7 +395,7 @@ namespace Wortschatz.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Wortschatz.Core.Models.Word", "Word")
-                        .WithMany("WordTags")
+                        .WithMany("Tags")
                         .HasForeignKey("WordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -391,7 +407,7 @@ namespace Wortschatz.Core.Migrations
 
             modelBuilder.Entity("Wortschatz.Core.Models.Word", b =>
                 {
-                    b.Navigation("WordTags");
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

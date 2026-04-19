@@ -1,9 +1,12 @@
-﻿namespace Wortschatz.Core.Static
+﻿using System.Text.Json.Serialization;
+
+namespace Wortschatz.Core.Static
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<ArtikelType>))]
     public enum ArtikelType
     {
-        Der,
-        Die,
-        Das
+        Der = 0,
+        Die = 1,
+        Das = 3
     }
 }

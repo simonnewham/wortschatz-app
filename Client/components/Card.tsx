@@ -1,36 +1,30 @@
+import { useStyling } from "@/hooks/useStyling";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { PropsWithChildren } from "react";
-import { StyleSheet, Text, View, useColorScheme } from "react-native";
-import { Colors } from "../constants/Colors";
-
+import { Text, View, useColorScheme } from "react-native";
 
 interface ICardProps {
+    className?: string,
     backgroundColour?: string,
-    title?: string
+    title?: string,
+    icon?: any
 }
 
 export function Card(props: PropsWithChildren<ICardProps>) {
     const colorScheme = useColorScheme();
     const theme = useTheme();
+    const styles = useStyling();
 
-    return <View style={[styles.container,
-    { backgroundColor: props.backgroundColour ?? Colors[colorScheme ?? 'light'].card, shadowColor: Colors[colorScheme ?? 'light'].cardShadow }]}>
-        {props.title &&
-            <Text style={{ color: theme.colors.text, fontSize: 14, margin: 5 }}>{props.title}</Text>
-        }
+    return <View className={props.className + " rounded-md bg-neutral-50 shadow-md shadow-gray"} 
+    style={[styles.cardContainer]}>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+            {props.icon && <MaterialIcons name={props.icon} size={24} color={theme.colors.text} />}
+            {props.title &&
+                <Text style={{ color: theme.colors.text, fontSize: 24, marginBottom: 5 }}>{props.title}</Text>
+            }</View>
         <View>
             {props.children}
         </View>
     </View>
-}
-
-const styles = StyleSheet.create({
-    container: {
-        borderRadius: 4,
-        padding: 10,
-        width: 720,
-        maxWidth: '100%',
-        marginVertical: 10,
-        shadowOffset: { width: 5, height: 5 }
-    }
-});
+};

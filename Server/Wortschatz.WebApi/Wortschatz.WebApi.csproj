@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wortschatz.Core\Wortschatz.Core.csproj" />
+    <ProjectReference Include="..\Wortschatz.Service\Wortschatz.Service.csproj" />
   </ItemGroup>
 </Project>

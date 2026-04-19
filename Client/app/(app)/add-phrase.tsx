@@ -1,43 +1,65 @@
+import { IPhrase } from '@/models/IPhrase';
+import baseEntityDataService from '@/services/BaseEntityDataService';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Theme, useTheme } from '@react-navigation/native';
+import { router } from 'expo-router';
+import Drawer from 'expo-router/drawer';
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { CancelSubmitButton } from '../../components/CancelSubmitButton';
 import { Card } from '../../components/Card';
-import { IPhrase } from '../../models/IPhrase';
 
 const initialForm: IPhrase = {
-    nativePhrase: '',
-    translatePhrase: '',
-    tags: '',
+    nativePhrase: undefined,
+    translatePhrase: undefined,
+    usage: undefined,
 }
 
 export default function AddPhrase() {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), []);
+
     const [form, setForm] = useState(initialForm);
-    const [error, setError] = useState(false);
+    const [message, setMessage] = useState<{ success: boolean; message: string | null } | null>(null);
 
     const handleFormUpdate = (text: string, value: string) => {
         setForm(prev => ({ ...prev, [value]: text }));
     }
 
     const onSubmit = async () => {
-        // todo: validation
-        // if (!form.nativePhrase) {
-        //     setError(true);
-        // }
-        // else {
-        //     await FireStore.AddPhrase(form);
-        //     setForm(initialForm);
-        // }
+        setMessage(null);
+        const result = await baseEntityDataService.Create('Phrase', form);
+        if (result.ok) {
+            setForm(initialForm);
+            setMessage({ success: true, message: 'Phrase added successfully!' });
+        }
+        else {
+            setMessage({ success: false, message: 'Failed to add phrase. Please try again.' });
+        }
     }
 
     return (
         <View style={[styles.container]}>
+            <Drawer.Screen
+                options={{
+                    headerTitle: 'Add a new phrase',
+                    headerLeft: () => (
+                        <Pressable className='p-2' onPress={() => router.back()}>
+                            <MaterialIcons name="arrow-back" size={20} color="black" />
+                        </Pressable>
+                    ),
+                }}
+            />
+            <Card>
+                <CancelSubmitButton onSubmit={onSubmit} />
+            </Card>
             <ScrollView style={[styles.formContainer]}>
+                {message && <Text style={{ backgroundColor: message.success ? 'green' : 'red', padding: 5, borderRadius: 5, color: 'white', textAlign: 'center' }}>
+                    {message.message}
+                </Text>}
                 <Card>
                     <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
-                    <TextInput style={[styles.input, { borderColor: error ? 'red' : 'gray' }]}
+                    <TextInput style={[styles.input]}
                         multiline={true}
                         value={form.nativePhrase}
                         placeholder='deutsch...'
@@ -55,16 +77,12 @@ export default function AddPhrase() {
 
                     <Text style={[styles.text]}>Tags</Text>
                     <TextInput style={styles.input}
-                        value={form.tags}
-                        placeholder='tags...'
+                        value={form.usage}
+                        placeholder='usage...'
                         placeholderTextColor={'gray'}
-                        onChangeText={text => handleFormUpdate(text, 'tags')}></TextInput>
+                        onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
                 </Card>
             </ScrollView>
-            <View style={{ width: 720, maxWidth: '100%' }}>
-                <CancelSubmitButton onSubmit={onSubmit} />
-            </View>
-
         </View>
     );
 }
@@ -83,7 +101,6 @@ const getStyles = (theme: Theme) => {
             flexDirection: 'column',
             height: '100%',
             padding: 10,
-            width: 720,
             maxWidth: '100%'
         },
         input: {
@@ -94,7 +111,8 @@ const getStyles = (theme: Theme) => {
             width: '100%',
             borderRadius: 4,
             backgroundColor: theme.colors.card,
-            color: theme.colors.text
+            color: theme.colors.text,
+            borderColor: 'gray'
         },
         text: {
             fontSize: 14,

@@ -1,20 +1,16 @@
-import { Footer } from '@/components/Footer';
-import { SessionProvider } from '@/providers/SessionProvider';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { AuthProvider } from '@/providers/AuthProvider';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot } from 'expo-router';
-import { useColorScheme, View } from 'react-native';
+import { useColorScheme } from 'react-native';
 
-export default function RootLayout() {
+export default function AppRoot() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <SessionProvider >
+    <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
+      <AuthProvider >
         <Slot />
-        <View style={{ alignItems: 'center', backgroundColor: "black" }}>
-          <Footer />
-        </View>
-      </SessionProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
