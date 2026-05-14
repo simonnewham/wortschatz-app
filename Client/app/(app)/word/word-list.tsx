@@ -42,7 +42,7 @@ export default function WordList() {
             <ContainerDrawer title='Wortschatz' />
             <ContainerContent>
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="#ea580c" />
+                    <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
                 ) : (
                     <ScrollView className="w-full p-2">
                         <PageToolbar icon="view-list" title="Word List" actionLabel="Add a new word" actionIcon="add"

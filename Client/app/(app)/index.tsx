@@ -5,7 +5,6 @@ import { useAuthSession } from '@/providers/AuthProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import dataService from '@/services/DataService';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
@@ -52,20 +51,20 @@ export default function Home() {
                     <Card className='border-gray-200'>
                         <View style={{ alignItems: 'center' }}>
                             <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
                                     onPress={() => router.navigate('/word/add-word')}>
                                     <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>
                                         Add a new Word
                                     </Text>
                                 </Pressable>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
                                     onPress={() => router.navigate('/phrase/add-phrase')}>
                                     <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>
                                         Add a new phrase</Text>
                                 </Pressable>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
                                     onPress={() => router.navigate('/note/add-note')}>
                                     <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>

@@ -1,4 +1,5 @@
 import { Card } from '@/components/Card';
+import { Logo } from '@/components/Logo';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React from 'react';
@@ -12,11 +13,11 @@ const Navbar = () => (
     <View className="absolute top-0 w-full z-50 bg-black px-2">
         <View className="flex-row items-center justify-between px-4 py-4 w-full">
             <View className='flex-row gap-4'>
-                <Text className="text-white text-2xl font-bold tracking-tight">Wortschatz</Text>
+                <Logo />
             </View>
-            <Pressable className="bg-orange-600 rounded-lg hover:bg-orange-500 flex-row gap-3 items-center px-4 py-1" onPress={() => router.replace('/login')}>
-                <Text className="text-white font-semibold">Get started</Text>
-                <MaterialIcons name="arrow-right-alt" size={28} color="white" />
+            <Pressable className="bg-accent/95 rounded-lg hover:bg-accent flex-row gap-3 items-center px-4 py-1" onPress={() => router.replace('/login')}>
+                <Text className="text-black font-semibold">Get started</Text>
+                <MaterialIcons name="arrow-right-alt" size={28} color="black" />
             </Pressable>
         </View>
     </View >
@@ -28,18 +29,13 @@ const HeroSection = () => {
         <View style={{ minHeight: windowHeight * 0.8 }} className="relative w-full overflow-hidden bg-black flex-1 
         border-b border-zinc-900 justify-center items-center px-4">
             <View>
-                <Animated.View entering={FadeInUp.delay(100).duration(800).springify()}>
-                    <Text className="text-white text-4xl md:text-6xl font-extrabold tracking-tighter mb-8">
-                        Wortschatz
-                    </Text>
-                </Animated.View>
-                <Animated.View entering={FadeInUp.delay(100).duration(800).springify()}>
+                <Animated.View entering={FadeInUp.delay(100).duration(500).springify()}>
                     <Text className="text-white text-3xl md:text-6xl font-extrabold tracking-tighter mb-2">
                         Stop forgetting words.
                     </Text>
                 </Animated.View>
-                <Animated.View entering={FadeInUp.delay(300).duration(800).springify()}>
-                    <Text className="text-orange-400 text-5xl md:text-8xl font-serif italic mb-8 transform origin-left md:scale-110">
+                <Animated.View entering={FadeInUp.delay(100).duration(800).springify()}>
+                    <Text className="text-accent text-5xl md:text-8xl font-serif italic mb-8 transform origin-left md:scale-110">
                         Start mastering them.
                     </Text>
                 </Animated.View>
@@ -50,9 +46,10 @@ const HeroSection = () => {
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(700).duration(800).springify()}
                     className="flex-row w-full gap-4 justify-center">
-                    <Pressable onPress={() => router.replace('/login')} className="bg-orange-600 px-10 py-4 rounded-lg flex-row items-center gap-3 active:opacity-80 hover:bg-orange-500 transition-colors shadow-lg shadow-orange-600/30">
-                        <Text className="text-white text-xl font-bold tracking-wide">Get started</Text>
-                        <MaterialIcons name="arrow-right-alt" size={28} color="white" />
+                    <Pressable onPress={() => router.replace('/login')} className="bg-accent/95 px-4 py-4 rounded-lg flex-row items-center gap-3 active:opacity-80
+                     hover:bg-accent transition-colors shadow-lg shadow-accent/30">
+                        <Text className="text-black text-xl font-bold">Get started</Text>
+                        <MaterialIcons name="arrow-right-alt" size={28} color="black" />
                     </Pressable>
                 </Animated.View>
             </View>
@@ -63,9 +60,9 @@ const HeroSection = () => {
 // Features
 const FeaturesSection = () => {
     return (
-        <View className="py-4 px-4 bg-black w-full text-white">
+        <View className="pb-24 px-4 bg-black w-full text-white">
             <View className='justify-center items-center'>
-                <Text className="text-sm font-bold tracking-widest text-orange-600 uppercase mb-4">
+                <Text className="text-sm font-bold tracking-widest text-accent uppercase mb-4">
                     Core Workflows</Text>
                 <Text className="text-3xl md:text-4xl font-bold text-white mb-8 tracking-tight">
                     Functional tools designed to accelerate your fluency.
@@ -74,8 +71,8 @@ const FeaturesSection = () => {
                     <Card className="w-full flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
                         <View className="flex-1">
                             <View className="flex flex-row items-center gap-4">
-                                <View className="w-12 h-12 rounded-full bg-orange-600/20 items-center justify-center mb-4">
-                                    <MaterialIcons name="add-circle" size={24} color="#ea580c" />
+                                <View className="w-12 h-12 rounded-full bg-accent/20 items-center justify-center mb-4">
+                                    <MaterialIcons name="add-circle" size={24} color="#d4fd52" />
                                 </View>
                                 <Text className="text-2xl font-bold text-white mb-4">Add words and phrases</Text>
                             </View>
@@ -122,9 +119,9 @@ const FooterSection = () => {
         <View className="py-16 px-4 bg-zinc-900 w-full ">
             <View className="w-full flex-col gap-20 md:flex-row gap-8 justify-center items-center">
                 <View className="max-w-3/4">
-                    <Text className="text-3xl font-bold text-white mb-4">Wortschatz</Text>
+                    <Logo />
                     <Text className="text-white mb-6 leading-relaxed">Your language learning companion. Master languages organically by saving what matters.</Text>
-                    <Text className="text-zinc-500 font-medium">© {new Date().getFullYear()} Wortschatz Inc. All rights reserved.</Text>
+                    <Text className="text-accent/20 font-medium">© {new Date().getFullYear()} Wortschatz Inc. All rights reserved.</Text>
                 </View>
                 <View className="max-w-1/2 flex-row">
                     <View className="gap-4">

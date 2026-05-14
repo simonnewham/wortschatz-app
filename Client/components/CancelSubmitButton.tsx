@@ -44,21 +44,21 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                 <Pressable className="p-2 rounded-md" style={[styles.button, { backgroundColor: 'grey' }]}
                     onPress={() => router.back()}>
                     <MaterialIcons name="cancel" size={20} color="white" />
-                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.cancelText ?? 'Cancel'}</Text>
+                    <Text className="text-white">{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
             </View>
             {props.onSubmit && <View>
-                <Pressable className="p-2 rounded-md bg-orange-600" style={[styles.button]}
+                <Pressable className="p-2 rounded-md bg-accent/95 hover:bg-accent" style={[styles.button]}
                     onPress={props.onSubmit}>
-                    <MaterialIcons name="add" size={20} color="white" />
-                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.submitText ?? 'Add'}</Text>
+                    <MaterialIcons name="add" size={20} color="black" />
+                    <Text className="text-text_primary">{props.submitText ?? 'Add'}</Text>
                 </Pressable>
             </View>}
             {props.onDelete && <View>
                 <Pressable className="p-2 rounded-md bg-red-500" style={[styles.button]}
                     onPress={props.onDelete}>
-                    <MaterialIcons name="delete" size={20} color="white" />
-                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{'Delete'}</Text>
+                    <MaterialIcons name="delete" size={20} color="black" />
+                    <Text className="text-text_primary">{'Delete'}</Text>
                 </Pressable>
             </View>}
         </View>

@@ -41,7 +41,7 @@ export default function NoteList() {
             <ContainerDrawer title='Wortschatz Notes' />
             <ContainerContent>
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="#ea580c" />
+                    <ActivityIndicator size="large" color="##d4fd52" />
                 ) : (
                     <ScrollView className="w-full p-2" showsVerticalScrollIndicator={false}>
                         <PageToolbar icon="view-list" title="Note List" actionLabel="Add a new note" actionIcon="add" action={() => router.navigate('/note/add-note')} />
@@ -57,7 +57,7 @@ export default function NoteList() {
                                                 ) : null}
                                             </View>
                                             <View className="p-2">
-                                                <MaterialIcons name="arrow-forward" size={24} color="orange" />
+                                                <MaterialIcons name="arrow-forward" size={24} color="black" />
                                             </View>
                                         </View>
                                     </Card>

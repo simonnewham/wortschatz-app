@@ -1,13 +1,12 @@
 import { CancelSubmitButton } from '@/components/CancelSubmitButton';
+import { ContainerContent } from '@/components/ContainerContent';
+import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
-import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { ContainerDrawer } from '@/components/ContainerDrawer';
 import React, { useState } from 'react';
-import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ScrollView, Text, TextInput } from 'react-native';
 import { Card } from '../../components/Card';
 
 export default function SettingsButton() {
@@ -29,8 +28,8 @@ export default function SettingsButton() {
 
     return (
         <ContainerView>
-            <ContainerDrawer title='Settings' />
-            <View className="rounded-md bg-white justify-center items-center" style={{ width: '95%', height: '95%' }}>
+            <ContainerContent>
+                <ContainerDrawer title='Settings' />
                 <Card className='border-gray-200'>
                     <CancelSubmitButton onSubmit={onSubmit} submitText='Save' cancelText='Back' />
                 </Card>
@@ -54,7 +53,7 @@ export default function SettingsButton() {
                             onChangeText={text => handleFormUpdate(text, 'lastName')} />
                     </Card>
                 </ScrollView>
-            </View>
+            </ContainerContent>
         </ContainerView>
     );
 };

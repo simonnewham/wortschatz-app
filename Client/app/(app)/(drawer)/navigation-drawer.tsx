@@ -1,3 +1,4 @@
+import { Logo } from '@/components/Logo';
 import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -48,10 +49,8 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
     return (
         <View className='bg-black' style={{ flex: 1, }}>
             <DrawerContentScrollView {...props}>
-                <View className='items-center border-b-2 border-orange-600 justify-center' style={[styles.headerButton]}>
-                    <Text className='font-sans text-xl text-white'>Wortschatz</Text>
-                </View>
-                <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
+                <Logo textSize='2xl' />
+                <Pressable className='pt-2 items-center' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
                     <MaterialIcons name="home" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Home</Text>
                 </Pressable>
@@ -63,7 +62,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Add new phrase</Text>
                 </Pressable> */}
-                <Pressable className='items-center border-b-2 border-orange-600' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
+                <Pressable className='items-center border-b-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Add new note</Text>
                 </Pressable>
@@ -71,7 +70,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="view-list" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>View Wortschatz</Text>
                 </Pressable>
-                <Pressable className='items-center border-b-2 border-orange-600' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
+                <Pressable className='items-center border-b-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>View Notes</Text>
                 </Pressable>
@@ -79,13 +78,14 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="settings" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Settings</Text>
                 </Pressable>
-            </DrawerContentScrollView >
-            <View>
-                <Pressable className='items-center p-2' style={[styles.headerButton]} onPress={onSignOut}>
-                    <MaterialIcons name="logout" size={24} color="rgb(234 88 12)" />
+                <Pressable className='items-center' style={[styles.headerButton]} onPress={onSignOut}>
+                    <MaterialIcons name="logout" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Sign Out</Text>
                 </Pressable>
-                <Text className='text-center text-xs text-orange-600 p mb-2'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
+            </DrawerContentScrollView >
+            <View>
+
+                <Text className='text-center text-xs text-accent/50 p mb-2'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
             </View>
         </View>
     );

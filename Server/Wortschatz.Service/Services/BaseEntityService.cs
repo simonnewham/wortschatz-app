@@ -39,7 +39,7 @@ public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntitySe
         var userId = _userService.GetUserId();
 
         return await _dbSet
-            .Where(t => t.CreatedByUserId == null || t.CreatedByUserId == userId)
+            .Where(t => t.CreatedByUserId == userId)
             .ToListAsync();
     }
 
