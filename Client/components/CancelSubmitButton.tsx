@@ -8,8 +8,10 @@ import { Text } from './Themed';
 export interface ICancelSubmitButtonProps {
     onSubmit: () => void;
     onCancel?: () => void;
+    onDelete?: () => void;
     submitText?: string;
     cancelText?: string;
+    deleteText?: string;
 }
 
 export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
@@ -40,18 +42,25 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
         <View style={[styles.buttonContainer]}>
             <View>
                 <Pressable className="p-2 rounded-md" style={[styles.button, { backgroundColor: 'grey' }]}
-                    onPress={() => router.replace('/(app)')}>
+                    onPress={() => router.back()}>
                     <MaterialIcons name="cancel" size={20} color="white" />
                     <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
             </View>
-            <View>
-                <Pressable className="p-2 rounded-md" style={[styles.button, { backgroundColor: 'green' }]}
+            {props.onSubmit && <View>
+                <Pressable className="p-2 rounded-md bg-orange-600" style={[styles.button]}
                     onPress={props.onSubmit}>
                     <MaterialIcons name="add" size={20} color="white" />
                     <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{props.submitText ?? 'Add'}</Text>
                 </Pressable>
-            </View>
+            </View>}
+            {props.onDelete && <View>
+                <Pressable className="p-2 rounded-md bg-red-500" style={[styles.button]}
+                    onPress={props.onDelete}>
+                    <MaterialIcons name="delete" size={20} color="white" />
+                    <Text className="font-sans text-white" style={[{ margin: 'auto' }]}>{'Delete'}</Text>
+                </Pressable>
+            </View>}
         </View>
     )
 }

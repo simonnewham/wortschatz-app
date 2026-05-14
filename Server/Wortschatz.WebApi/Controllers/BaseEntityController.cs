@@ -12,15 +12,15 @@ namespace Wortschatz.WebApi.Controllers
             this.baseEntityService = baseEntityService;
         }
 
-        [HttpGet]
-        public async Task<T> Get(Guid Id)
+        [HttpGet("{id:guid}")]
+        public async Task<T> Get([FromRoute] Guid Id)
         {
             var entity = await baseEntityService.GetByIdAsync(Id);
             return entity;
         }
 
-        [HttpDelete("{id}")]
-        public async Task<bool> Delete([FromQuery]Guid id)
+        [HttpDelete("{id:guid}")]
+        public async Task<bool> Delete([FromRoute]Guid id)
         {
             return await baseEntityService.DeleteAsync(id);
         }

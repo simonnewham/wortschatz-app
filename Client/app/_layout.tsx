@@ -8,7 +8,7 @@ export default function AppRoot() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
-      <AuthProvider >
+      <AuthProvider>
         <Slot />
       </AuthProvider>
     </ThemeProvider>

@@ -39,6 +39,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
           } else {
             authService.logout();
           }
+        }).catch(() => {
+          authService.logout();
         });
       }
     }

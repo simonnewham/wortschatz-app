@@ -1,3 +1,4 @@
+import ContainerView from '@/components/ContainerView';
 import { useStyling } from '@/hooks/useStyling';
 import { IUserStatsSummaryDto } from '@/models/IUserStatsSummaryDto';
 import { useAuthSession } from '@/providers/AuthProvider';
@@ -9,9 +10,9 @@ import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Card } from '../../components/Card';
+import { ContainerContent } from '../../components/ContainerContent';
 
 export default function Home() {
-    const theme = useTheme();
     const { userInfo } = useAuthSession();
     const styles = useStyling();
 
@@ -37,51 +38,46 @@ export default function Home() {
     };
 
     return (
-        <View className='bg-gradient-to-r from-zinc-700 to-zinc-950' style={[styles.container]}>
-            <View className='rounded-md bg-white' style={{ height: '95%', width: '95%' }}>
+        <ContainerView>
+            <ContainerContent>
                 <View style={{ alignItems: 'center' }}>
-                    <Card className='bg-gradient-to-r from-zinc-700 to-zinc-950'>
-                        <View style={{ alignItems: 'center' }}>
-                            <Text className='font-sans text-white p-2' style={{ fontSize: 20 }}>
-                                {getGreeting()}, {userInfo?.firstName}
-                            </Text>
-                        </View>
-                    </Card>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text className='font-sans text-black p-2' style={{ fontSize: 20 }}>
+                            {getGreeting()}, {userInfo?.firstName}
+                        </Text>
+                    </View>
+
                 </View>
                 <View style={{ alignItems: 'center' }}>
-                    <Card>
+                    <Card className='border-gray-200'>
                         <View style={{ alignItems: 'center' }}>
                             <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
-                                <Pressable className='border-4 border-zinc-800 rounded-md hover:opacity-50' style={[styles.button]}
-                                    onPress={() => router.push('/add-word')}>
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                    onPress={() => router.navigate('/word/add-word')}>
                                     <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>
                                         Add a new Word
                                     </Text>
                                 </Pressable>
-                                <Pressable className='border-4 border-zinc-800 rounded-md' style={[styles.button]}
-                                    onPress={() => router.push('/add-phrase')}>
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                    onPress={() => router.navigate('/phrase/add-phrase')}>
                                     <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>
                                         Add a new phrase</Text>
                                 </Pressable>
-                                <Pressable className='border-4 border-zinc-800 rounded-md' style={[styles.button]}
-                                    onPress={() => router.push('/word-list')}>
-                                    <MaterialIcons name="view-list" size={20} color="black" />
+                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-orange-600' style={[styles.button]}
+                                    onPress={() => router.navigate('/note/add-note')}>
+                                    <MaterialIcons name="add" size={20} color="black" />
                                     <Text className='font-sans text-black'>
-                                        View your Wortschatz
-                                    </Text>
+                                        Add a new note</Text>
                                 </Pressable>
                             </View>
                         </View>
                     </Card>
                 </View>
-                {/* <View style={{ alignItems: 'center' }}>
-                    <AddWordComponent />
-                </View> */}
                 <View style={{ alignItems: 'center' }}>
                     {/* TODO: Move out */}
-                    <Card>
+                    <Card className='border-gray-100'>
                         <View style={{ flex: 2, flexDirection: 'row', width: '100%' }}>
                             <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
                                 <Text className='p-2 text-gray-500'>Total Words</Text>
@@ -98,8 +94,7 @@ export default function Home() {
                         </View>
                     </Card>
                 </View>
-
-            </View >
-        </View >
+            </ContainerContent>
+        </ContainerView >
     );
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Wortschatz.Core.Models;
 using Wortschatz.Service.DataGenerators;
 using Wortschatz.Service.Dtos;
@@ -19,6 +19,8 @@ namespace Wortschatz.Service.Extensions
                 BaseEntityService<Word, WordAddDto, WordUpdateDto, WordUpdateDto, WordListDto>>();
             services.AddScoped<IBaseEntityService<Phrase, PhraseAddDto, PhraseUpdateDto, PhraseDetailDto, PhraseListDto>,
                BaseEntityService<Phrase, PhraseAddDto, PhraseUpdateDto, PhraseDetailDto, PhraseListDto>>();
+            services.AddScoped<IBaseEntityService<Note, NoteAddDto, NoteUpdateDto, NoteDetailDto, NoteListDto>,
+               BaseEntityService<Note, NoteAddDto, NoteUpdateDto, NoteDetailDto, NoteListDto>>();
 
             return services;
         }

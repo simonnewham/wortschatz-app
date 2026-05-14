@@ -43,21 +43,21 @@ export default function Login() {
     }
 
     return (
-        <View className='bg-neutral' style={[styles.container]}>
-            <Card className='bg-gradient-to-r from-zinc-700 to-zinc-950'>
+        <View className='bg-background_primary' style={[styles.container]}>
+            <Card className='bg-zinc-900 border border-zinc-800'>
                 <View className='items-center m-5'>
-                    <Text className='font-sans font-bold text-3xl pb-2 text-white'>
+                    <Text className='text-white text-3xl md:text-4xl font-extrabold tracking-tighter'>
                         Wortschatz
                     </Text>
-                    <Text className='font-sans italic pb-2 text-white'>
+                    <Text className='tracking-tighter italic pb-2 text-white'>
                         Your personal German learning companion
                     </Text>
                 </View>
             </Card>
-            <Card>
+            <Card className='bg-zinc-900 border border-zinc-800'>
                 <View className='items-center m-5 min-w-lg'>
                     <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
-                        placeholder='Email'
+                        placeholder='Username'
                         placeholderTextColor='gray'
                         value={email}
                         onChangeText={setEmail} />
@@ -68,10 +68,9 @@ export default function Login() {
                         value={password}
                         onChangeText={setPassword} />
                     {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
-
                     <Pressable
-                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-gradient-to-r from-zinc-700 to-zinc-950
-                            items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-orange-500
+                           border-b-2 border-orange-600 items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                         onPress={onLogin}
                         disabled={isLoading}>
                         {isLoading ? (
@@ -84,22 +83,22 @@ export default function Login() {
                         )}
                     </Pressable>
                     <Pressable
-                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-4 border-zinc-800
+                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-orange-400 border-b-2 border-orange-600
                             items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                         onPress={onRegister}
                         disabled={isLoading}>
                         {isLoading ? (
-                            <ActivityIndicator size="small" color="black" />
+                            <ActivityIndicator size="small" color="white" />
                         ) : (
                             <>
-                                <MaterialIcons name="person-add" size={24} color="black" />
-                                <Text className='text-black'>
+                                <MaterialIcons name="person-add" size={24} color="white" />
+                                <Text className='text-white'>
                                     Register
                                 </Text>
                             </>
                         )}
                     </Pressable>
-                    <Text className='font-sans pt-5 italic text-black underline'>
+                    <Text className='font-sans pt-5 italic text-white underline'>
                         Forgot Password?
                     </Text>
                 </View>

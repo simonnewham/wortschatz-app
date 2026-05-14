@@ -73,6 +73,9 @@ public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntitySe
 
         var entity = updateDto.Adapt<T>();
 
+        // TODO: Do not override from Dto
+        entity.CreatedByUserId = _userService.GetUserId();
+
         var result = _dbSet.Update(entity);
         await _dataContext.SaveChangesAsync();
 

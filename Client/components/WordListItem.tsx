@@ -1,9 +1,6 @@
 import { WordGender } from "@/constants/WordGender";
-import { useStyling } from "@/hooks/useStyling";
 import { WordListDto } from "@/models/IWord";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
-import { Pressable, Text, useColorScheme, View } from "react-native";
+import { Text, View } from "react-native";
 import { Card } from '../components/Card';
 
 export interface IWordListItemProps {
@@ -13,9 +10,6 @@ export interface IWordListItemProps {
 }
 
 export function WordListItem(props: IWordListItemProps) {
-    const colorScheme = useColorScheme();
-    const theme = useTheme();
-    const styles = useStyling();
     const { item } = props;
 
     // Helper to format gender text. nativeWordGender could be an enum value or string like "Der (masculine)", based on the Picker.
@@ -36,10 +30,10 @@ export function WordListItem(props: IWordListItemProps) {
 
     return (
         <View className="w-full">
-            <Card className="bg-white shadow-sm flex-col w-full">
-                <View className="flex-row justify-between">
+            <Card className="bg-white shadow-sm flex-col w-full border-gray-200">
+                <View className="flex-row justify-between min-h-20">
                     <View className="flex-col">
-                        <Text className="text-lg font-bold font-sans text-blue-900 pb-1">
+                        <Text className="text-lg font-bold font-sans pb-1">
                             {nGender ? `${nGender} ` : ''}{item.nativeWord}
                         </Text>
                         <Text className="text-md text-gray-700 italic">
@@ -54,13 +48,7 @@ export function WordListItem(props: IWordListItemProps) {
                             </Text>
                         )} */}
                         <View className="flex-row gap-4">
-                            <Pressable onPress={() => console.log('Edit word', item.id)} className="p-1 bg-blue-50 rounded-full hover:bg-blue-100">
-                                <MaterialIcons name="edit" size={18} color="#0284c7" />
-                            </Pressable>
-                            <Pressable onPress={() => props.onDelete(item)}
-                                className="p-1 bg-red-50 rounded-full hover:bg-red-100">
-                                <MaterialIcons name="delete" size={18} color="#971330ff" />
-                            </Pressable>
+
                         </View>
                     </View>
                 </View>
