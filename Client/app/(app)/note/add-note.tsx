@@ -6,7 +6,7 @@ import { INote } from '@/models/INote';
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import { Theme, useTheme } from '@react-navigation/native';
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { CancelSubmitButton } from '../../../components/CancelSubmitButton';
 import { Card } from '../../../components/Card';
 
@@ -50,12 +50,10 @@ export default function AddNote() {
                 <Card className='border-gray-100'>
                     <CancelSubmitButton onSubmit={onSubmit} />
                 </Card>
-                <ScrollView style={[styles.formContainer]}>
-                    {message && <Text style={{ backgroundColor: message.success ? 'green' : 'red', padding: 5, borderRadius: 5, color: 'white', textAlign: 'center' }}>
-                        {message.message}
-                    </Text>}
-                    <AddEditNote note={form} handleFormUpdate={handleFormUpdate} />
-                </ScrollView>
+                {message && <Text style={{ backgroundColor: message.success ? 'green' : 'red', padding: 5, borderRadius: 5, color: 'white', textAlign: 'center' }}>
+                    {message.message}
+                </Text>}
+                <AddEditNote note={form} handleFormUpdate={handleFormUpdate} />
             </ContainerContent>
         </ContainerView>
     );
@@ -68,13 +66,12 @@ const getStyles = (theme: Theme) => {
             alignItems: 'center',
             flexDirection: 'column',
             justifyContent: 'center',
-            backgroundColor: theme.colors.background,
             width: "100%",
         },
         formContainer: {
             flexDirection: 'column',
+            width: '100%',
             height: '100%',
-            maxWidth: '100%'
         },
         input: {
             height: 40,

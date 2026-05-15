@@ -46,14 +46,12 @@ export default function Login() {
     return (
         <View className='bg-background_primary' style={[styles.container]}>
             <Card className='bg-zinc-900 border border-zinc-800'>
-                <View className='items-center m-5'>
+                <View className='items-center p-4'>
                     <Logo />
                     <Text className='tracking-tighter italic pb-2 text-white'>
                         Your personal German learning companion
                     </Text>
                 </View>
-            </Card>
-            <Card className='bg-zinc-900 border border-zinc-800'>
                 <View className='items-center m-5 min-w-lg'>
                     <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
                         placeholder='Username'

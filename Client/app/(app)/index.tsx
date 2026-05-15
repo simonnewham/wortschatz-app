@@ -1,3 +1,4 @@
+import ActivityTracker from '@/components/ActivityTracker';
 import ContainerView from '@/components/ContainerView';
 import { useStyling } from '@/hooks/useStyling';
 import { IUserStatsSummaryDto } from '@/models/IUserStatsSummaryDto';
@@ -45,9 +46,8 @@ export default function Home() {
                             {getGreeting()}, {userInfo?.firstName}
                         </Text>
                     </View>
-
                 </View>
-                <View style={{ alignItems: 'center' }}>
+                <View className='w-full p-2'>
                     <Card className='border-gray-200'>
                         <View style={{ alignItems: 'center' }}>
                             <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
@@ -74,7 +74,10 @@ export default function Home() {
                         </View>
                     </Card>
                 </View>
-                <View style={{ alignItems: 'center' }}>
+                <View className='w-full p-2'>
+                    <ActivityTracker />
+                </View>
+                <View className='w-full p-2'>
                     {/* TODO: Move out */}
                     <Card className='border-gray-100'>
                         <View style={{ flex: 2, flexDirection: 'row', width: '100%' }}>

@@ -21,14 +21,6 @@ export function useStyling() {
             height: '100%',
             maxWidth: '100%'
         },
-        cardContainer: {
-            borderRadius: 4,
-            padding: 5,
-            width: 600,
-            maxWidth: '100%',
-            marginVertical: 10,
-            shadowOffset: { width: 5, height: 5 }
-        },
         input: {
             height: 40,
             borderWidth: 1,

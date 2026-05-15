@@ -27,6 +27,31 @@ class UserService {
             return null;
         }
     }
+
+    public async getActivity(): Promise<string[]> {
+        try {
+            // In a real scenario, this would call the API
+            // const response = await dataService.Get('User/getActivity');
+            // if (response.ok) return await response.json();
+
+            // Stubbed data for the current month
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth();
+
+            return [
+                new Date(year, month, 2).toISOString(),
+                new Date(year, month, 5).toISOString(),
+                new Date(year, month, 10).toISOString(),
+                new Date(year, month, 12).toISOString(),
+                new Date(year, month, 15).toISOString(),
+                new Date(year, month, today.getDate()).toISOString(),
+            ];
+        } catch (error) {
+            console.error(error, { logMessage: 'Error fetching user activity' });
+            return [];
+        }
+    }
 }
 
 // Export a singleton instance

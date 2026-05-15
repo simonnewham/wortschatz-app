@@ -3,4 +3,5 @@ export interface INote {
     title?: string;
     description?: string;
     notes?: string;
+    createdDate?: Date;
 }

@@ -7,7 +7,7 @@ import { INote } from '@/models/INote';
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, Text } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { Card } from '../../../components/Card';
 import { ContainerContent } from '../../../components/ContainerContent';
 
@@ -80,18 +80,17 @@ export default function ViewNote() {
             <ContainerDrawer title='View Note' />
             <ContainerContent>
                 <PageToolbar icon='note' title='View Note' />
-
                 {isLoading ? (
                     <ActivityIndicator size="large" color="#ea580c" />
                 ) : error ? (
                     <Text className="text-red-500 font-bold p-4">{error}</Text>
                 ) : note ? (
-                    <ScrollView className="w-full p-2 items-center" showsVerticalScrollIndicator={false}>
+                    <View className="w-full items-center">
                         <Card className='border-gray-100'>
                             <CancelSubmitButton submitText='Save' onSubmit={onSubmit} onDelete={() => onDelete(note.id)} />
                         </Card>
                         <AddEditNote note={note} handleFormUpdate={handleFormUpdate} />
-                    </ScrollView>
+                    </View>
                 ) : (
                     <Text className="text-zinc-500">Note not found.</Text>
                 )}

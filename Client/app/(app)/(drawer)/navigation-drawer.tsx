@@ -62,7 +62,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Add new phrase</Text>
                 </Pressable> */}
-                <Pressable className='items-center border-b-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
+                <Pressable className='items-center/' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Add new note</Text>
                 </Pressable>

@@ -5,7 +5,7 @@ import { WordListItem } from "@/components/WordListItem";
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, ScrollView } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { ContainerContent } from "../../../components/ContainerContent";
 import { WordListDto } from "../../../models/IWord";
 
@@ -44,7 +44,7 @@ export default function WordList() {
                 {isLoading ? (
                     <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
                 ) : (
-                    <ScrollView className="w-full p-2">
+                    <View className="w-full">
                         <PageToolbar icon="view-list" title="Word List" actionLabel="Add a new word" actionIcon="add"
                             action={() => router.navigate('/word/add-word')} />
                         <FlatList
@@ -54,7 +54,7 @@ export default function WordList() {
                                 <WordListItem onDelete={onDelete} item={item} index={index} />
                             }
                         />
-                    </ScrollView>
+                    </View>
                 )
                 }
             </ContainerContent>

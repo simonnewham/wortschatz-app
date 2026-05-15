@@ -6,4 +6,5 @@ Structure
 Menu entry
 Shared components
 if add or list
+model
 ...

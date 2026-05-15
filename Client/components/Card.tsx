@@ -1,4 +1,3 @@
-import { useStyling } from "@/hooks/useStyling";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { PropsWithChildren } from "react";
@@ -13,10 +12,8 @@ interface ICardProps {
 
 export function Card(props: PropsWithChildren<ICardProps>) {
     const theme = useTheme();
-    const styles = useStyling();
 
-    return <View className={props.className + " rounded-md bg-neutral-50 shadow-sm shadow-gray border-2"}
-        style={[styles.cardContainer]}>
+    return <View className={props.className + " p-1 w-full rounded-md bg-neutral-50 shadow-sm shadow-gray border-2"}>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             {props.icon && <MaterialIcons name={props.icon} size={24} color={theme.colors.text} />}
             {props.title &&
