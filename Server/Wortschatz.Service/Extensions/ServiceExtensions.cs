@@ -12,6 +12,7 @@ namespace Wortschatz.Service.Extensions
         public static IServiceCollection AddWortschatzServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEnhanceService, EnhanceService>();
             services.AddHostedService<DefaultDataGenerator>();
 
             // Generics

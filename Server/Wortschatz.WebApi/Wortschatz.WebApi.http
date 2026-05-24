@@ -1,0 +1,5 @@
+﻿@Wortschatz.WebApi_HostAddress = http://localhost:5153
+
+GET {{Wortschatz.WebApi_HostAddress}}/admin/getCounts
+
+###

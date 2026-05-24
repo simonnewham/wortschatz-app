@@ -15,4 +15,6 @@ public class Word : BaseEntity
     public WordType? WordType { get; set; }
 
     public IEnumerable<WordTag>? Tags { get; set; }
+
+    public string? EnhanceResult { get; set; }
 }

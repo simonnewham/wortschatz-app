@@ -40,6 +40,7 @@ public class BaseEntityService<T, TAdd, TUpdate, TDetail, TList> : IBaseEntitySe
 
         return await _dbSet
             .Where(t => t.CreatedByUserId == userId)
+            .OrderByDescending(t => t.CreatedDate)
             .ToListAsync();
     }
 

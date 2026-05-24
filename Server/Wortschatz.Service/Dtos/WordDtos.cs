@@ -1,4 +1,4 @@
-﻿using Wortschatz.Core.Static;
+using Wortschatz.Core.Static;
 
 namespace Wortschatz.Service.Dtos
 {
@@ -18,9 +18,18 @@ namespace Wortschatz.Service.Dtos
     public class WordUpdateDto : WordAddDto
     {
         public Guid Id { get; set; }
+
+        public string EnhanceResult { get; set; }
     }
 
     public class WordListDto : WordUpdateDto
     {
+    }
+
+    public class WordEnhanceDto
+    {
+        public required string Word { get; set; }
+
+        public Guid WordId { get; set; }
     }
 }

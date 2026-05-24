@@ -11,7 +11,19 @@ namespace Wortschatz.WebApi.Controllers;
 [Route("[controller]")]
 public class WordController : BaseEntityController<Word, WordAddDto, WordUpdateDto, WordUpdateDto, WordListDto>
 {
-    public WordController(IBaseEntityService<Word, WordAddDto, WordUpdateDto, WordUpdateDto, WordListDto> baseEntityService) : base(baseEntityService)
+    private readonly IEnhanceService _enhanceService;
+
+    public WordController(
+        IBaseEntityService<Word, WordAddDto, WordUpdateDto, WordUpdateDto, WordListDto> baseEntityService,
+        IEnhanceService enhanceService) : base(baseEntityService)
     {
+        _enhanceService = enhanceService;
+    }
+
+    [HttpPost("enhance")]
+    public async Task<IActionResult> Enhance([FromBody] WordEnhanceDto dto)
+    {
+        var result = await _enhanceService.EnhanceWordAsync(dto);
+        return Ok(new { result });
     }
 }

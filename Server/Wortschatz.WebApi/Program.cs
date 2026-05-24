@@ -16,6 +16,7 @@ internal class Program
 
         // Services
         builder.Services.AddWortschatzServices();
+        builder.Services.AddHttpClient();
 
         // Swagger
         builder.Services.AddEndpointsApiExplorer();
