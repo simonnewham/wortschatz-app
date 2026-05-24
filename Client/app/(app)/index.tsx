@@ -1,5 +1,6 @@
 import ActivityTracker from '@/components/ActivityTracker';
 import ContainerView from '@/components/ContainerView';
+import { StreakCard } from '@/components/StreakCard';
 import { useStyling } from '@/hooks/useStyling';
 import { IUserStatsSummaryDto } from '@/models/IUserStatsSummaryDto';
 import { useAuthSession } from '@/providers/AuthProvider';
@@ -8,7 +9,7 @@ import dataService from '@/services/DataService';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Card } from '../../components/Card';
 import { ContainerContent } from '../../components/ContainerContent';
 
@@ -40,62 +41,69 @@ export default function Home() {
     return (
         <ContainerView>
             <ContainerContent>
-                <View style={{ alignItems: 'center' }}>
+                <ScrollView horizontal={false}>
                     <View style={{ alignItems: 'center' }}>
                         <Text className='font-sans text-black p-2' style={{ fontSize: 20 }}>
-                            {getGreeting()}, {userInfo?.firstName}
+                            {getGreeting()}, {userInfo?.firstName} 👋
                         </Text>
                     </View>
-                </View>
-                <View className='w-full p-2'>
-                    <Card className='border-gray-200'>
-                        <View style={{ alignItems: 'center' }}>
-                            <View style={{ padding: 10, width: 640, maxWidth: '100%', alignItems: 'center' }}>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
-                                    onPress={() => router.navigate('/word/add-word')}>
-                                    <MaterialIcons name="add" size={20} color="black" />
-                                    <Text className='font-sans text-black'>
-                                        Add a new Word
+                    <View className='w-full p-2'>
+                        <Card className='border-gray-200'>
+                            <View style={{ alignItems: 'center' }}>
+                                <View className="w-full max-w-lg p-2 items-center">
+                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                        onPress={() => router.navigate('/word/add-word')}>
+                                        <MaterialIcons name="add" size={20} color="black" />
+                                        <Text className='font-sans text-black'>
+                                            Add a new Word
+                                        </Text>
+                                    </Pressable>
+                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                        onPress={() => router.navigate('/phrase/add-phrase')}>
+                                        <MaterialIcons name="add" size={20} color="black" />
+                                        <Text className='font-sans text-black'>
+                                            Add a new phrase</Text>
+                                    </Pressable>
+                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                        onPress={() => router.navigate('/note/add-note')}>
+                                        <MaterialIcons name="add" size={20} color="black" />
+                                        <Text className='font-sans text-black'>
+                                            Add a new note</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Card>
+                    </View>
+                    <View className='w-full p-2'>
+                        <StreakCard />
+                    </View>
+                    <View className='w-full p-2'>
+                        <ActivityTracker />
+                    </View>
+                    <View className='w-full p-2'>
+                        {/* TODO: Move out */}
+                        <Card className='border-gray-100'>
+                            <View className="flex-row w-full py-2">
+                                <View className="flex-1 px-2 items-center justify-between">
+                                    <Text className='pb-1 text-gray-500 font-sans text-xs'>Total Words</Text>
+                                    <Text className='text-md font-bold text-zinc-800 mb-2'>{stats?.wordCount ?? 0}</Text>
+                                    <Text className='pb-1 text-gray-500 font-sans text-xs'>Last Word</Text>
+                                    <Text className='text-sm font-sans text-center text-zinc-700 w-full' numberOfLines={2} ellipsizeMode="tail">
+                                        {stats?.lastWord || '-'}
                                     </Text>
-                                </Pressable>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
-                                    onPress={() => router.navigate('/phrase/add-phrase')}>
-                                    <MaterialIcons name="add" size={20} color="black" />
-                                    <Text className='font-sans text-black'>
-                                        Add a new phrase</Text>
-                                </Pressable>
-                                <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
-                                    onPress={() => router.navigate('/note/add-note')}>
-                                    <MaterialIcons name="add" size={20} color="black" />
-                                    <Text className='font-sans text-black'>
-                                        Add a new note</Text>
-                                </Pressable>
+                                </View>
+                                <View className="flex-1 px-2 items-center justify-between border-l border-gray-200">
+                                    <Text className='pb-1 text-gray-500 font-sans text-xs'>Total Phrases</Text>
+                                    <Text className='text-md font-bold text-zinc-800 mb-2'>{stats?.phraseCount ?? 0}</Text>
+                                    <Text className='pb-1 text-gray-500 font-sans text-xs'>Last Phrase</Text>
+                                    <Text className='text-sm font-sans text-center text-zinc-700 w-full' numberOfLines={2} ellipsizeMode="tail">
+                                        {stats?.lastPhrase || '-'}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
-                    </Card>
-                </View>
-                <View className='w-full p-2'>
-                    <ActivityTracker />
-                </View>
-                <View className='w-full p-2'>
-                    {/* TODO: Move out */}
-                    <Card className='border-gray-100'>
-                        <View style={{ flex: 2, flexDirection: 'row', width: '100%' }}>
-                            <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                                <Text className='p-2 text-gray-500'>Total Words</Text>
-                                <Text className='text-sm'>{stats?.wordCount}</Text>
-                                <Text className='p-2 text-gray-500'>Last Word</Text>
-                                <Text className='text-sm'>{stats?.lastWord}</Text>
-                            </View>
-                            <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                                <Text className='p-2 text-gray-500'>Total Phrases</Text>
-                                <Text className='text-sm'>{stats?.phraseCount} </Text>
-                                <Text className='p-2 text-gray-500'>Last Phrase</Text>
-                                <Text className='text-sm text-align-center'>{stats?.lastPhrase}</Text>
-                            </View>
-                        </View>
-                    </Card>
-                </View>
+                        </Card>
+                    </View>
+                </ScrollView>
             </ContainerContent>
         </ContainerView >
     );

@@ -24,6 +24,10 @@ class BaseEntityDataService {
         return dataService.GetById(`${entity}`, id);
     }
 
+    public async Enhance(entity: string, body?: any): Promise<Response> {
+        return dataService.Post(`${entity}/enhance`, body);
+    }
+
 }
 
 const baseEntityDataService = new BaseEntityDataService();

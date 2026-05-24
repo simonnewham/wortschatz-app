@@ -5,43 +5,56 @@ import { ContainerContent } from '@/components/ContainerContent';
 import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { Status } from '@/constants/Status';
+import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Word } from '@/models/IWord';
 import { useToast } from '@/providers/ToastProvider';
-import baseEntityDataService from '@/services/BaseEntityDataService';
-import React, { useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { ScrollView } from 'react-native';
 
 export default function AddWord() {
     const [form, setForm] = useState(new Word());
+    const [isLoading, setIsLoading] = useState(false);
     const toast = useToast();
+
+    const { onAdd } = useBaseEntity({
+        entity: 'Word',
+        viewRoute: '/word/view-word'
+    });
 
     const handleFormUpdate = (value: any, field: string) => {
         setForm(prev => ({ ...prev, [field]: value }));
     }
 
-    const onSubmit = async () => {
+    const onSubmit = useCallback(async (isAndNew?: boolean) => {
         if (!form.nativeWord) {
             toast.show('Please enter a native word.', Status.Error);
+            return;
         }
-        else {
-            const result = await baseEntityDataService.Create('Word', form);
-            if (result.ok) {
-                setForm(new Word());
-                toast.show('Word added successfully!', Status.Success);
-            }
-            else {
-                toast.show('Failed to add word. Please try again.', Status.Error);
-            }
+
+        const result = await onAdd(form, isAndNew);
+
+        if (result?.ok && isAndNew) {
+            setForm(new Word());
         }
-    }
+    }, [onAdd, form])
+
+    useFocusEffect(
+        useCallback(() => {
+            setForm(new Word());
+        }, [setForm])
+    )
 
     return (
         <ContainerView>
             <ContainerDrawer title='Add a new word' />
             <ContainerContent>
                 <Card className='border-gray-200'>
-                    <CancelSubmitButton onSubmit={onSubmit} />
+                    <CancelSubmitButton onSubmit={onSubmit} onSubmitAndNewAction={() => onSubmit(true)} />
                 </Card>
-                <AddEditWord form={form} handleFormUpdate={handleFormUpdate} />
+                <ScrollView className='w-full'>
+                    <AddEditWord form={form} handleFormUpdate={handleFormUpdate} />
+                </ScrollView>
             </ContainerContent>
         </ContainerView>
     );

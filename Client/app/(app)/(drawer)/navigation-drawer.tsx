@@ -17,7 +17,7 @@ export function NavigationDrawer() {
             drawerType: isDesktop ? 'permanent' : 'front',
             drawerPosition: 'left',
             drawerStyle: {
-                width: 220,
+                width: 250,
                 borderRightWidth: 0,
                 backgroundColor: 'black'
             },
@@ -47,7 +47,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
 
 
     return (
-        <View className='bg-black' style={{ flex: 1, }}>
+        <View className='bg-black flex-1'>
             <DrawerContentScrollView {...props}>
                 <Logo textSize='2xl' />
                 <Pressable className='pt-2 items-center' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
@@ -74,7 +74,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="list-alt" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>View Notes</Text>
                 </Pressable>
-                <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
+                <Pressable className='items-center pt-2' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
                     <MaterialIcons name="settings" size={24} color="white" />
                     <Text className='font-sans text-md text-white'>Settings</Text>
                 </Pressable>

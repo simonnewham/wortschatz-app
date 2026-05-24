@@ -17,9 +17,7 @@ export function useStyling() {
             marginRight: 20
         },
         formContainer: {
-            flexDirection: 'column',
-            height: '100%',
-            maxWidth: '100%'
+
         },
         input: {
             height: 40,

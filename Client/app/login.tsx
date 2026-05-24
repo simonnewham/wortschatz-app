@@ -45,61 +45,63 @@ export default function Login() {
 
     return (
         <View className='bg-background_primary' style={[styles.container]}>
-            <Card className='bg-zinc-900 border border-zinc-800'>
-                <View className='items-center p-4'>
-                    <Logo />
-                    <Text className='tracking-tighter italic pb-2 text-white'>
-                        Your personal German learning companion
-                    </Text>
-                </View>
-                <View className='items-center m-5 min-w-lg'>
-                    <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
-                        placeholder='Username'
-                        placeholderTextColor='gray'
-                        value={email}
-                        onChangeText={setEmail} />
-                    <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
-                        placeholder='Password'
-                        placeholderTextColor='gray'
-                        secureTextEntry
-                        value={password}
-                        onChangeText={setPassword} />
-                    {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
-                    <Pressable
-                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent
+            <View className='max-w-lg w-full'>
+                <Card className='bg-zinc-900 border border-zinc-800'>
+                    <View className='items-center p-4'>
+                        <Logo />
+                        <Text className='tracking-tighter italic pb-2 text-white'>
+                            Your personal German learning companion
+                        </Text>
+                    </View>
+                    <View className='items-center m-5 min-w-lg'>
+                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
+                            placeholder='Username'
+                            placeholderTextColor='gray'
+                            value={email}
+                            onChangeText={setEmail} />
+                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
+                            placeholder='Password'
+                            placeholderTextColor='gray'
+                            secureTextEntry
+                            value={password}
+                            onChangeText={setPassword} />
+                        {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
+                        <Pressable
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent
                            border-b-2 border-accent items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
-                        onPress={onLogin}
-                        disabled={isLoading}>
-                        {isLoading ? (
-                            <ActivityIndicator size="small" color="black" />
-                        ) : (
-                            <>
-                                <MaterialIcons name="login" size={24} color="black" />
-                                <Text className='text-text'>Login</Text>
-                            </>
-                        )}
-                    </Pressable>
-                    <Pressable
-                        className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent border-b-2 border-accent
+                            onPress={onLogin}
+                            disabled={isLoading}>
+                            {isLoading ? (
+                                <ActivityIndicator size="small" color="black" />
+                            ) : (
+                                <>
+                                    <MaterialIcons name="login" size={24} color="black" />
+                                    <Text className='text-text'>Login</Text>
+                                </>
+                            )}
+                        </Pressable>
+                        <Pressable
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent border-b-2 border-accent
                             items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
-                        onPress={onRegister}
-                        disabled={isLoading}>
-                        {isLoading ? (
-                            <ActivityIndicator size="small" color="black" />
-                        ) : (
-                            <>
-                                <MaterialIcons name="person-add" size={24} color="black" />
-                                <Text className='text-text'>
-                                    Register
-                                </Text>
-                            </>
-                        )}
-                    </Pressable>
-                    <Text className='font-sans pt-5 italic text-white underline'>
-                        Forgot Password?
-                    </Text>
-                </View>
-            </Card>
+                            onPress={onRegister}
+                            disabled={isLoading}>
+                            {isLoading ? (
+                                <ActivityIndicator size="small" color="black" />
+                            ) : (
+                                <>
+                                    <MaterialIcons name="person-add" size={24} color="black" />
+                                    <Text className='text-text'>
+                                        Register
+                                    </Text>
+                                </>
+                            )}
+                        </Pressable>
+                        <Text className='font-sans pt-5 italic text-white underline'>
+                            Forgot Password?
+                        </Text>
+                    </View>
+                </Card>
+            </View>
         </View>
     );
 };

@@ -33,7 +33,7 @@ export default function SettingsButton() {
                 <Card className='border-gray-200'>
                     <CancelSubmitButton onSubmit={onSubmit} submitText='Save' cancelText='Back' />
                 </Card>
-                <ScrollView style={[styles.formContainer]}>
+                <ScrollView className='w-full' style={[styles.formContainer]}>
                     <Card title='Settings' icon={'settings'} className='border-gray-200'>
                         <Text style={[styles.text]}>Username</Text>
                         <TextInput readOnly={true}
@@ -51,6 +51,22 @@ export default function SettingsButton() {
                             placeholder='Last name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'lastName')} />
+                        <Text style={[styles.text]}>Streak</Text>
+                        <Text style={[styles.text]}>Word Streak Target</Text>
+                        <TextInput style={styles.input}
+                            // value={form.wordStreakTarget?.toString()}
+                            keyboardType='numeric'
+                            placeholder='Word Streak Target...'
+                            placeholderTextColor={'gray'}
+                            onChangeText={text => handleFormUpdate(text, 'wordStreakTarget')} />
+
+                        <Text style={[styles.text]}>Note Streak Target</Text>
+                        <TextInput style={styles.input}
+                            // value={form.noteStreakTarget?.toString()}
+                            keyboardType='numeric'
+                            placeholder='Note Streak Target...'
+                            placeholderTextColor={'gray'}
+                            onChangeText={text => handleFormUpdate(text, 'noteStreakTarget')} />
                     </Card>
                 </ScrollView>
             </ContainerContent>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import userService from '@/services/UserService';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Card } from './Card';
 
 const ActivityTracker = () => {
@@ -17,7 +17,7 @@ const ActivityTracker = () => {
             const year = now.getFullYear();
             const month = now.getMonth();
             const numDays = new Date(year, month + 1, 0).getDate();
-            
+
             const days = Array.from({ length: numDays }, (_, i) => i + 1);
             setDaysInMonth(days);
             setCurrentMonthName(now.toLocaleString('default', { month: 'long' }));
@@ -34,7 +34,7 @@ const ActivityTracker = () => {
 
     return (
         <Card className="border-gray-200 p-4">
-            <Text className="text-lg font-sans mb-4 text-center">{currentMonthName} Activity</Text>
+            <Text className="text-lg font-sans mb-4 text-center"> 🔥{currentMonthName} Activity</Text>
             <View style={styles.grid}>
                 {daysInMonth.map(day => (
                     <View

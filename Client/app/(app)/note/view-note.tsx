@@ -4,8 +4,8 @@ import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { PageToolbar } from '@/components/PageToolbar';
 import { INote } from '@/models/INote';
-import baseEntityDataService from '@/services/BaseEntityDataService';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useBaseEntity } from '@/hooks/useBaseEntity';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { Card } from '../../../components/Card';
@@ -19,67 +19,46 @@ export default function ViewNote() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const { onUpdate, onDelete, onDetail } = useBaseEntity({
+        entity: 'Note',
+        viewRoute: '/note/view-note',
+        isLoading: setIsLoading
+    });
+
     const handleFormUpdate = (text: string, value: string) => {
         setNote(prev => ({ ...prev, [value]: text }));
     }
 
     const fetchNote = useCallback(async (id?: string) => {
         if (id) {
-            try {
-                setIsLoading(true);
-                const result = await baseEntityDataService.GetDetail('Note', id);
-                if (result.ok) {
-                    const data = await result.json();
-                    setError(null);
-                    setNote(data);
-                } else {
-                    setError('Failed to load note details.');
-                }
-            } catch (err) {
-                console.error(err, { logMessage: 'Error fetching note' });
-                setError('An error occurred while loading the note.');
-            } finally {
-                setIsLoading(false);
+            const data = await onDetail(id);
+            if (data) {
+                setError(null);
+                setNote(data);
+            } else {
+                setError('Failed to load note details.');
             }
         }
-    }, [baseEntityDataService]);
+    }, [onDetail]);
 
     const onSubmit = async () => {
-        try {
-            const result = await baseEntityDataService.Update('Note', note);
-            if (result?.ok) {
-                fetchNote(note?.id);
-            }
-        } catch (error) {
-            console.error(error, { logMessage: 'Error saving note' });
+        if (!note) return;
+        const result = await onUpdate(note);
+        if (result?.ok) {
+            fetchNote(note.id);
         }
     }
-
-    const onDelete = useCallback(async (id?: string) => {
-        if (id) {
-            try {
-                const result = await baseEntityDataService.Delete('Note', id);
-                if (result.ok) {
-                    router.back();
-                }
-            } catch (e) {
-                console.error(e, { logMessage: 'Error deleting note' });
-            }
-        }
-    }, [baseEntityDataService]);
-
-
 
     useEffect(() => {
         if (!id) return;
         fetchNote(id);
-    }, [id]);
+    }, [id, fetchNote]);
 
     return (
         <ContainerView>
             <ContainerDrawer title='View Note' />
             <ContainerContent>
-                <PageToolbar icon='note' title='View Note' />
+                <PageToolbar icon='note' title='View Note' showBackButton={true} />
                 {isLoading ? (
                     <ActivityIndicator size="large" color="#ea580c" />
                 ) : error ? (

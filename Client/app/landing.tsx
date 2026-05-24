@@ -94,7 +94,7 @@ const FeaturesSection = () => {
                             </Text>
                         </View>
                     </Card>
-                    <Card className="w-full flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
+                    <Card className="flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
                         <View className="flex-1">
                             <View className="flex flex-row items-center gap-4">
                                 <View className="w-12 h-12 rounded-full bg-indigo-600/20 items-center justify-center mb-6">

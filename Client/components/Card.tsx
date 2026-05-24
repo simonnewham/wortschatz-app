@@ -13,7 +13,7 @@ interface ICardProps {
 export function Card(props: PropsWithChildren<ICardProps>) {
     const theme = useTheme();
 
-    return <View className={props.className + " p-1 w-full rounded-md bg-neutral-50 shadow-sm shadow-gray border-2"}>
+    return <View className={props.className + " p-1 mt-2 mb-2 w-full rounded-lg bg-neutral-50 shadow-sm shadow-gray border-2"}>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             {props.icon && <MaterialIcons name={props.icon} size={24} color={theme.colors.text} />}
             {props.title &&

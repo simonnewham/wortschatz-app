@@ -3,9 +3,9 @@ import ContainerView from "@/components/ContainerView";
 import { PageToolbar } from "@/components/PageToolbar";
 import { WordListItem } from "@/components/WordListItem";
 import baseEntityDataService from '@/services/BaseEntityDataService';
-import { router } from 'expo-router';
-import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from "react";
+import { ActivityIndicator, FlatList, Pressable, View } from "react-native";
 import { ContainerContent } from "../../../components/ContainerContent";
 import { WordListDto } from "../../../models/IWord";
 
@@ -33,13 +33,15 @@ export default function WordList() {
         }
     }, [baseEntityDataService]);
 
-    useEffect(() => {
-        fetchWords();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            fetchWords();
+        }, [fetchWords])
+    );
 
     return (
         <ContainerView>
-            <ContainerDrawer title='Wortschatz' />
+            <ContainerDrawer title='Word list' />
             <ContainerContent>
                 {isLoading ? (
                     <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
@@ -51,7 +53,9 @@ export default function WordList() {
                             className="w-full"
                             data={data}
                             renderItem={({ item, index }) =>
-                                <WordListItem onDelete={onDelete} item={item} index={index} />
+                                <Pressable onPress={() => item.id && router.navigate(`/word/view-word?id=${item.id}`)}>
+                                    <WordListItem item={item} index={index} />
+                                </Pressable>
                             }
                         />
                     </View>

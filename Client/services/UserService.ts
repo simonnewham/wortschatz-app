@@ -52,6 +52,21 @@ class UserService {
             return [];
         }
     }
+
+    public async getStreaks(): Promise<{ wordStreak: number; noteStreak: number; wordTarget: number; noteTarget: number }> {
+        try {
+            // Stubbed data for streaks
+            return {
+                wordStreak: 5,
+                noteStreak: 0,
+                wordTarget: 10,
+                noteTarget: 10
+            };
+        } catch (error) {
+            console.error(error, { logMessage: 'Error fetching user streaks' });
+            return { wordStreak: 0, noteStreak: 0, wordTarget: 0, noteTarget: 0 };
+        }
+    }
 }
 
 // Export a singleton instance

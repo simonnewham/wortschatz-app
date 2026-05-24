@@ -45,7 +45,6 @@ export default function NoteList() {
                 ) : (
                     <View className="w-full">
                         <PageToolbar icon="view-list" title="Note List" actionLabel="Add a new note" actionIcon="add" action={() => router.navigate('/note/add-note')} />
-
                         {data.map((note, index) => (
                             <Pressable key={note.id || index.toString()} onPress={() => note.id && router.navigate(`/note/view-note?id=${note.id}`)}>
                                 <Card className="bg-zinc-50 border border-gray-200">
@@ -64,7 +63,7 @@ export default function NoteList() {
                             </Pressable>
                         ))}
                         {data.length === 0 && (
-                            <Text className="text-center text-gray-500 mt-10">No notes found. Add your first note!</Text>
+                            <Text className="text-center text-gray-500 mt-10">➕ No notes found. Add your first note!</Text>
                         )}
                     </View>
                 )}

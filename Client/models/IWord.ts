@@ -3,6 +3,7 @@ import { WordGender } from "../constants/WordGender";
 
 export class Word {
     constructor() {
+        this.id = undefined;
         this.nativeWord = '';
         this.nativeWordGender = undefined;
         this.nativeWordCategory = WordCategory.Noun;
@@ -10,6 +11,7 @@ export class Word {
         this.translateWordGender = '';
         this.tags = '';
         this.usage = '';
+        this.enhanceResult = '';
     }
 
     id?: string;
@@ -20,6 +22,7 @@ export class Word {
     translateWordGender: string;
     tags: string;
     usage: string;
+    enhanceResult?: string
 }
 
 export class WordListDto extends Word {

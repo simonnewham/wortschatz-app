@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, Platform, StyleSheet, Text } from 'react-native';
 import { Status } from "../constants/Status";
 
@@ -9,9 +9,9 @@ export interface IToastCardProps {
 }
 
 export function ToastCard(props: IToastCardProps) {
-    const [fadeAnim] = React.useState(new Animated.Value(0));
+    const [fadeAnim] = useState(new Animated.Value(0));
 
-    React.useEffect(() => {
+    useEffect(() => {
         Animated.timing(fadeAnim, {
             toValue: props.visible ? 1 : 0,
             duration: 300,
@@ -31,7 +31,7 @@ export function ToastCard(props: IToastCardProps) {
                 { opacity: fadeAnim, backgroundColor: backgroundColor }
             ]}
             pointerEvents="none">
-            <Text style={styles.text}>{props.message}</Text>
+            <Text className='text-white'>{props.message}</Text>
         </Animated.View>
     );
 }
@@ -52,10 +52,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: 300
-    },
-    text: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 12,
     }
 });

@@ -1,7 +1,6 @@
 import { ToastCard } from "@/components/ToastCard";
 import { Status } from "@/constants/Status";
 import { createContext, useContext, useState, type PropsWithChildren } from "react";
-import { View } from "react-native";
 
 interface ToastContextType {
     show: (message: string, status?: Status) => void;
@@ -34,11 +33,11 @@ export function ToastProvider({ children }: PropsWithChildren) {
     };
 
     return (
-        <ToastContext.Provider value={{ show }}>
-            <View style={{ flex: 1 }}>
-                {children}
-                <ToastCard visible={visible} message={message} status={status} />
-            </View>
-        </ToastContext.Provider>
+        <ToastContext value={{ show }}>
+
+            {children}
+            <ToastCard visible={visible} message={message} status={status} />
+
+        </ToastContext>
     );
 }
