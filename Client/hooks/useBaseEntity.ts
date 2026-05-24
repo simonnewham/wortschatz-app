@@ -12,7 +12,7 @@ export interface IUseBaseEntityProps {
 export function useBaseEntity({ entity, viewRoute }: IUseBaseEntityProps) {
     const toast = useToast();
 
-    const onAdd = useCallback(async (data: any, andNew: boolean = false) => {
+    const onAdd = useCallback(async (data: any) => {
         if (!data) return { ok: false };
         try {
             const result = await baseEntityDataService.Create(entity, data);
@@ -20,10 +20,6 @@ export function useBaseEntity({ entity, viewRoute }: IUseBaseEntityProps) {
             if (result.ok) {
                 toast.show(`${entity} added successfully!`, Status.Success);
                 const responseData = await result.json().catch(() => null);
-
-                if (!andNew && responseData?.id) {
-                    router.navigate(`${viewRoute}?id=${responseData.id}` as any);
-                }
                 return { ok: true, data: responseData };
             } else {
                 toast.show(`Failed to add ${entity.toLowerCase()}.`, Status.Error);

@@ -8,7 +8,7 @@ import { Status } from '@/constants/Status';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Word } from '@/models/IWord';
 import { useToast } from '@/providers/ToastProvider';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native';
 
@@ -26,18 +26,23 @@ export default function AddWord() {
         setForm(prev => ({ ...prev, [field]: value }));
     }
 
-    const onSubmit = useCallback(async (isAndNew?: boolean) => {
+    const onSubmit = useCallback(async (isAndNew: boolean) => {
         if (!form.nativeWord) {
             toast.show('Please enter a native word.', Status.Error);
             return;
         }
 
-        const result = await onAdd(form, isAndNew);
+        const result = await onAdd(form);
 
-        if (result?.ok && isAndNew) {
-            setForm(new Word());
+        if (result?.ok) {
+            if (isAndNew) {
+                setForm(new Word());
+            }
+            else {
+                router.navigate(`/word/view-word?id=${result.data.id}`);
+            }
         }
-    }, [onAdd, form])
+    }, [onAdd, form, setForm, router])
 
     useFocusEffect(
         useCallback(() => {
@@ -50,7 +55,7 @@ export default function AddWord() {
             <ContainerDrawer title='Add a new word' />
             <ContainerContent>
                 <Card className='border-gray-200'>
-                    <CancelSubmitButton onSubmit={onSubmit} onSubmitAndNewAction={() => onSubmit(true)} />
+                    <CancelSubmitButton onSubmit={() => onSubmit(false)} onSubmitAndNewAction={() => onSubmit(true)} />
                 </Card>
                 <ScrollView className='w-full'>
                     <AddEditWord form={form} handleFormUpdate={handleFormUpdate} />

@@ -53,7 +53,7 @@ export function AddEditWord(props: IAddWordComponentProps) {
                     onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
             </Card> */}
             <Card className='border-gray-200 w-full'>
-                <Text style={[styles.text]}>Enhancement Result</Text>
+                <Text style={[styles.text]}>✨ Wortschatz Enhancement Result</Text>
                 <TextInput className="h-full"
                     style={{ ...styles.input, height: 300 }}
                     value={form.enhanceResult}

@@ -24,15 +24,6 @@ export default function WordList() {
         setIsLoading(false);
     }, [baseEntityDataService]);
 
-    const onDelete = useCallback(async (item: WordListDto) => {
-        if (item.id) {
-            const result = await baseEntityDataService.Delete('Word', item.id);
-            if (result.ok) {
-                fetchWords()
-            }
-        }
-    }, [baseEntityDataService]);
-
     useFocusEffect(
         useCallback(() => {
             fetchWords();
