@@ -3,8 +3,8 @@ import { CancelSubmitButton } from '@/components/CancelSubmitButton';
 import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { PageToolbar } from '@/components/PageToolbar';
-import { INote } from '@/models/INote';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
+import { INote } from '@/models/INote';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
@@ -21,8 +21,7 @@ export default function ViewNote() {
 
     const { onUpdate, onDelete, onDetail } = useBaseEntity({
         entity: 'Note',
-        viewRoute: '/note/view-note',
-        isLoading: setIsLoading
+        viewRoute: '/note/view-note'
     });
 
     const handleFormUpdate = (text: string, value: string) => {
