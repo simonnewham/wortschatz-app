@@ -17,7 +17,7 @@ export function NavigationDrawer() {
             drawerType: isDesktop ? 'permanent' : 'front',
             drawerPosition: 'left',
             drawerStyle: {
-                width: 250,
+                width: isDesktop ? 300 : "75%",
                 borderRightWidth: 0,
                 backgroundColor: 'black'
             },
@@ -49,43 +49,45 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
     return (
         <View className='bg-black flex-1'>
             <DrawerContentScrollView {...props}>
-                <Logo textSize='2xl' />
+                <View className='pb-4'>
+                    <Logo textSize='2xl' />
+                </View>
                 <Pressable className='pt-2 items-center' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
                     <MaterialIcons name="home" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Home</Text>
+                    <Text className='text-lg text-white'>Home</Text>
                 </Pressable>
                 <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/add-word')}>
                     <MaterialIcons name="add" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Add new word</Text>
+                    <Text className='text-lg text-white'>Add new word</Text>
                 </Pressable>
                 {/* <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.navigate('/phrase/add-phrase')}>
                     <MaterialIcons name="add" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Add new phrase</Text>
+                    <Text className='text-lg text-white'>Add new phrase</Text>
                 </Pressable> */}
                 <Pressable className='items-center/' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
                     <MaterialIcons name="add" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Add new note</Text>
+                    <Text className='text-lg text-white'>Add new note</Text>
                 </Pressable>
                 <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons name="view-list" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>View Wortschatz</Text>
+                    <Text className='text-lg text-white'>View Wortschatz</Text>
                 </Pressable>
-                <Pressable className='items-center border-b-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
+                <Pressable className='items-center pb-4' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>View Notes</Text>
+                    <Text className='text-lg text-white'>View Notes</Text>
                 </Pressable>
-                <Pressable className='items-center pt-2' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
+                <Pressable className='items-center pt-4 border-t-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
                     <MaterialIcons name="settings" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Settings</Text>
+                    <Text className='text-lg text-white'>Settings</Text>
                 </Pressable>
                 <Pressable className='items-center' style={[styles.headerButton]} onPress={onSignOut}>
                     <MaterialIcons name="logout" size={24} color="white" />
-                    <Text className='font-sans text-md text-white'>Sign Out</Text>
+                    <Text className='text-lg text-white'>Sign Out</Text>
                 </Pressable>
             </DrawerContentScrollView >
             <View>
 
-                <Text className='text-center text-xs text-accent/50 p mb-2'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
+                <Text className='text-center text-xs text-accent/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
             </View>
         </View>
     );

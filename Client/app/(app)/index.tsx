@@ -41,9 +41,9 @@ export default function Home() {
     return (
         <ContainerView>
             <ContainerContent>
-                <ScrollView horizontal={false}>
-                    <View style={{ alignItems: 'center' }}>
-                        <Text className='font-sans text-black p-2' style={{ fontSize: 20 }}>
+                <ScrollView className='w-full' horizontal={false}>
+                    <View className='justify-center items-center'>
+                        <Text className='font-semibold text-black p-2' style={{ fontSize: 20 }}>
                             {getGreeting()}, {userInfo?.firstName} 👋
                         </Text>
                     </View>
@@ -51,24 +51,20 @@ export default function Home() {
                         <Card className='border-gray-200'>
                             <View style={{ alignItems: 'center' }}>
                                 <View className="w-full max-w-lg p-2 items-center">
-                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                    <Pressable className='border-2 border-zinc-300 rounded-md hover:bg-accent/25' style={[styles.button]}
                                         onPress={() => router.navigate('/word/add-word')}>
                                         <MaterialIcons name="add" size={20} color="black" />
-                                        <Text className='font-sans text-black'>
-                                            Add a new Word
-                                        </Text>
+                                        <Text className='font-semibold text-black'>Add a new Word</Text>
                                     </Pressable>
-                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                    <Pressable className='border-2 border-zinc-300 rounded-md hover:bg-accent/25' style={[styles.button]}
                                         onPress={() => router.navigate('/phrase/add-phrase')}>
                                         <MaterialIcons name="add" size={20} color="black" />
-                                        <Text className='font-sans text-black'>
-                                            Add a new phrase</Text>
+                                        <Text className='font-semibold text-black'>Add a new phrase</Text>
                                     </Pressable>
-                                    <Pressable className='border-2 border-zinc-800 rounded-md hover:border-accent' style={[styles.button]}
+                                    <Pressable className='border-2 border-zinc-300 rounded-md hover:bg-accent/25' style={[styles.button]}
                                         onPress={() => router.navigate('/note/add-note')}>
                                         <MaterialIcons name="add" size={20} color="black" />
-                                        <Text className='font-sans text-black'>
-                                            Add a new note</Text>
+                                        <Text className='font-semibold text-black'>Add a new note</Text>
                                     </Pressable>
                                 </View>
                             </View>

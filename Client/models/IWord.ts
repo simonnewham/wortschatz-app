@@ -11,7 +11,7 @@ export class Word {
         this.translateWordGender = '';
         this.tags = '';
         this.usage = '';
-        this.enhanceResult = '';
+        this.enhanceResult = undefined;
     }
 
     id?: string;

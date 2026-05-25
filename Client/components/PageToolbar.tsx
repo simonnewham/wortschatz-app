@@ -7,14 +7,14 @@ export function PageToolbar(props: { title: string, icon: string, showBackButton
         <View className="flex-row justify-between w-full p-2 border-b-2 border-gray-200">
             <View className="flex-row gap-2 p-2 items-center">
                 {props.showBackButton && <Pressable onPress={() => router.back()} >
-                    <MaterialIcons name="arrow-back" size={20} color="black" />
+                    <MaterialIcons name="arrow-back" size={18} color="black" />
                 </Pressable>}
-                <Text className="font-sans text-black text-xl">{props.title}</Text>
+                <Text className="text-black text-lg font-semibold">{props.title}</Text>
             </View>
             {props.actionLabel && <View>
                 <Pressable onPress={props.action} className="p-2 rounded-md bg-accent flex-row justify-center items-center" >
-                    <MaterialIcons name={props.actionIcon as any} size={20} color="black" />
-                    <Text className="font-sans text-black">{props.actionLabel}</Text>
+                    <MaterialIcons name={props.actionIcon as any} className="animate-pulse" size={20} color="black" />
+                    <Text className="font-semibold text-black">{props.actionLabel}</Text>
                 </Pressable>
             </View>}
         </View>

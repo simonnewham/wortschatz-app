@@ -44,7 +44,7 @@ export default function Login() {
     }
 
     return (
-        <View className='bg-background_primary' style={[styles.container]}>
+        <View className='bg-background_primary h-screen w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
                 <Card className='bg-zinc-900 border border-zinc-800'>
                     <View className='items-center p-4'>

@@ -26,7 +26,7 @@ namespace Wortschatz.Service.Services
             var word = await _dataContext.Words.FirstOrDefaultAsync(w => w.Id == dto.WordId);
             if (word == null)
             {
-                throw new KeyNotFoundException($"Word with ID '{dto.WordId}' was not found.");
+                throw new KeyNotFoundException($"Word was not found.");
             }
 
             var nativeWord = word.NativeWord;
@@ -34,19 +34,46 @@ namespace Wortschatz.Service.Services
             var apiKey = _configuration["Gemini:ApiKey"];
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                throw new InvalidOperationException("Gemini API Key is not configured. Please add 'Gemini:ApiKey' to your appsettings.json.");
+                throw new InvalidOperationException("Not Key found");
             }
 
             var prompt = @$"
-                You are an expert german language teacher.Your B1 level student would like you to help them understand the word {nativeWord}.
-                To do this you will provide the following information and format your response in JSON.
+                You are an expert german language teacher.Your **B1** level student would like you to help them understand the word **{nativeWord}**.
+                To do this you will provide the following information and format your response in **JSON**.
 
-                1-Provide the English translation of the word
-                1- If the word is a Noun or a Verb
-                2- If the word is a Noun then provide the gender of the word (der, die, das)
-                3- Provde 1-3 synonyms
-                4- Provide 1 usage of the word in the Present and 1 usage of the word in the Past tense
-                5- Provide 1 usage of the word in the Passive form";
+                1- Provide the word itself
+                2- If the word is misspelled, provide possible word options, if not then provide an empty array
+                3- If the word is a Noun or a Verb
+                4- If the wordType is a Noun then provide the gender of the word (der, die, das) else provide an empty string
+                5- If the wordType is a Verb then provide the Perfekt and Pratertium past tense
+                6- Provide a short and simple explanation of the word in German. Not more than 2 sentences.
+                7- Provide the English translation of the word
+                8- Provide 1-3 synonyms
+                9- Provide 1 usage of the word in Present, Past and Passive form
+                10- Provide a single category to group similar words
+                
+                Use the following JSON structure to ensure a consistent output:
+                {{
+                    ""word"": ""string"",
+                    ""corrections"": ""string[]"",
+                    ""wordType"": ""string"",
+                    ""noun"": {{
+                        ""gender"": ""string""
+                    }}
+                    ""verb"": {{
+                        ""perfekt"": ""string"",
+                         ""pratertium"": ""string""
+                    }},
+                    ""explanation"": ""string"",
+                    ""translation"": ""string"",
+                    ""synonyms"": ""string[]"",
+                    ""usages"": {{
+                        ""present"": ""string"",
+                        ""past"": ""string"",
+                        ""passive"": ""string""
+                    }},
+                    ""category"": ""string""
+                }}";
 
             var requestBody = new
             {
@@ -84,12 +111,12 @@ namespace Wortschatz.Service.Services
                 .GetProperty("content")
                 .GetProperty("parts")[0]
                 .GetProperty("text")
-                .GetString();
+                .GetString() ?? string.Empty;
 
             word.EnhanceResult = text;
             await _dataContext.SaveChangesAsync();
 
-            return text ?? string.Empty;
+            return text;
         }
     }
 }

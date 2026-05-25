@@ -17,11 +17,11 @@ export function WordListItem(props: IWordListItemProps) {
                 <View>
                     <View className="flex-row justify-between ">
                         <View className="flex-row items-center gap-4">
-                            <Text className="text-lg font-bold font-sans">
+                            <Text className="text-lg font-semibold">
                                 {item.nativeWord}
                             </Text>
                             <MaterialIcons name="arrow-right" size={20} color="black" />
-                            <Text className="text-lg text-gray-700">
+                            <Text className="text-lg font-semibold text-gray-700">
                                 {item.translateWord != null && item.translateWord != '' ? item.translateWord : '❔'}
                             </Text>
                         </View>
@@ -37,7 +37,7 @@ export function WordListItem(props: IWordListItemProps) {
                         <Text className="font-bold">Usage:</Text> {item.usage}
                     </Text>
                     <View className="flex-col items-end justify-between border-gray-100">
-                        <MaterialIcons className='right-0' name="arrow-forward" size={24} color="black" />
+                        <MaterialIcons className='right-0 px-2' name="arrow-forward" size={24} color="black" />
                     </View>
                 </View>
             </Card>

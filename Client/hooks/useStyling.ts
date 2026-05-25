@@ -7,11 +7,7 @@ export function useStyling() {
 
     const styles = useMemo(() => StyleSheet.create({
         container: {
-            flex: 1,
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: "100%"
+
         },
         headerContainer: {
             marginRight: 20
@@ -44,13 +40,12 @@ export function useStyling() {
             flexDirection: 'row',
             verticalAlign: 'middle',
             gap: 5,
-            paddingHorizontal: 5,
-            paddingVertical: 8,
+            paddingHorizontal: 8,
+            paddingVertical: 10,
         },
         button: {
             height: 50,
-            borderWidth: 1,
-            borderColor: 'gray',
+
             width: '100%',
             maxWidth: 450,
             flexDirection: 'row',
