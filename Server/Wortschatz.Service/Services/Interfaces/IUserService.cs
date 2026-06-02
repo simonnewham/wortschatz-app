@@ -22,7 +22,7 @@ namespace Wortschatz.Service.Services.Interfaces
         /// </summary>
         /// <param name="userUpdateDto"></param>
         /// <returns></returns>
-        Task<UpdateUserDto> AddUserAsync(AddUserDto userUpdateDto);
+        Task<BaseUserDto> AddUserAsync(AddUserDto userUpdateDto);
 
         /// <summary>
         /// Update the current user.

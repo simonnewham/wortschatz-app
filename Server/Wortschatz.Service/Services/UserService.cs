@@ -40,13 +40,11 @@ namespace Wortschatz.Service.Services
             return userName!;
         }
 
-        public async Task<UpdateUserDto> AddUserAsync(AddUserDto addUserDto)
+        public async Task<BaseUserDto> AddUserAsync(AddUserDto addUserDto)
         {
             var user = new User()
             {
-                UserName = addUserDto.Email,
-                FirstName = addUserDto.FirstName,
-                LastName = addUserDto.LastName
+                UserName = addUserDto.Email
             };
 
             var result = await userManager.CreateAsync(user, addUserDto.Password);
@@ -56,10 +54,9 @@ namespace Wortschatz.Service.Services
             {
                 // TODO: Email and logging 
 
-                return new UpdateUserDto
+                return new BaseUserDto
                 {
-                    FirstName = addUserDto.FirstName,
-                    LastName = addUserDto.LastName
+                 Email = addUserDto.Email
                 };
             }
             else
@@ -73,9 +70,6 @@ namespace Wortschatz.Service.Services
         {
             if (TryGetUser(out var user))
             {
-                user.FirstName = userUpdateDto.FirstName;
-                user.LastName = userUpdateDto.LastName;
-
                 context.SaveChanges();
 
                 return userUpdateDto;

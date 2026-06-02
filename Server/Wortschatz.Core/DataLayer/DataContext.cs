@@ -19,4 +19,6 @@ public class DataContext : IdentityDbContext<User>
     public DbSet<WordTag> WordTags { get; set; }
 
     public DbSet<Note> Notes { get; set; }
+
+    public DbSet<UserSetting> UserSettings { get; set; }
 }

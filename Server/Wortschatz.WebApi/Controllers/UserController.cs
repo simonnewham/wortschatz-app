@@ -24,7 +24,7 @@ namespace Wortschatz.WebApi.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<UpdateUserDto> Register([FromBody] AddUserDto updateUserDto)
+        public async Task<BaseUserDto> Register([FromBody] AddUserDto updateUserDto)
         {
             var result = await userService.AddUserAsync(updateUserDto);
 
@@ -45,8 +45,6 @@ namespace Wortschatz.WebApi.Controllers
             {
                 return new UserInfoDto
                 {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
                     UserName = username
                 };
             }
@@ -54,16 +52,6 @@ namespace Wortschatz.WebApi.Controllers
            return null;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="updateUserDto"></param>
-        /// <returns></returns>
-        [HttpPost("update")]
-        public UpdateUserDto UpdateUser([FromBody] UpdateUserDto updateUserDto)
-        {
-            return userService.UpdateUser(updateUserDto);
-        }
 
         /// <summary>
         /// 

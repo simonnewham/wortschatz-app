@@ -4,7 +4,5 @@ namespace Wortschatz.Core.Models;
 
 public class User : IdentityUser
 {
-    public string? FirstName { get; set; }
-
-    public string? LastName { get; set; }
+    public UserSetting? UserSetting { get; set; }
 }
