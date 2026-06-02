@@ -1,58 +1,43 @@
-import { Theme, useTheme } from "@react-navigation/native";
-import { useMemo } from "react";
-import { ColorSchemeName, Pressable, StyleSheet, View, useColorScheme } from "react-native";
-import { Colors } from "../constants/Colors";
-import { IPhrase } from "../models/IPhrase";
-import { Text } from './Themed';
+import { MaterialIcons } from "@expo/vector-icons";
+import { Text, View } from "react-native";
+import { Phrase } from "../models/IPhrase";
+import { Card } from './Card';
 
 export interface IPhraseListItemProps {
-    item: IPhrase,
+    item: Phrase,
     index: number
 }
 
 export function PhraseListItem(props: IPhraseListItemProps) {
-    const colorScheme = useColorScheme();
-    const theme = useTheme();
-    const styles = useMemo(() => getStyles(theme, props.index, colorScheme), []);
+    const { item } = props;
 
     return (
-        <View style={styles.rowContainer}>
-            <Pressable onPress={() => alert('Test')}>
-                <View style={styles.row}>
-                    <View style={styles.rowItem}>
-                        <Text style={styles.text}>{props.item.nativePhrase}</Text>
-                    </View>
-                    <View style={styles.rowItem}>
-                        <Text style={styles.text}>{props.item.translatePhrase}</Text>
-                    </View>
-                    <View style={styles.rowItem}>
-                        <View>
-                            <Text style={styles.text} >Tags: {props.item.tags}</Text>
+        <View className="w-full">
+            <Card className="bg-white shadow-sm flex-col border-gray-200">
+                <View>
+                    <View className="flex-row justify-between ">
+                        <View className="flex-row items-center gap-4">
+                            <Text className="text-lg font-semibold">
+                                {item.nativePhrase}
+                            </Text>
+                            <MaterialIcons name="arrow-right" size={20} color="black" />
+                            <Text className="text-lg font-semibold text-gray-700">
+                                {item.translatePhrase != null && item.translatePhrase != '' ? item.translatePhrase : '❔'}
+                            </Text>
+                        </View>
+                        <View className="flex-col items-end justify-between border-gray-100">
+                            {item.createdDate && (
+                                <Text className="text-sm text-gray-400 right-0">
+                                    Created: {new Date(item.createdDate).toLocaleDateString()}
+                                </Text>
+                            )}
                         </View>
                     </View>
+                    <View className="flex-col items-end justify-between border-gray-100">
+                        <MaterialIcons className='right-0 px-2' name="arrow-forward" size={24} color="black" />
+                    </View>
                 </View>
-            </Pressable>
+            </Card>
         </View>
     )
 }
-
-const getStyles = (theme: Theme, index: number, colorScheme: ColorSchemeName) => {
-    return StyleSheet.create({
-        text: {
-            fontSize: 14,
-            color: theme.colors.text
-        },
-        rowContainer: {
-            padding: 10,
-            backgroundColor: index % 2 == 0 ? Colors[colorScheme ?? 'light'].listEven : Colors[colorScheme ?? 'light'].listEven,
-            borderBottomWidth: 1
-        },
-        row: {
-            flexDirection: 'row',
-            flex: 3
-        },
-        rowItem: {
-            flex: 1
-        }
-    });
-};

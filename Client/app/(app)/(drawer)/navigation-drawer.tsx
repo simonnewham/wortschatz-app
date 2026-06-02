@@ -70,7 +70,11 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </Pressable> */}
                 <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons name="view-list" size={24} color="white" />
-                    <Text className='text-lg text-white'>Wortschatz</Text>
+                    <Text className='text-lg text-white'>Words</Text>
+                </Pressable>
+                <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/phrase/phrase-list')}>
+                    <MaterialIcons name="view-list" size={24} color="white" />
+                    <Text className='text-lg text-white'>Phrases</Text>
                 </Pressable>
                 <Pressable className='items-center pb-4' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
