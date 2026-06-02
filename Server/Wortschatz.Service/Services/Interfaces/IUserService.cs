@@ -1,4 +1,4 @@
-﻿using Wortschatz.Core.Models;
+using Wortschatz.Core.Models;
 using Wortschatz.Service.Dtos;
 
 namespace Wortschatz.Service.Services.Interfaces
@@ -41,5 +41,11 @@ namespace Wortschatz.Service.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<UserStatsSummaryDto> GetUserStatsSummaryAsync();
+
+        /// <summary>
+        /// Get the streaks for the current user.
+        /// </summary>
+        /// <returns></returns>
+        Task<UserStreaksDto> GetUserStreaksAsync();
     }
 }

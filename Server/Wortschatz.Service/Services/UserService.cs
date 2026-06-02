@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -112,6 +112,61 @@ namespace Wortschatz.Service.Services
                 LastWord = words.OrderByDescending(t => t.CreatedDate).FirstOrDefault()?.NativeWord,
                 LastPhrase = phrases.OrderByDescending(t => t.CreatedDate).FirstOrDefault()?.NativePhrase,
             };
+        }
+
+        public async Task<UserStreaksDto> GetUserStreaksAsync()
+        {
+            var userId = GetUserId();
+
+            var wordDates = await context.Words
+                .Where(t => t.CreatedByUserId == userId)
+                .Select(t => t.CreatedDate)
+                .ToListAsync();
+
+            var distinctWordDates = wordDates.Select(d => d.Date).Distinct().OrderByDescending(d => d).ToList();
+
+            var phraseDates = await context.Phrases
+                .Where(t => t.CreatedByUserId == userId)
+                .Select(t => t.CreatedDate)
+                .ToListAsync();
+            
+            var distinctPhraseDates = phraseDates.Select(d => d.Date).Distinct().OrderByDescending(d => d).ToList();
+
+            return new UserStreaksDto
+            {
+                WordStreak = CalculateStreak(distinctWordDates),
+                PhraseStreak = CalculateStreak(distinctPhraseDates)
+            };
+        }
+
+        private int CalculateStreak(List<DateTime> dates)
+        {
+            if (!dates.Any()) return 0;
+
+            var today = DateTime.UtcNow.Date;
+            var current = dates[0];
+            
+            // Streak must be active either today or yesterday
+            if (current != today && current != today.AddDays(-1))
+            {
+                return 0;
+            }
+
+            int streak = 1;
+            for (int i = 1; i < dates.Count; i++)
+            {
+                if (dates[i] == current.AddDays(-1))
+                {
+                    streak++;
+                    current = dates[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return streak;
         }
 
         private readonly IHttpContextAccessor httpContextAccessor;

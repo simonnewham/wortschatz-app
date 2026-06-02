@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wortschatz.Service.Dtos;
 using Wortschatz.Service.Services.Interfaces;
@@ -61,6 +61,17 @@ namespace Wortschatz.WebApi.Controllers
         public async Task<UserStatsSummaryDto> GetUserStatsSummary()
         {
             return await userService.GetUserStatsSummaryAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getStreaks")]
+        [ResponseCache(Duration = 60)]
+        public async Task<UserStreaksDto> GetUserStreaks()
+        {
+            return await userService.GetUserStreaksAsync();
         }
     }
 }

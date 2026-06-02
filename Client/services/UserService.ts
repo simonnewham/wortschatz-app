@@ -53,19 +53,20 @@ class UserService {
         }
     }
 
-    public async getStreaks(): Promise<{ wordStreak: number; noteStreak: number; wordTarget: number; noteTarget: number }> {
-        try {
-            // Stubbed data for streaks
+    public async getStreaks(): Promise<{ wordStreak: number; phraseStreak: number; }> {
+
+        const response = await dataService.Get('User/getStreaks');
+        if (response.ok) {
+            const data = await response.json();
+
             return {
-                wordStreak: 5,
-                noteStreak: 0,
-                wordTarget: 10,
-                noteTarget: 10
+                wordStreak: data.wordStreak,
+                phraseStreak: data.phraseStreak
             };
-        } catch (error) {
-            console.error(error, { logMessage: 'Error fetching user streaks' });
-            return { wordStreak: 0, noteStreak: 0, wordTarget: 0, noteTarget: 0 };
         }
+
+
+        return { wordStreak: 0, phraseStreak: 0 };
     }
 }
 

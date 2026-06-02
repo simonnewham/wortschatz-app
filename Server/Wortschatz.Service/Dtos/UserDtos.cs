@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Wortschatz.Service.Dtos
 {
@@ -37,5 +37,12 @@ namespace Wortschatz.Service.Dtos
         public string? LastPhrase { get; set; } = string.Empty;
 
         public int? PhraseCount { get; set; } = 0;
+    }
+
+    public class UserStreaksDto
+    {
+        public int WordStreak { get; set; } = 0;
+        
+        public int PhraseStreak { get; set; } = 0;
     }
 }

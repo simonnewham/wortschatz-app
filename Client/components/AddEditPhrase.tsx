@@ -32,17 +32,10 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
                     placeholder='english...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
-
-                <Text style={[styles.text]}>Tags</Text>
-                <TextInput style={styles.input}
-                    value={form.usage}
-                    placeholder='usage...'
-                    placeholderTextColor={'gray'}
-                    onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
             </Card>
-            {form.id && form.enhanceResult &&
+            {form.id &&
                 <Card className='border-gray-200 w-full'>
-                    <Text className="font-semibold">✨ Result</Text>
+                    <Text className="font-semibold">✨</Text>
                     <TextInput className="h-full"
                         numberOfLines={25}
                         value={form.enhanceResult}

@@ -1,4 +1,3 @@
-import ActivityTracker from '@/components/ActivityTracker';
 import ContainerView from '@/components/ContainerView';
 import { StreakCard } from '@/components/StreakCard';
 import { useStyling } from '@/hooks/useStyling';
@@ -45,7 +44,7 @@ export default function Home() {
                     <View className='h-screen'>
                         <View className='justify-center items-center'>
                             <Text className='font-semibold text-black p-2' style={{ fontSize: 20 }}>
-                                {getGreeting()}, {userInfo?.firstName} 👋
+                                {getGreeting()} {userInfo?.firstName} 👋
                             </Text>
                         </View>
                         <View className='w-full p-2'>
@@ -74,9 +73,9 @@ export default function Home() {
                         <View className='w-full p-2'>
                             <StreakCard />
                         </View>
-                        <View className='w-full p-2'>
+                        {/* <View className='w-full p-2'>
                             <ActivityTracker />
-                        </View>
+                        </View> */}
                         <View className='w-full p-2'>
                             {/* TODO: Move out */}
                             <Card className='border-gray-100'>
