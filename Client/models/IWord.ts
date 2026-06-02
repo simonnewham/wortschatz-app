@@ -1,8 +1,11 @@
 import { WordCategory } from "../constants/WordCategory";
 import { WordGender } from "../constants/WordGender";
+import { IBase } from "./IBase";
 
-export class Word {
+export class Word extends IBase {
     constructor() {
+        super();
+
         this.id = undefined;
         this.nativeWord = '';
         this.nativeWordGender = undefined;
@@ -29,6 +32,4 @@ export class WordListDto extends Word {
     constructor() {
         super();
     }
-
-    createdDate: Date | undefined;
 }

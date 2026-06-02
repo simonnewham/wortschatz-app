@@ -59,7 +59,7 @@ export default function ViewWord() {
         setIsEnhancing(false);
 
         if (result.ok && result.data) {
-            setWord({ ...word, enhanceResult: result.data } as Word);
+            fetchWord(word?.id);
         }
     }, [onEnhance, word]);
 
@@ -79,11 +79,11 @@ export default function ViewWord() {
                 ) : error ? (
                     <Text className="text-red-500 font-bold p-4">{error}</Text>
                 ) : word ? (
-                    <View className="w-full items-center">
+                    <View className="w-full h-screen items-center">
                         <Card className='border-gray-100'>
                             <CancelSubmitButton submitText='Save' onSubmit={onSubmit} onDelete={() => onDelete(word.id)} onEnhance={onEnhanceWord} isEnhancing={isEnhancing} />
                         </Card>
-                        <ScrollView className='w-full h-full bg-white'>
+                        <ScrollView className='w-full'>
                             <AddEditWord form={word} handleFormUpdate={handleFormUpdate} />
                         </ScrollView>
                     </View>

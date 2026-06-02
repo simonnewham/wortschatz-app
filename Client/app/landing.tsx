@@ -46,10 +46,10 @@ const HeroSection = () => {
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(700).duration(800).springify()}
                     className="flex-row w-full gap-4 justify-center">
-                    <Pressable onPress={() => router.replace('/login')} className="bg-accent/95 px-4 py-4 rounded-lg flex-row items-center gap-3 active:opacity-80
+                    <Pressable onPress={() => router.replace('/login')} className="bg-accent/95 px-4 py-2 rounded-lg flex-row items-center gap-3 active:opacity-80
                      hover:bg-accent transition-colors shadow-lg shadow-accent/30">
-                        <Text className="text-black text-xl font-bold">Get started</Text>
-                        <MaterialIcons name="arrow-right-alt" size={28} color="black" />
+                        <Text className="text-black text-xl font-semibold animate-pulse">Get started</Text>
+                        <MaterialIcons className='animate-pulse' name="arrow-right-alt" size={28} color="black" />
                     </Pressable>
                 </Animated.View>
             </View>

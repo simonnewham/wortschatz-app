@@ -33,7 +33,7 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                             ? <ActivityIndicator size={20} color="white" />
                             : <MaterialIcons name="auto-awesome" className="animate-pulse" size={20} color="white" />
                         }
-                        <Text className="text-white font-semibold">{props.enhanceText ?? 'Enhance'}</Text>
+                        <Text className="text-white font-semibold">{props.enhanceText ?? 'Discover'}</Text>
                     </Pressable>
                 }
             </View>
@@ -46,17 +46,17 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                     </Pressable>
                 }
                 {props.onSubmit &&
-                    <Pressable className="flex-row py-2 px-4 rounded-md bg-accent/90 items-center hover:bg-accent"
+                    <Pressable className="flex-row py-2 px-4 rounded-md border-2 border-accent bg-accent/80 items-center hover:bg-accent"
                         onPress={props.onSubmit}>
                         <MaterialIcons name="add" size={20} color="black" />
                         <Text className="text-black font-semibold">{props.submitText ?? 'Add'}</Text>
                     </Pressable>
                 }
                 {props.onSubmitAndNewAction &&
-                    <Pressable className="flex-row py-2 px-4 rounded-md bg-secondary/90 hover:bg-secondary items-center gap-1"
+                    <Pressable className="flex-row py-2 px-4 rounded-md border-2 border-secondary/90 hover:bg-secondary/20 items-center gap-1"
                         onPress={props.onSubmitAndNewAction}>
-                        <MaterialIcons name="playlist-add" size={20} color="white" />
-                        <Text className="text-white font-semibold">Add and New</Text>
+                        <MaterialIcons name="playlist-add" size={20} color="black" />
+                        <Text className="text-black font-semibold">Add and New</Text>
                     </Pressable>
                 }
             </View>

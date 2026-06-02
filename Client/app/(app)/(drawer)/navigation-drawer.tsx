@@ -17,7 +17,7 @@ export function NavigationDrawer() {
             drawerType: isDesktop ? 'permanent' : 'front',
             drawerPosition: 'left',
             drawerStyle: {
-                width: isDesktop ? 300 : "75%",
+                width: isDesktop ? 280 : "75%",
                 borderRightWidth: 0,
                 backgroundColor: 'black'
             },
@@ -29,7 +29,7 @@ export function NavigationDrawer() {
             headerTintColor: 'white',
             headerTitleStyle: { color: 'white' },
             headerStyle: { backgroundColor: 'black' },
-            title: 'Wortschatz'
+            headerTitle: () => <Logo textSize='2xl' />
         }}
             drawerContent={(props) => <CustomDrawerContent {...props} />}>
         </Drawer >
@@ -49,32 +49,32 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
     return (
         <View className='bg-black flex-1'>
             <DrawerContentScrollView {...props}>
-                <View className='pb-4'>
-                    <Logo textSize='2xl' />
+                <View className='w-full items-center justify-center pb-4'>
+                    <Logo textSize='xl' />
                 </View>
                 <Pressable className='pt-2 items-center' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
                     <MaterialIcons name="home" size={24} color="white" />
                     <Text className='text-lg text-white'>Home</Text>
                 </Pressable>
-                <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/add-word')}>
+                {/* <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/add-word')}>
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='text-lg text-white'>Add new word</Text>
-                </Pressable>
+                </Pressable> */}
                 {/* <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.navigate('/phrase/add-phrase')}>
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='text-lg text-white'>Add new phrase</Text>
                 </Pressable> */}
-                <Pressable className='items-center/' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
+                {/* <Pressable className='items-center/' style={[styles.headerButton]} onPress={() => router.replace('/note/add-note')}>
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='text-lg text-white'>Add new note</Text>
-                </Pressable>
+                </Pressable> */}
                 <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons name="view-list" size={24} color="white" />
-                    <Text className='text-lg text-white'>View Wortschatz</Text>
+                    <Text className='text-lg text-white'>Wortschatz</Text>
                 </Pressable>
                 <Pressable className='items-center pb-4' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
-                    <Text className='text-lg text-white'>View Notes</Text>
+                    <Text className='text-lg text-white'>Notes</Text>
                 </Pressable>
                 <Pressable className='items-center pt-4 border-t-2 border-accent' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
                     <MaterialIcons name="settings" size={24} color="white" />

@@ -4,18 +4,14 @@ import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { INote } from '@/models/INote';
-import { useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import { CancelSubmitButton } from '../../../components/CancelSubmitButton';
 import { Card } from '../../../components/Card';
 
-const initialForm: INote = {
-    title: undefined,
-    description: undefined,
-    notes: undefined,
-}
-
 export default function AddNote() {
-    const [form, setForm] = useState(initialForm);
+    const [form, setForm] = useState(new INote());
     const [isLoading, setIsLoading] = useState(false);
 
     const { onAdd } = useBaseEntity({
@@ -27,12 +23,17 @@ export default function AddNote() {
         setForm(prev => ({ ...prev, [value]: text }));
     }
 
-    const onSubmit = async () => {
+    const onSubmit = useCallback(async () => {
         const result = await onAdd(form);
         if (result?.ok) {
-            setForm(initialForm);
+            setForm(new INote());
         }
-    }
+    }, [form, onAdd])
+
+    useFocusEffect(
+        useCallback(() => {
+            setForm(new INote());
+        }, [setForm]));
 
     return (
         <ContainerView>
@@ -41,7 +42,9 @@ export default function AddNote() {
                 <Card className='border-gray-100'>
                     <CancelSubmitButton onSubmit={onSubmit} />
                 </Card>
-                <AddEditNote note={form} handleFormUpdate={handleFormUpdate} />
+                <ScrollView className='w-full h-screen'>
+                    <AddEditNote note={form} handleFormUpdate={handleFormUpdate} />
+                </ScrollView>
             </ContainerContent>
         </ContainerView>
     );

@@ -34,10 +34,8 @@ export function ToastProvider({ children }: PropsWithChildren) {
 
     return (
         <ToastContext value={{ show }}>
-
             {children}
             <ToastCard visible={visible} message={message} status={status} />
-
         </ToastContext>
     );
 }

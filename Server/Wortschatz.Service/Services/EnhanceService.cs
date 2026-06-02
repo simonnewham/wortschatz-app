@@ -31,7 +31,10 @@ namespace Wortschatz.Service.Services
 
             var nativeWord = word.NativeWord;
 
+            // TODO: Config model
             var apiKey = _configuration["Gemini:ApiKey"];
+            var endpoint = _configuration["Gemini:Endpoint"];
+
             if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new InvalidOperationException("Not Key found");
@@ -48,9 +51,10 @@ namespace Wortschatz.Service.Services
                 5- If the wordType is a Verb then provide the Perfekt and Pratertium past tense
                 6- Provide a short and simple explanation of the word in German. Not more than 2 sentences.
                 7- Provide the English translation of the word
-                8- Provide 1-3 synonyms
-                9- Provide 1 usage of the word in Present, Past and Passive form
+                8- Provide 1-3 synonyms, if nouns then with the correct gender
+                9- Provide 1 usage of the word in Present, Perfekt Past and Passive form
                 10- Provide a single category to group similar words
+                11- If possible provide the Swiss-German equivalent word, if a noun then with the correct gender equivalent
                 
                 Use the following JSON structure to ensure a consistent output:
                 {{
@@ -72,7 +76,8 @@ namespace Wortschatz.Service.Services
                         ""past"": ""string"",
                         ""passive"": ""string""
                     }},
-                    ""category"": ""string""
+                    ""category"": ""string"",
+                    ""swiss_german"": ""string""
                 }}";
 
             var requestBody = new
@@ -91,7 +96,7 @@ namespace Wortschatz.Service.Services
 
             var jsonPayload = JsonSerializer.Serialize(requestBody);
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, endpoint);
             requestMessage.Headers.Add("x-goog-api-key", apiKey);
             requestMessage.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 

@@ -19,7 +19,7 @@ export function AddEditWord(props: IAddWordComponentProps) {
                 <Text style={[styles.text]}>Deutsch</Text>
                 <TextInput style={styles.input}
                     value={form.nativeWord}
-                    placeholder='deutsches Wort...'
+                    placeholder='Deutsches Wort...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
             </Card>
@@ -52,17 +52,18 @@ export function AddEditWord(props: IAddWordComponentProps) {
                     value={form.usage}
                     onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
             </Card> */}
-            <Card className='border-gray-200 w-full'>
-                <Text style={[styles.text]}>✨ Wortschatz Enhancement Result</Text>
-                <TextInput className="h-full"
-                    style={{ ...styles.input, height: 300 }}
-                    value={form.enhanceResult}
-                    scrollEnabled={true}
-                    multiline={true}
-                    editable={false}
-                    textAlignVertical="top"
-                />
-            </Card>
+            {form.id &&
+                <Card className='border-gray-200 w-full'>
+                    <Text className="font-semibold">✨ Result</Text>
+                    <TextInput className="h-full"
+                        numberOfLines={25}
+                        value={form.enhanceResult}
+                        scrollEnabled={true}
+                        multiline={true}
+                        editable={false}
+                        textAlignVertical="top"
+                    />
+                </Card>}
         </View>
     );
 }
