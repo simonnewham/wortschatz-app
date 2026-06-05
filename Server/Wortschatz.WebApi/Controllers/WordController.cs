@@ -20,6 +20,11 @@ public class WordController : BaseEntityController<Word, WordAddDto, WordUpdateD
         _enhanceService = enhanceService;
     }
 
+    /// <summary>
+    /// Enhances a word using AI-powered translation or generation.
+    /// </summary>
+    /// <param name="dto">The data transfer object containing the word to enhance.</param>
+    /// <returns>An enhanced result.</returns>
     [HttpPost("enhance")]
     public async Task<IActionResult> Enhance([FromBody] WordEnhanceDto dto)
     {

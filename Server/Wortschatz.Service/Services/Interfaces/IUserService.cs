@@ -37,6 +37,12 @@ namespace Wortschatz.Service.Services.Interfaces
         bool TryGetUser(out User user);
 
         /// <summary>
+        /// Get user info.
+        /// </summary>
+        /// <returns></returns>
+        UserInfoDto? GetUserInfo();
+
+        /// <summary>
         /// Get summary stats for the current user.
         /// </summary>
         /// <returns></returns>

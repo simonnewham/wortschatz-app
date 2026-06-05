@@ -54,10 +54,7 @@ namespace Wortschatz.Service.Services
             {
                 // TODO: Email and logging 
 
-                return new BaseUserDto
-                {
-                 Email = addUserDto.Email
-                };
+                return new BaseUserDto();
             }
             else
             {
@@ -70,6 +67,25 @@ namespace Wortschatz.Service.Services
         {
             if (TryGetUser(out var user))
             {
+                var userSetting = context.UserSettings.FirstOrDefault(u => u.UserId == user.Id);
+                if (userSetting == null)
+                {
+                    userSetting = new UserSetting
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = user.Id,
+                        User = user,
+                        FirstName = userUpdateDto.FirstName,
+                        LastName = userUpdateDto.LastName
+                    };
+                    context.UserSettings.Add(userSetting);
+                }
+                else
+                {
+                    userSetting.FirstName = userUpdateDto.FirstName;
+                    userSetting.LastName = userUpdateDto.LastName;
+                }
+
                 context.SaveChanges();
 
                 return userUpdateDto;
@@ -85,6 +101,29 @@ namespace Wortschatz.Service.Services
             user = context.Users.Find(userId)!;
 
             return user != null;
+        }
+
+        public UserInfoDto? GetUserInfo()
+        {
+            var username = GetUserName();
+            if (!string.IsNullOrEmpty(username) && TryGetUser(out var user))
+            {
+                var userInfo = new UserInfoDto
+                {
+                    UserName = username
+                };
+
+                var userSetting = context.UserSettings.FirstOrDefault(u => u.UserId == user.Id);
+                if (userSetting != null)
+                {
+                    userInfo.FirstName = userSetting.FirstName;
+                    userInfo.LastName = userSetting.LastName;
+                }
+
+                return userInfo;
+            }
+
+            return null;
         }
 
         private ClaimsPrincipal GetClaimsPrincipal()

@@ -18,10 +18,10 @@ namespace Wortschatz.WebApi.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Registers a new user in the system.
         /// </summary>
-        /// <param name="updateUserDto"></param>
-        /// <returns></returns>
+        /// <param name="updateUserDto">The data transfer object containing the new user's email and password.</param>
+        /// <returns>A base user data transfer object.</returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<BaseUserDto> Register([FromBody] AddUserDto updateUserDto)
@@ -33,30 +33,20 @@ namespace Wortschatz.WebApi.Controllers
 
 
         /// <summary>
-        /// 
+        /// Retrieves the profile information for the currently authenticated user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The user's information including their first and last name.</returns>
         [HttpGet("getUserInfo")]
         public UserInfoDto? GetUserDetails()
         {
-            var username = userService.GetUserName();
-
-            if (!string.IsNullOrEmpty(username) && userService.TryGetUser(out var user))
-            {
-                return new UserInfoDto
-                {
-                    UserName = username
-                };
-            }
-
-           return null;
+           return userService.GetUserInfo();
         }
 
 
         /// <summary>
-        /// 
+        /// Retrieves a statistical summary of the user's activity (e.g., word and phrase counts).
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A summary of the user's statistics.</returns>
         [HttpGet("getStatsSummary")]
         public async Task<UserStatsSummaryDto> GetUserStatsSummary()
         {
@@ -64,14 +54,24 @@ namespace Wortschatz.WebApi.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Retrieves the current streaks for the user's word and phrase creations.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An object detailing the user's consecutive active days.</returns>
         [HttpGet("getStreaks")]
         [ResponseCache(Duration = 60)]
         public async Task<UserStreaksDto> GetUserStreaks()
         {
             return await userService.GetUserStreaksAsync();
+        }
+        /// <summary>
+        /// Updates the profile settings for the currently authenticated user.
+        /// </summary>
+        /// <param name="updateUserDto">The updated user information.</param>
+        /// <returns>The updated user data transfer object.</returns>
+        [HttpPost("updateUser")]
+        public UpdateUserDto UpdateUser([FromBody] UpdateUserDto updateUserDto)
+        {
+            return userService.UpdateUser(updateUserDto);
         }
     }
 }
