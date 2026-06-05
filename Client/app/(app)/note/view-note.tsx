@@ -24,7 +24,7 @@ export default function ViewNote() {
         viewRoute: '/note/view-note'
     });
 
-    const handleFormUpdate = (text: string, value: string) => {
+    const handleFormUpdate = (text: any, value: string) => {
         setNote(prev => ({ ...prev, [value]: text }));
     }
 
@@ -59,13 +59,13 @@ export default function ViewNote() {
             <ContainerContent>
                 <PageToolbar icon='note' title='View Note' showBackButton={true} />
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="#ea580c" />
+                    <ActivityIndicator size="large" color="#d4fd52" />
                 ) : error ? (
                     <Text className="text-red-500 font-bold p-4">{error}</Text>
                 ) : note ? (
                     <View className="w-full items-center">
                         <Card className='border-gray-100'>
-                            <CancelSubmitButton submitText='Save' onSubmit={onSubmit} onDelete={() => onDelete(note.id)} />
+                            <CancelSubmitButton submitText='Save' submitIcon='save' onSubmit={onSubmit} onDelete={() => onDelete(note.id)} />
                         </Card>
                         <ScrollView className='w-full h-screen'>
                             <AddEditNote note={note} handleFormUpdate={handleFormUpdate} />

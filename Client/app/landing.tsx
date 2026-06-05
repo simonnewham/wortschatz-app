@@ -10,7 +10,7 @@ const { height: windowHeight } = Dimensions.get('window');
 
 // Navbar Component
 const Navbar = () => (
-    <View className="absolute top-0 w-full z-50 bg-black px-2">
+    <View className="absolute top-0 w-full z-50 bg-gray-800 px-2">
         <View className="flex-row items-center justify-between px-4 py-4 w-full">
             <View className='flex-row gap-4'>
                 <Logo />
@@ -26,8 +26,8 @@ const Navbar = () => (
 // Hero Section
 const HeroSection = () => {
     return (
-        <View style={{ minHeight: windowHeight * 0.8 }} className="relative w-full overflow-hidden bg-black flex-1 
-        border-b border-zinc-900 justify-center items-center px-4">
+        <View style={{ minHeight: windowHeight * 0.8 }} className="relative w-full overflow-hidden flex-1 
+            justify-center items-center px-4">
             <View>
                 <Animated.View entering={FadeInUp.delay(100).duration(500).springify()}>
                     <Text className="text-white text-3xl md:text-6xl font-extrabold tracking-tighter mb-2">
@@ -37,11 +37,6 @@ const HeroSection = () => {
                 <Animated.View entering={FadeInUp.delay(100).duration(800).springify()}>
                     <Text className="text-accent text-5xl md:text-8xl font-serif italic mb-8 transform origin-left md:scale-110">
                         Start mastering them.
-                    </Text>
-                </Animated.View>
-                <Animated.View entering={FadeInUp.delay(500).duration(800).springify()}>
-                    <Text className="text-zinc-300 text-xl mb-12">
-                        Your language learning companion. Building a meaningful vocabulary has never been this organic and immersive.
                     </Text>
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(700).duration(800).springify()}
@@ -60,7 +55,7 @@ const HeroSection = () => {
 // Features
 const FeaturesSection = () => {
     return (
-        <View className="pb-24 px-4 bg-black w-full text-white">
+        <View className="pb-24 px-4 pt-4 w-full text-white">
             <View className='justify-center items-center'>
                 <Text className="text-sm font-bold tracking-widest text-accent uppercase mb-4">
                     Core Workflows</Text>
@@ -68,6 +63,19 @@ const FeaturesSection = () => {
                     Functional tools designed to accelerate your fluency.
                 </Text>
                 <View className="flex-col gap-2">
+                    <Card className="flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
+                        <View className="flex-1">
+                            <View className="flex flex-row items-center gap-4">
+                                <View className="w-12 h-12 rounded-full bg-indigo-600/20 items-center justify-center mb-6">
+                                    <MaterialIcons name="auto-awesome" size={24} color="#6366f1" />
+                                </View>
+                                <Text className="text-2xl font-bold text-white mb-4">View your dashboard</Text>
+                            </View>
+                            <Text className="text-zinc-400 text-md mb-2">
+                                Review your learned words, track your progress, and stay motivated with your learning streak.
+                            </Text>
+                        </View>
+                    </Card>
                     <Card className="w-full flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
                         <View className="flex-1">
                             <View className="flex flex-row items-center gap-4">
@@ -94,19 +102,6 @@ const FeaturesSection = () => {
                             </Text>
                         </View>
                     </Card>
-                    <Card className="flex-col md:flex-row gap-12 bg-zinc-900 rounded-lg md:p-4 border border-zinc-800">
-                        <View className="flex-1">
-                            <View className="flex flex-row items-center gap-4">
-                                <View className="w-12 h-12 rounded-full bg-indigo-600/20 items-center justify-center mb-6">
-                                    <MaterialIcons name="auto-awesome" size={24} color="#6366f1" />
-                                </View>
-                                <Text className="text-2xl font-bold text-white mb-4">Future Feature: Create lessons & stories</Text>
-                            </View>
-                            <Text className="text-zinc-400 text-md mb-2">
-                                Turn disparate words into cohesive narrative. Our AI constructs personalized mini-stories from your exact vocabulary to cement retention.
-                            </Text>
-                        </View>
-                    </Card>
                 </View>
             </View>
         </View>
@@ -121,7 +116,7 @@ const FooterSection = () => {
                 <View className="max-w-3/4">
                     <Logo />
                     <Text className="text-white mb-6 leading-relaxed">Your language learning companion. Master languages organically by saving what matters.</Text>
-                    <Text className="text-accent/20 font-medium">© {new Date().getFullYear()} Wortschatz Inc. All rights reserved.</Text>
+                    <Text className="text-accent font-medium">© {new Date().getFullYear()} Wortschatz All rights reserved.</Text>
                 </View>
                 <View className="max-w-1/2 flex-row">
                     <View className="gap-4">
@@ -137,7 +132,7 @@ const FooterSection = () => {
 
 export default function LandingPage() {
     return (
-        <View className="flex-1 bg-black">
+        <View className="flex-1 bg-gray-800">
             <Navbar />
             <ScrollView
                 className="flex-1"

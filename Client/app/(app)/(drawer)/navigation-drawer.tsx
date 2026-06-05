@@ -75,23 +75,23 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </Pressable> */}
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons name="abc" size={24} color="white" />
-                    <Text className='text-lg text-white'>Words</Text>
+                    <Text className='text-lg text-white'>Wörter</Text>
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/phrase/phrase-list')}>
                     <MaterialIcons name="list" size={24} color="white" />
-                    <Text className='text-lg text-white'>Phrases</Text>
+                    <Text className='text-lg text-white'>Phrasen</Text>
                 </Pressable>
                 <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
-                    <Text className='text-lg text-white'>Notes</Text>
+                    <Text className='text-lg text-white'>Notizen</Text>
                 </Pressable>
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
                     <MaterialIcons name="settings" size={24} color="white" />
-                    <Text className='text-lg text-white'>Settings</Text>
+                    <Text className='text-lg text-white'>Einstellungen</Text>
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={onSignOut}>
                     <MaterialIcons name="logout" size={24} color="white" />
-                    <Text className='text-lg text-white'>Sign Out</Text>
+                    <Text className='text-lg text-white'>Ausloggen</Text>
                 </Pressable>
             </DrawerContentScrollView >
             <View>

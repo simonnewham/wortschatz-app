@@ -7,7 +7,7 @@ import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { useEntityState } from '@/hooks/useEntityState';
 import { Word } from '@/models/IWord';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { ContainerContent } from '../../../components/ContainerContent';
@@ -68,7 +68,9 @@ export default function ViewWord() {
                                 onSubmit={onSubmit}
                                 onDelete={() => onDelete(entityState?.current?.id)}
                                 onEnhance={onEnhanceWord}
-                                isEnhancing={isEnhancing} />
+                                onCancel={() => router.replace('/word/word-list')}
+                                isEnhancing={isEnhancing}
+                                submitIcon='save' />
                         </Card>
                         <ScrollView className='w-full pb-20'>
                             <AddEditWord form={entityState.current} handleFormUpdate={handleFormUpdate} />

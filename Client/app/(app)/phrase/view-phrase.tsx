@@ -84,7 +84,7 @@ export default function ViewPhrase() {
                 ) : phrase ? (
                     <View className="w-full h-screen items-center">
                         <Card className='border-gray-100'>
-                            <CancelSubmitButton submitText='Save' onSubmit={onSubmit} onDelete={() => onDelete(phrase.id)} onEnhance={onEnhancePhrase} isEnhancing={isEnhancing} />
+                            <CancelSubmitButton submitText='Save' submitIcon='save' onSubmit={onSubmit} onDelete={() => onDelete(phrase.id)} onEnhance={onEnhancePhrase} isEnhancing={isEnhancing} />
                         </Card>
                         <ScrollView className='w-full'>
                             <AddEditPhrase form={phrase} handleFormUpdate={handleFormUpdate} />

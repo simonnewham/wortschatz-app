@@ -41,7 +41,7 @@ export default function NoteList() {
             <ContainerDrawer title='Wortschatz Notes' />
             <ContainerContent>
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="##d4fd52" />
+                    <ActivityIndicator size="large" color="#d4fd52" />
                 ) : (
                     <View className="w-full">
                         <PageToolbar icon="view-list" title="Note List" actionLabel="Add a new note" actionIcon="add" action={() => router.navigate('/note/add-note')} />

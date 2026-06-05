@@ -29,7 +29,7 @@ export function StreakCard() {
     if (isLoading) {
         return (
             <Card className='border-gray-200 p-4'>
-                <ActivityIndicator size="small" color="#ea580c" />
+                <ActivityIndicator size="small" color="#d4fd52" />
             </Card>
         );
     }

@@ -24,10 +24,19 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
         <View className='flex-row gap-2 justify-between flex-wrap'>
             <View className="flex-row gap-2">
                 <Pressable className=" flex-row gap-2 py-1 px-4 rounded-md bg-gray-400 items-center"
-                    onPress={() => router.back()}>
+                    onPress={() => props.onCancel ? props.onCancel() : router.back()}>
                     <MaterialIcons name="cancel" size={20} color="white" />
                     <Text className="text-white font-semibold">{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
+            </View>
+            <View className="flex-row gap-2">
+                {props.onDelete &&
+                    <Pressable className="flex-row gap-2 px-4 rounded-md bg-red-500 items-center"
+                        onPress={props.onDelete}>
+                        <MaterialIcons name="delete" size={20} color="white" />
+                        <Text className="text-white font-semibold">Delete</Text>
+                    </Pressable>
+                }
                 {props.onEnhance &&
                     <Pressable
                         className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400 ${props.isEnhancing ? 'opacity-60' : ''}`}
@@ -38,15 +47,6 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                             : <MaterialIcons name="auto-awesome" className="animate-pulse" size={20} color="white" />
                         }
                         <Text className="text-white font-semibold">{props.enhanceText ?? 'Discover'}</Text>
-                    </Pressable>
-                }
-            </View>
-            <View className="flex-row gap-2">
-                {props.onDelete &&
-                    <Pressable className="flex-row gap-2 px-4 rounded-md bg-red-500 items-center"
-                        onPress={props.onDelete}>
-                        <MaterialIcons name="delete" size={20} color="white" />
-                        <Text className="text-white font-semibold">Delete</Text>
                     </Pressable>
                 }
                 {props.onSubmit &&
