@@ -8,11 +8,9 @@ class UserService {
     public async getUserInfo(): Promise<IUserInfo | null> {
         try {
             const response = await dataService.Get('User/getUserInfo');
-
             if (response.ok && response.status !== 401) {
                 const data = await response.json();
                 return {
-                    id: data.id,
                     role: data.role,
                     userName: data.userName,
                     firstName: data.firstName,
@@ -23,7 +21,6 @@ class UserService {
             return null;
         }
         catch {
-
             return null;
         }
     }

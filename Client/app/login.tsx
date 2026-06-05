@@ -1,5 +1,4 @@
 import { Logo } from '@/components/Logo';
-import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -10,8 +9,6 @@ import { Card } from '../components/Card';
 import '../global.css';
 
 export default function Login() {
-    const styles = useStyling();
-
     const { login, register } = useAuthSession();
 
     const [email, setEmail] = useState('');
@@ -44,9 +41,9 @@ export default function Login() {
     }
 
     return (
-        <View className='bg-background_primary h-screen w-full items-center justify-center'>
+        <View className='bg-gray-700 h-screen w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
-                <Card className='bg-zinc-900 border border-zinc-800'>
+                <Card className='bg-gray-800 shadow-gray-950'>
                     <View className='items-center p-4'>
                         <Logo />
                         <Text className='tracking-tighter italic pb-2 text-white'>
@@ -67,8 +64,8 @@ export default function Login() {
                             onChangeText={setPassword} />
                         {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent
-                           border-b-2 border-accent items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/80 hover:bg-accent
+                           items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onLogin}
                             disabled={isLoading}>
                             {isLoading ? (
@@ -76,29 +73,27 @@ export default function Login() {
                             ) : (
                                 <>
                                     <MaterialIcons name="login" size={24} color="black" />
-                                    <Text className='text-text'>Login</Text>
+                                    <Text className='text-black'>Login</Text>
                                 </>
                             )}
                         </Pressable>
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/95 hover:bg-accent border-b-2 border-accent
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-secondary/70 hover:bg-secondary
                             items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onRegister}
                             disabled={isLoading}>
                             {isLoading ? (
-                                <ActivityIndicator size="small" color="black" />
+                                <ActivityIndicator size="small" color="white" />
                             ) : (
                                 <>
-                                    <MaterialIcons name="person-add" size={24} color="black" />
-                                    <Text className='text-text'>
-                                        Register
-                                    </Text>
+                                    <MaterialIcons name="person-add" size={24} color="white" />
+                                    <Text className='text-white'>Register</Text>
                                 </>
                             )}
                         </Pressable>
-                        <Text className='font-sans pt-5 italic text-white underline'>
+                        {/* <Text className='font-sans pt-5 italic text-white underline'>
                             Forgot Password?
-                        </Text>
+                        </Text> */}
                     </View>
                 </Card>
             </View>

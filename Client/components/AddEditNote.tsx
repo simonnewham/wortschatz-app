@@ -12,7 +12,7 @@ export function AddEditNote({ note, handleFormUpdate }: AddEditNoteProps) {
     return (
         <View>
             <Card className='border-gray-100'>
-                <Text className="font-sans text-black text-lg">Title</Text>
+                <Text className="font-sans text-black text-lg">🇩🇪 Title</Text>
                 <TextInput className="border-2 bg-white border-gray-300 rounded-md p-2"
                     value={note?.title}
                     placeholder='Title...'

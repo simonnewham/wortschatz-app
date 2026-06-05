@@ -16,15 +16,15 @@ export function AddEditWord(props: IAddWordComponentProps) {
     return (
         <View>
             <Card className='border-gray-200'>
-                <Text style={[styles.text]}>Deutsch</Text>
+                <Text style={[styles.text]}>🇩🇪 Deutsch</Text>
                 <TextInput style={styles.input}
                     value={form.nativeWord}
                     placeholder='Deutsches Wort...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
             </Card>
-            {/* <Card className='border-gray-200'>
-                <View style={{ flexDirection: 'row', gap: 10, marginVertical: 10 }}>
+            <Card className='border-gray-200'>
+                {/* <View style={{ flexDirection: 'row', gap: 10, marginVertical: 10 }}>
                     <Label style={[styles.text]}>noun</Label>
                     <Switch onValueChange={setIsEnabled} value={isEnabled}></Switch>
                     <Label style={[styles.text]}>verb</Label>
@@ -38,25 +38,25 @@ export function AddEditWord(props: IAddWordComponentProps) {
                             <Picker.Item label={option.title} value={option.title} />
                         )}
                     </Picker>
-                }
+                } */}
                 <Text style={[styles.text]}>Translation</Text>
                 <TextInput style={styles.input}
                     value={form.translateWord}
-                    placeholder='translated word...'
+                    placeholder='translation...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
                 <Text style={[styles.text]}>Usage</Text>
                 <TextInput style={styles.input}
-                    placeholder='usage example...'
+                    placeholder='usage...'
                     placeholderTextColor={'gray'}
                     value={form.usage}
                     onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
-            </Card> */}
+            </Card>
             {form.id &&
                 <Card className='border-gray-200 w-full'>
-                    <Text className="font-semibold">✨ Result</Text>
-                    <TextInput className="h-full"
-                        numberOfLines={25}
+                    <Text className="font-semibold">✨Wortkiste Result</Text>
+                    <TextInput
+                        numberOfLines={form.enhanceResult ? 25 : 4}
                         value={form.enhanceResult}
                         scrollEnabled={true}
                         multiline={true}

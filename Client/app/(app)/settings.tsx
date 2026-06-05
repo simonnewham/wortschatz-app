@@ -2,8 +2,10 @@ import { CancelSubmitButton } from '@/components/CancelSubmitButton';
 import { ContainerContent } from '@/components/ContainerContent';
 import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
+import { Status } from '@/constants/Status';
 import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
+import { useToast } from '@/providers/ToastProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput } from 'react-native';
@@ -12,6 +14,7 @@ import { Card } from '../../components/Card';
 export default function SettingsButton() {
     const styles = useStyling();
     const { userInfo, refreshUserInfo } = useAuthSession();
+    const toast = useToast();
 
     const [form, setForm] = useState({ ...userInfo, theme: 'dark' });
 
@@ -22,6 +25,7 @@ export default function SettingsButton() {
     const onSubmit = async () => {
         const result = await baseEntityDataService.Update('User', form);
         if (result.ok) {
+            toast.show('Settings updated successfully!', Status.Success)
             refreshUserInfo();
         }
     }
@@ -31,42 +35,31 @@ export default function SettingsButton() {
             <ContainerContent>
                 <ContainerDrawer title='Settings' />
                 <Card className='border-gray-200'>
-                    <CancelSubmitButton onSubmit={onSubmit} submitText='Save' cancelText='Back' />
+                    <CancelSubmitButton onSubmit={onSubmit} submitText='Save' submitIcon='save' cancelText='Back' />
                 </Card>
                 <ScrollView className='w-full' style={[styles.formContainer]}>
                     <Card title='Settings' icon={'settings'} className='border-gray-200'>
-                        <Text style={[styles.text]}>Username</Text>
-                        <TextInput readOnly={true}
-                            style={styles.input}
-                            value={form.userName} />
-                        <Text style={[styles.text]}>First name</Text>
+                        <Text className='pb-2 font-semibold'>Username</Text>
+                        <Text className='pb-2 text-md'>{form.userName}</Text>
+                        <Text className='font-semibold'>First name</Text>
                         <TextInput style={styles.input}
                             value={form.firstName}
                             placeholder='First name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'firstName')} />
-                        <Text style={[styles.text]}>Last name</Text>
+                        <Text className='font-semibold'>Last name</Text>
                         <TextInput style={styles.input}
                             value={form.lastName}
                             placeholder='Last name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'lastName')} />
-                        <Text style={[styles.text]}>Streak</Text>
-                        <Text style={[styles.text]}>Word Streak Target</Text>
+                        <Text className='font-semibold'>Gemini API Key</Text>
                         <TextInput style={styles.input}
-                            // value={form.wordStreakTarget?.toString()}
-                            keyboardType='numeric'
-                            placeholder='Word Streak Target...'
+                            value={form.lastName}
+                            secureTextEntry
+                            placeholder='Gemini API Key...'
                             placeholderTextColor={'gray'}
-                            onChangeText={text => handleFormUpdate(text, 'wordStreakTarget')} />
-
-                        <Text style={[styles.text]}>Note Streak Target</Text>
-                        <TextInput style={styles.input}
-                            // value={form.noteStreakTarget?.toString()}
-                            keyboardType='numeric'
-                            placeholder='Note Streak Target...'
-                            placeholderTextColor={'gray'}
-                            onChangeText={text => handleFormUpdate(text, 'noteStreakTarget')} />
+                            onChangeText={text => handleFormUpdate(text, 'geminiApiKey')} />
                     </Card>
                 </ScrollView>
             </ContainerContent>

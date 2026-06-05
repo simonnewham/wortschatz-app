@@ -13,13 +13,8 @@ class AuthService {
     }
 
     public async isAuthenticated() {
-        try {
-            const user = await userService.getUserInfo();
-            return user?.id != null;
-        } catch (error: any) {
-            this.logout();
-            return false;
-        }
+        const user = await userService.getUserInfo();
+        return user != null;
     }
 
     public async login(credentials: ICredentials) {

@@ -68,7 +68,7 @@ namespace Wortschatz.WebApi.Controllers
         /// </summary>
         /// <param name="updateUserDto">The updated user information.</param>
         /// <returns>The updated user data transfer object.</returns>
-        [HttpPost("updateUser")]
+        [HttpPost("update")]
         public UpdateUserDto UpdateUser([FromBody] UpdateUserDto updateUserDto)
         {
             return userService.UpdateUser(updateUserDto);

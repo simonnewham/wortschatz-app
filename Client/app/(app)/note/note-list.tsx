@@ -47,7 +47,7 @@ export default function NoteList() {
                         <PageToolbar icon="view-list" title="Note List" actionLabel="Add a new note" actionIcon="add" action={() => router.navigate('/note/add-note')} />
                         {data.map((note, index) => (
                             <Pressable key={note.id || index.toString()} onPress={() => note.id && router.navigate(`/note/view-note?id=${note.id}`)}>
-                                <Card className="bg-zinc-50 border border-gray-200">
+                                <Card className="bg-zinc-50 border border-gray-200 hover:bg-accent/20">
                                     <View className="flex-row justify-between items-start">
                                         <View className="flex">
                                             <Text className="text-xl font-bold text-zinc-900 mb-2">{note.title || 'Untitled Note'}</Text>
@@ -55,9 +55,16 @@ export default function NoteList() {
                                                 <Text className="text-md text-zinc-600 mb-2">{note.description}</Text>
                                             ) : null}
                                         </View>
-                                        <View className="p-2">
-                                            <MaterialIcons name="arrow-forward" size={24} color="black" />
+                                        <View className="flex-col items-end justify-between border-gray-100">
+                                            {note.createdDate && (
+                                                <Text className="text-sm text-gray-400 right-0">
+                                                    Created: {new Date(note.createdDate).toLocaleDateString()}
+                                                </Text>
+                                            )}
                                         </View>
+                                    </View>
+                                    <View className="p-2 flex-row justify-end">
+                                        <MaterialIcons name="arrow-forward" size={24} color="black" />
                                     </View>
                                 </Card>
                             </Pressable>

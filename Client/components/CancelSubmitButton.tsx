@@ -13,20 +13,24 @@ export interface ICancelSubmitButtonProps {
     cancelText?: string;
     deleteText?: string;
     enhanceText?: string;
+    submitIcon?: string;
+    cancelIcon?: string;
+    deleteIcon?: string;
+    enhanceIcon?: string;
 }
 
 export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
     return (
         <View className='flex-row gap-2 justify-between flex-wrap'>
             <View className="flex-row gap-2">
-                <Pressable className=" flex-row py-1 px-4 rounded-md bg-gray-100 items-center"
+                <Pressable className=" flex-row gap-2 py-1 px-4 rounded-md bg-gray-400 items-center"
                     onPress={() => router.back()}>
-                    <MaterialIcons name="cancel" size={20} color="black" />
-                    <Text className="text-black font-semibold">{props.cancelText ?? 'Cancel'}</Text>
+                    <MaterialIcons name="cancel" size={20} color="white" />
+                    <Text className="text-white font-semibold">{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
                 {props.onEnhance &&
                     <Pressable
-                        className={`flex-row py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400 ${props.isEnhancing ? 'opacity-60' : ''}`}
+                        className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400 ${props.isEnhancing ? 'opacity-60' : ''}`}
                         onPress={props.onEnhance}
                         disabled={props.isEnhancing}>
                         {props.isEnhancing
@@ -39,21 +43,21 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
             </View>
             <View className="flex-row gap-2">
                 {props.onDelete &&
-                    <Pressable className="flex-row px-4 rounded-md bg-red-500 items-center"
+                    <Pressable className="flex-row gap-2 px-4 rounded-md bg-red-500 items-center"
                         onPress={props.onDelete}>
                         <MaterialIcons name="delete" size={20} color="white" />
                         <Text className="text-white font-semibold">Delete</Text>
                     </Pressable>
                 }
                 {props.onSubmit &&
-                    <Pressable className="flex-row py-1 px-4 rounded-md border-2 border-accent bg-accent/80 items-center hover:bg-accent"
+                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md border-2 border-accent bg-accent/80 items-center hover:bg-accent"
                         onPress={props.onSubmit}>
-                        <MaterialIcons name="add" size={20} color="black" />
+                        <MaterialIcons name={(props.submitIcon ?? 'add') as any} size={20} color="black" />
                         <Text className="text-black font-semibold">{props.submitText ?? 'Add'}</Text>
                     </Pressable>
                 }
                 {props.onSubmitAndNewAction &&
-                    <Pressable className="flex-row py-1 px-4 rounded-md border-2 border-secondary bg-secondary/80 hover:bg-secondary items-center gap-1"
+                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md border-2 border-secondary bg-secondary/80 hover:bg-secondary items-center gap-1"
                         onPress={props.onSubmitAndNewAction}>
                         <MaterialIcons name="playlist-add" size={20} color="white" />
                         <Text className="text-white font-semibold">Add and New</Text>

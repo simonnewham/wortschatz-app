@@ -20,7 +20,6 @@ namespace Wortschatz.Service.Dtos
 
     public class UpdateUserDto : BaseUserDto
     {
-        // public Guid? Id { get; set; }
     }
 
     public class UserInfoDto : BaseUserDto

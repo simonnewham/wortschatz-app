@@ -13,7 +13,7 @@ export function PhraseListItem(props: IPhraseListItemProps) {
 
     return (
         <View className="w-full">
-            <Card className="bg-white shadow-sm flex-col border-gray-200">
+            <Card className="bg-white shadow-sm flex-col border-gray-200 hover:bg-accent/20">
                 <View>
                     <View className="flex-row justify-between ">
                         <View className="flex-row items-center gap-4">

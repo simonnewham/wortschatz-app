@@ -16,7 +16,7 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
     return (
         <View>
             <Card className='border-gray-200'>
-                <Text style={[styles.text, { paddingBottom: 5 }]}>Deutsch</Text>
+                <Text style={[styles.text, { paddingBottom: 5 }]}>🇩🇪 Deutsch</Text>
                 <TextInput style={styles.input}
                     multiline={true}
                     value={form.nativePhrase}
@@ -35,9 +35,9 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
             </Card>
             {form.id &&
                 <Card className='border-gray-200 w-full'>
-                    <Text className="font-semibold">✨</Text>
+                    <Text className="font-semibold">✨ Wortkiste Result</Text>
                     <TextInput className="h-full"
-                        numberOfLines={25}
+                        numberOfLines={form.enhanceResult ? 25 : 4}
                         value={form.enhanceResult}
                         scrollEnabled={true}
                         multiline={true}

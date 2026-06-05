@@ -9,6 +9,7 @@ export class INote extends IBase {
         this.title = undefined;
         this.description = undefined;
         this.notes = undefined;
+        this.createdDate = undefined;
     }
 
     id?: string;

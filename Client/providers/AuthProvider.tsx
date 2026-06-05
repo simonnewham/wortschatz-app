@@ -33,15 +33,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     const checkAuth = async () => {
       if (await authService.isAuthenticated()) {
-        userService.getUserInfo().then((userInfo) => {
-          if (userInfo) {
-            setUser(userInfo);
-          } else {
-            authService.logout();
-          }
-        }).catch(() => {
-          authService.logout();
-        });
+        const userInfo = await userService.getUserInfo();
+        setUser(userInfo);
+      }
+      else {
+        authService.logout();
       }
     }
     checkAuth();

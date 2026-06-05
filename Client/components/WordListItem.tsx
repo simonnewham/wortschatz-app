@@ -12,8 +12,8 @@ export function WordListItem(props: IWordListItemProps) {
     const { item } = props;
 
     return (
-        <View className="w-full">
-            <Card className="bg-white shadow-sm flex-col border-gray-200">
+        <View className="w-full ">
+            <Card className="bg-white shadow-sm flex-col border-gray-200 hover:bg-accent/20">
                 <View>
                     <View className="flex-row justify-between ">
                         <View className="flex-row items-center gap-4">
@@ -33,10 +33,10 @@ export function WordListItem(props: IWordListItemProps) {
                             )}
                         </View>
                     </View>
-                    <Text className="text-sm text-gray-600">
-                        <Text className="font-bold">Usage:</Text> {item.usage}
-                    </Text>
-                    <View className="flex-col items-end justify-between border-gray-100">
+                    <View className="flex-row justify-between">
+                        <Text className="text-sm text-gray-600">
+                            <Text className="font-bold">Usage:</Text> {item.usage}
+                        </Text>
                         <MaterialIcons className='right-0 px-2' name="arrow-forward" size={24} color="black" />
                     </View>
                 </View>
