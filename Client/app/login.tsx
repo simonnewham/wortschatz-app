@@ -41,9 +41,9 @@ export default function Login() {
     }
 
     return (
-        <View className='bg-gray-700 h-screen w-full items-center justify-center'>
+        <View className='bg-gray-900 h-screen w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
-                <Card className='bg-gray-800 shadow-gray-950'>
+                <Card className='bg-zinc-900 shadow-gray-900'>
                     <View className='items-center p-4'>
                         <Logo />
                         <Text className='tracking-tighter italic pb-2 text-white'>
@@ -78,8 +78,8 @@ export default function Login() {
                             )}
                         </Pressable>
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-secondary/70 hover:bg-secondary
-                            items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-accent border-2
+                                items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onRegister}
                             disabled={isLoading}>
                             {isLoading ? (

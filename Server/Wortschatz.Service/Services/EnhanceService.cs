@@ -47,14 +47,15 @@ namespace Wortschatz.Service.Services
                 1- Provide the word itself
                 2- If the word is misspelled, provide possible word options, if not then provide an empty array
                 3- If the word is a Noun or a Verb
-                4- If the wordType is a Noun then provide the gender of the word (der, die, das) else provide an empty string
-                5- If the wordType is a Verb then provide the Perfekt and Pratertium past tense
-                6- Provide a short and simple explanation of the word in German. Not more than 2 sentences.
-                7- Provide the English translation of the word
-                8- Provide 1-3 synonyms, if nouns then with the correct gender
-                9- Provide 1 usage of the word in Present, Perfekt Past and Passive form
-                10- Provide a single category to group similar words
-                11- If possible provide the Swiss-German equivalent word, if a noun then with the correct gender equivalent
+                4- If the wordType is a Noun then provide the gender of the word (der, die, das) else provide an empty 
+                5- If the wordType is a Noun then the plural form of the word, else provide an empty string
+                6- If the wordType is a Verb then provide the Perfekt and Pratertium past tense, else provide an empty string
+                7- Provide a short and simple explanation of the word in German. Not more than 2 sentences.
+                8- Provide the English translation of the word
+                9- Provide 1-3 synonyms, if nouns then with the correct gender
+                10- Provide 1 usage of the word in Present, Perfekt Past and Passive form
+                11- Provide a single category to group similar words
+                12- If possible provide the Swiss-German equivalent word, if a noun then with the correct gender equivalent
                 
                 Use the following JSON structure to ensure a consistent output:
                 {{
@@ -68,6 +69,7 @@ namespace Wortschatz.Service.Services
                         ""perfekt"": ""string"",
                          ""pratertium"": ""string""
                     }},
+                    ""plural"": ""string"",
                     ""explanation"": ""string"",
                     ""translation"": ""string"",
                     ""synonyms"": ""string[]"",
@@ -118,7 +120,7 @@ namespace Wortschatz.Service.Services
                 .GetProperty("text")
                 .GetString() ?? string.Empty;
 
-            word.EnhanceResult = text;
+            word.EnhanceResult = text.Substring(text.IndexOf("{"), text.LastIndexOf("}") + 1);
             await _dataContext.SaveChangesAsync();
 
             return text;
