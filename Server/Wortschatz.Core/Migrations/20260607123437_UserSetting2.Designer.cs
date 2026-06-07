@@ -12,8 +12,8 @@ using Wortschatz.Core.DataLayer;
 namespace Wortschatz.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260602194901_UserSetting")]
-    partial class UserSetting
+    [Migration("20260607123437_UserSetting2")]
+    partial class UserSetting2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
