@@ -12,8 +12,8 @@ using Wortschatz.Core.DataLayer;
 namespace Wortschatz.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260607123437_UserSetting2")]
-    partial class UserSetting2
+    [Migration("20260608174629_UserSetting3")]
+    partial class UserSetting3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -317,13 +317,9 @@ namespace Wortschatz.Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("UserSettings");
                 });
@@ -443,17 +439,6 @@ namespace Wortschatz.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wortschatz.Core.Models.UserSetting", b =>
-                {
-                    b.HasOne("Wortschatz.Core.Models.User", "User")
-                        .WithOne("UserSetting")
-                        .HasForeignKey("Wortschatz.Core.Models.UserSetting", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Wortschatz.Core.Models.WordTag", b =>
                 {
                     b.HasOne("Wortschatz.Core.Models.Tag", "Tag")
@@ -471,11 +456,6 @@ namespace Wortschatz.Core.Migrations
                     b.Navigation("Tag");
 
                     b.Navigation("Word");
-                });
-
-            modelBuilder.Entity("Wortschatz.Core.Models.User", b =>
-                {
-                    b.Navigation("UserSetting");
                 });
 
             modelBuilder.Entity("Wortschatz.Core.Models.Word", b =>
