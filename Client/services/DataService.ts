@@ -2,7 +2,7 @@ import authService from "./AuthService";
 
 class DataService {
     constructor() {
-        this.baseUrl = process.env.EXPO_PUBLIC_WORTSCHATZ_API_URL || 'http://localhost:5153';
+        this.baseUrl = process.env.EXPO_PUBLIC_WORTSCHATZ_API_URL;
     }
 
     public async Get(endpoint: string): Promise<Response> {
