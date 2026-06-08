@@ -50,7 +50,10 @@ internal class Program
         {
             options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:8081").AllowAnyHeader().AllowAnyMethod();
+                    // TODO
+                    policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
         });
 
