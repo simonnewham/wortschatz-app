@@ -4,7 +4,7 @@ import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { INote } from '@/models/INote';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { CancelSubmitButton } from '../../../components/CancelSubmitButton';
@@ -27,6 +27,7 @@ export default function AddNote() {
         const result = await onAdd(form);
         if (result?.ok) {
             setForm(new INote());
+            router.navigate(`/note/view-note?id=${result.data.id}`);
         }
     }, [form, onAdd])
 

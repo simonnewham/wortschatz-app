@@ -1,7 +1,6 @@
 import { Status } from '@/constants/Status';
 import { useToast } from '@/providers/ToastProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
-import { router } from 'expo-router';
 import { useCallback } from 'react';
 
 export interface IUseBaseEntityProps {
@@ -58,7 +57,6 @@ export function useBaseEntity({ entity, viewRoute }: IUseBaseEntityProps) {
             const result = await baseEntityDataService.Delete(entity, id);
             if (result.ok) {
                 toast.show(`${entity} deleted successfully!`, Status.Success);
-                router.back();
                 return true;
             } else {
                 toast.show(`Failed to delete ${entity.toLowerCase()}.`, Status.Error);

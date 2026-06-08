@@ -14,7 +14,6 @@ import { ScrollView } from 'react-native';
 
 export default function AddWord() {
     const [form, setForm] = useState(new Word());
-    const [isLoading, setIsLoading] = useState(false);
     const toast = useToast();
 
     const { onAdd } = useBaseEntity({

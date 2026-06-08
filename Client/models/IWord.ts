@@ -14,7 +14,7 @@ export class Word extends IBase {
         this.translateWordGender = '';
         this.tags = '';
         this.usage = '';
-        this.enhanceResult = undefined;
+        this.enhanceResult = '';
     }
 
     id?: string;
@@ -25,7 +25,7 @@ export class Word extends IBase {
     translateWordGender: string;
     tags: string;
     usage: string;
-    enhanceResult?: string
+    enhanceResult: string
 }
 
 export class WordListDto extends Word {

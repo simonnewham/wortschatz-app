@@ -5,19 +5,17 @@ import ContainerView from '@/components/ContainerView';
 import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { INote } from '@/models/INote';
-import { useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import { Card } from '../../../components/Card';
 import { ContainerContent } from '../../../components/ContainerContent';
 
 export default function ViewNote() {
     const searchParams = useLocalSearchParams();
-    const id = Array.isArray(searchParams.id) ? searchParams.id[0] : searchParams.id;
+    const id = useMemo(() => Array.isArray(searchParams.id) ? searchParams.id[0] : searchParams.id, [searchParams.id]);
 
-    const [note, setNote] = useState<INote | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [note, setNote] = useState<INote>(new INote());
 
     const { onUpdate, onDelete, onDetail } = useBaseEntity({
         entity: 'Note',
@@ -32,10 +30,7 @@ export default function ViewNote() {
         if (id) {
             const data = await onDetail(id);
             if (data) {
-                setError(null);
                 setNote(data);
-            } else {
-                setError('Failed to load note details.');
             }
         }
     }, [onDetail]);
@@ -48,32 +43,39 @@ export default function ViewNote() {
         }
     }
 
-    useEffect(() => {
-        if (!id) return;
-        fetchNote(id);
-    }, [id, fetchNote]);
+    const onDeleteNote = useCallback(async () => {
+        const result = await onDelete(note?.id);
+        if (result) {
+            router.replace('/note/note-list');
+        }
+    }, [note]);
+
+    useFocusEffect(
+        useCallback(() => {
+            if (id) {
+                fetchNote(id);
+            }
+        }, [id, fetchNote])
+    );
 
     return (
         <ContainerView>
             <ContainerDrawer title='View Note' />
             <ContainerContent>
                 <PageToolbar icon='note' title='View Note' showBackButton={true} />
-                {isLoading ? (
-                    <ActivityIndicator size="large" color="#d4fd52" />
-                ) : error ? (
-                    <Text className="text-red-500 font-bold p-4">{error}</Text>
-                ) : note ? (
+                {note &&
                     <View className="w-full items-center">
                         <Card className='border-gray-100'>
-                            <CancelSubmitButton submitText='Save' submitIcon='save' onSubmit={onSubmit} onDelete={() => onDelete(note.id)} />
+                            <CancelSubmitButton submitText='Save'
+                                submitIcon='save'
+                                onSubmit={onSubmit}
+                                onDelete={onDeleteNote}
+                                onCancel={() => router.replace('/note/note-list')} />
                         </Card>
                         <ScrollView className='w-full h-screen'>
                             <AddEditNote note={note} handleFormUpdate={handleFormUpdate} />
                         </ScrollView>
-                    </View>
-                ) : (
-                    <Text className="text-zinc-500">Note not found.</Text>
-                )}
+                    </View>}
             </ContainerContent>
         </ContainerView>
     );

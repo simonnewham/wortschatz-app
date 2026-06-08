@@ -95,7 +95,6 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </Pressable>
             </DrawerContentScrollView >
             <View>
-
                 <Text className='text-center text-xs text-accent/50 p pb-4'>🇩🇪 Version {process.env.EXPO_PUBLIC_VERSION}</Text>
             </View>
         </View>

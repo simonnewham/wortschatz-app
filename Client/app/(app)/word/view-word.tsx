@@ -7,8 +7,8 @@ import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { useEntityState } from '@/hooks/useEntityState';
 import { Word } from '@/models/IWord';
-import { router, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { ContainerContent } from '../../../components/ContainerContent';
 
@@ -17,7 +17,7 @@ export default function ViewWord() {
 
     const id = useMemo(() => Array.isArray(searchParams.id) ? searchParams.id[0] : searchParams.id, [searchParams.id]);
 
-    const { entityState, handleFormUpdate, hasChanges, setEntity, clearEntity } = useEntityState<Word>();
+    const { entityState, handleFormUpdate, setEntity, clearEntity } = useEntityState<Word>();
     const [isEnhancing, setIsEnhancing] = useState(false);
 
     const { onUpdate, onDelete, onDetail, onEnhance } = useBaseEntity({
@@ -39,6 +39,14 @@ export default function ViewWord() {
         }
     }, [onUpdate, entityState.current, fetchWord]);
 
+    const onDeleteWord = useCallback(async () => {
+        const result = await onDelete(entityState.current?.id);
+        if (result) {
+            clearEntity();
+            router.replace('/word/word-list');
+        }
+    }, [entityState.current]);
+
     const onEnhanceWord = useCallback(async () => {
         setIsEnhancing(true);
         const result = await onEnhance({ wordId: entityState.current?.id, word: entityState.current?.nativeWord });
@@ -49,12 +57,14 @@ export default function ViewWord() {
         }
     }, [onEnhance, entityState.current, fetchWord]);
 
-    useEffect(() => {
-        if (id) {
-            clearEntity();
-            fetchWord(id);
-        }
-    }, [id, fetchWord, clearEntity]);
+    useFocusEffect(
+        useCallback(() => {
+            if (id) {
+                clearEntity();
+                fetchWord(id);
+            }
+        }, [id, fetchWord, clearEntity])
+    );
 
     return (
         <ContainerView>
@@ -66,10 +76,9 @@ export default function ViewWord() {
                         <Card className='border-gray-100'>
                             <CancelSubmitButton submitText='Save'
                                 onSubmit={onSubmit}
-                                onDelete={() => onDelete(entityState?.current?.id)}
+                                onDelete={onDeleteWord}
                                 onEnhance={onEnhanceWord}
                                 onCancel={() => router.replace('/word/word-list')}
-                                isEnhancing={isEnhancing}
                                 submitIcon='save' />
                         </Card>
                         <ScrollView className='w-full pb-20'>

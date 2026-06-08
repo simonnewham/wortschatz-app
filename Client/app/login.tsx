@@ -59,9 +59,10 @@ export default function Login() {
                         <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
                             placeholder='Password'
                             placeholderTextColor='gray'
-                            secureTextEntry
+                            secureTextEntry={true}
                             value={password}
                             onChangeText={setPassword} />
+                        <Text className='text-center text-xs text-accent/50 p pb-4'>* Min 8 characters, uppercase, alphanumeric</Text>
                         {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
                         <Pressable
                             className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/80 hover:bg-accent
@@ -78,7 +79,7 @@ export default function Login() {
                             )}
                         </Pressable>
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-accent border-2
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-accent/50 border-2 hover:border-accent
                                 items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onRegister}
                             disabled={isLoading}>
@@ -94,6 +95,9 @@ export default function Login() {
                         {/* <Text className='font-sans pt-5 italic text-white underline'>
                             Forgot Password?
                         </Text> */}
+                    </View>
+                    <View>
+                        <Text className='text-center text-xs text-white/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
                     </View>
                 </Card>
             </View>

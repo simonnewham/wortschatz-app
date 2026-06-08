@@ -1,14 +1,14 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from 'expo-router';
+import { useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 
 export interface ICancelSubmitButtonProps {
-    onSubmit: () => void;
-    onSubmitAndNewAction?: () => void;
+    onSubmit: () => Promise<void>;
+    onSubmitAndNewAction?: () => Promise<void>;
     onCancel?: () => void;
-    onDelete?: () => void;
-    onEnhance?: () => void;
-    isEnhancing?: boolean;
+    onDelete?: () => Promise<void>;
+    onEnhance?: () => Promise<void>;
     submitText?: string;
     cancelText?: string;
     deleteText?: string;
@@ -20,6 +20,10 @@ export interface ICancelSubmitButtonProps {
 }
 
 export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
+    const [submitting, setSubmitting] = useState(false);
+    const [enhancing, setEnhancing] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+
     return (
         <View className='flex-row gap-2 justify-between flex-wrap'>
             <View className="flex-row gap-2">
@@ -32,17 +36,29 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
             <View className="flex-row gap-2">
                 {props.onDelete &&
                     <Pressable className="flex-row gap-2 px-4 rounded-md bg-red-500 items-center"
-                        onPress={props.onDelete}>
-                        <MaterialIcons name="delete" size={20} color="white" />
+                        disabled={enhancing || submitting || deleting}
+                        onPress={async () => {
+                            setDeleting(true);
+                            await props.onDelete?.();
+                            setDeleting(false);
+                        }}>
+                        {deleting
+                            ? <ActivityIndicator size={20} color="white" />
+                            : <MaterialIcons name="delete" size={20} color="white" />
+                        }
                         <Text className="text-white font-semibold">Delete</Text>
                     </Pressable>
                 }
                 {props.onEnhance &&
                     <Pressable
-                        className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400 ${props.isEnhancing ? 'opacity-60' : ''}`}
-                        onPress={props.onEnhance}
-                        disabled={props.isEnhancing}>
-                        {props.isEnhancing
+                        className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400`}
+                        disabled={enhancing || submitting || deleting}
+                        onPress={async () => {
+                            setEnhancing(true);
+                            await props.onEnhance?.();
+                            setEnhancing(false);
+                        }}>
+                        {enhancing
                             ? <ActivityIndicator size={20} color="white" />
                             : <MaterialIcons name="auto-awesome" className="animate-pulse" size={20} color="white" />
                         }
@@ -51,15 +67,31 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                 }
                 {props.onSubmit &&
                     <Pressable className="flex-row gap-2 py-1 px-4 rounded-md border-2 border-accent bg-accent/80 items-center hover:bg-accent"
-                        onPress={props.onSubmit}>
-                        <MaterialIcons name={(props.submitIcon ?? 'add') as any} size={20} color="black" />
+                        disabled={enhancing || submitting || deleting}
+                        onPress={async () => {
+                            setSubmitting(true);
+                            await props.onSubmit();
+                            setSubmitting(false);
+                        }}>
+                        {submitting
+                            ? <ActivityIndicator size={20} color="black" />
+                            : <MaterialIcons name={(props.submitIcon ?? 'add') as any} size={20} color="black" />
+                        }
                         <Text className="text-black font-semibold">{props.submitText ?? 'Add'}</Text>
                     </Pressable>
                 }
                 {props.onSubmitAndNewAction &&
                     <Pressable className="flex-row gap-2 py-1 px-4 rounded-md border-2 border-secondary bg-secondary/80 hover:bg-secondary items-center gap-1"
-                        onPress={props.onSubmitAndNewAction}>
-                        <MaterialIcons name="playlist-add" size={20} color="white" />
+                        disabled={enhancing || submitting || deleting}
+                        onPress={async () => {
+                            setSubmitting(true);
+                            await props.onSubmitAndNewAction?.();
+                            setSubmitting(false);
+                        }}>
+                        {submitting
+                            ? <ActivityIndicator size={20} color="white" />
+                            : <MaterialIcons name="playlist-add" size={20} color="white" />
+                        }
                         <Text className="text-white font-semibold">Add and New</Text>
                     </Pressable>
                 }

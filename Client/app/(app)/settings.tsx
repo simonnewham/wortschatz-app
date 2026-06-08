@@ -7,6 +7,7 @@ import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { useToast } from '@/providers/ToastProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput } from 'react-native';
 import { Card } from '../../components/Card';
@@ -35,7 +36,11 @@ export default function SettingsButton() {
             <ContainerContent>
                 <ContainerDrawer title='Settings' />
                 <Card className='border-gray-200'>
-                    <CancelSubmitButton onSubmit={onSubmit} submitText='Save' submitIcon='save' cancelText='Back' />
+                    <CancelSubmitButton onSubmit={onSubmit}
+                        submitText='Save'
+                        submitIcon='save'
+                        cancelText='Back'
+                        onCancel={() => router.replace('/(app)')} />
                 </Card>
                 <ScrollView className='w-full' style={[styles.formContainer]}>
                     <Card title='Settings' icon={'settings'} className='border-gray-200'>

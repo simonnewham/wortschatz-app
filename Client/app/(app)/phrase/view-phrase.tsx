@@ -5,8 +5,8 @@ import ContainerView from '@/components/ContainerView';
 import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Phrase } from '@/models/IPhrase';
-import { useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 import { Card } from '../../../components/Card';
 import { ContainerContent } from '../../../components/ContainerContent';
@@ -18,7 +18,6 @@ export default function ViewPhrase() {
 
     const [phrase, setPhrase] = useState<Phrase | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isEnhancing, setIsEnhancing] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const { onUpdate, onDelete, onDetail, onEnhance } = useBaseEntity({
@@ -57,20 +56,26 @@ export default function ViewPhrase() {
     }, [onUpdate, phrase, fetchPhrase]);
 
     const onEnhancePhrase = useCallback(async () => {
-        setIsEnhancing(true);
         const result = await onEnhance({ wordId: phrase?.id, word: phrase?.nativePhrase });
-        setIsEnhancing(false);
-
         if (result.ok && result.data) {
             fetchPhrase(phrase?.id);
         }
     }, [onEnhance, phrase, fetchPhrase]);
 
-    useEffect(() => {
-        if (id) {
-            fetchPhrase(id);
+    const onDeletePhrase = useCallback(async () => {
+        const result = await onDelete(phrase?.id);
+        if (result) {
+            router.replace('/phrase/phrase-list');
         }
-    }, [id]);
+    }, [phrase, onDelete]);
+
+    useFocusEffect(
+        useCallback(() => {
+            if (id) {
+                fetchPhrase(id);
+            }
+        }, [id, fetchPhrase])
+    );
 
     return (
         <ContainerView>
@@ -84,7 +89,12 @@ export default function ViewPhrase() {
                 ) : phrase ? (
                     <View className="w-full h-screen items-center">
                         <Card className='border-gray-100'>
-                            <CancelSubmitButton submitText='Save' submitIcon='save' onSubmit={onSubmit} onDelete={() => onDelete(phrase.id)} onEnhance={onEnhancePhrase} isEnhancing={isEnhancing} />
+                            <CancelSubmitButton
+                                submitText='Save'
+                                submitIcon='save' onSubmit={onSubmit}
+                                onDelete={onDeletePhrase}
+                                onEnhance={onEnhancePhrase}
+                                onCancel={() => router.replace('/phrase/phrase-list')} />
                         </Card>
                         <ScrollView className='w-full'>
                             <AddEditPhrase form={phrase} handleFormUpdate={handleFormUpdate} />
