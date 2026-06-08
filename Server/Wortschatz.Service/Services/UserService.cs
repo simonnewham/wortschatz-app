@@ -74,7 +74,6 @@ namespace Wortschatz.Service.Services
                     {
                         Id = Guid.NewGuid(),
                         UserId = user.Id,
-                        User = user,
                         FirstName = userUpdateDto.FirstName,
                         LastName = userUpdateDto.LastName
                     };

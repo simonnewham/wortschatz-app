@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Wortschatz.Core.Models
+﻿namespace Wortschatz.Core.Models
 {
     public class UserSetting: BaseEntity
     {
@@ -8,10 +6,6 @@ namespace Wortschatz.Core.Models
 
         public string? LastName { get; set; }
 
-        public required string UserId { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        public required User User { get; set; }
-
+        public string? UserId { get; set; }
     }
 }
