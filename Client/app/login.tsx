@@ -1,7 +1,8 @@
 import { Logo } from '@/components/Logo';
 import { useAuthSession } from '@/providers/AuthProvider';
+import authService from '@/services/AuthService';
 import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import React, { useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
@@ -19,6 +20,7 @@ export default function Login() {
     const onLogin = async () => {
         setError(false);
         setIsLoading(true);
+
         login(email, password).then(() => {
             setIsLoading(false);
             router.replace('/(app)');
@@ -31,6 +33,7 @@ export default function Login() {
     const onRegister = async () => {
         setError(false);
         setIsLoading(true);
+
         register(email, password).then(() =>
             // Call login on success
             onLogin()
@@ -39,6 +42,19 @@ export default function Login() {
             setError(true);
         });
     }
+
+    useFocusEffect(() => {
+        const onLogin = async () => {
+            try {
+                if (await authService.isAuthenticated()) {
+                    router.replace('/(app)');
+                }
+            } catch {
+                //
+            }
+        }
+        onLogin();
+    });
 
     return (
         <View className='bg-gray-900 h-screen w-full items-center justify-center'>

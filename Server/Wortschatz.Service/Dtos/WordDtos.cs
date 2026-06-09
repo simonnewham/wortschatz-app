@@ -6,7 +6,7 @@ namespace Wortschatz.Service.Dtos
     {
         public required string NativeWord { get; set; }
 
-        public required string TranslateWord { get; set; }
+        public string? TranslateWord { get; set; }
 
         public ArtikelType? Artikel { get; set; }
 
@@ -17,9 +17,9 @@ namespace Wortschatz.Service.Dtos
 
     public class WordUpdateDto : WordAddDto
     {
-        public Guid Id { get; set; }
+        public required Guid Id { get; set; }
 
-        public string EnhanceResult { get; set; }
+        public string? EnhanceResult { get; set; }
     }
 
     public class WordListDto : WordUpdateDto
