@@ -57,7 +57,7 @@ export default function Login() {
     });
 
     return (
-        <View className='bg-gray-900 h-screen w-full items-center justify-center'>
+        <View className='bg-gray-900 h-full w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
                 <Card className='bg-zinc-900 shadow-gray-900'>
                     <View className='items-center p-4'>

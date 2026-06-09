@@ -36,7 +36,7 @@ export default function PhraseList() {
                 {isLoading ? (
                     <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
                 ) : (
-                    <View className="w-full h-screen">
+                    <View className="w-full h-full">
                         <PageToolbar icon="view-list" title="Phrase List" actionLabel="Add a new phrase" actionIcon="add"
                             action={() => router.navigate('/phrase/add-phrase')} />
                         <FlatList

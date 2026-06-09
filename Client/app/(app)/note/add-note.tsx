@@ -43,7 +43,7 @@ export default function AddNote() {
                 <Card className='border-gray-100'>
                     <CancelSubmitButton onSubmit={onSubmit} />
                 </Card>
-                <ScrollView className='w-full h-screen'>
+                <ScrollView className='w-full h-full'>
                     <AddEditNote note={form} handleFormUpdate={handleFormUpdate} />
                 </ScrollView>
             </ContainerContent>

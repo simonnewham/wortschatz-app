@@ -37,13 +37,13 @@ export default function WordList() {
                 {isLoading ? (
                     <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
                 ) : (
-                    <View className="w-full h-screen">
+                    <View className="w-full h-full">
                         <PageToolbar icon="view-list" title="Word List" actionLabel="Add a new word" actionIcon="add"
                             action={() => router.navigate('/word/add-word')} />
                         <FlatList
                             showsVerticalScrollIndicator={true}
                             scrollEnabled={true}
-                            className="w-full pb-4"
+                            className="w-full"
                             data={data}
                             renderItem={({ item, index }) =>
                                 <Pressable onPress={() => item.id && router.navigate(`/word/view-word?id=${item.id}`)}>

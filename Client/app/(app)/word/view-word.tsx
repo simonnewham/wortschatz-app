@@ -72,7 +72,7 @@ export default function ViewWord() {
             <ContainerContent>
                 <PageToolbar icon='menu-book' title='View Word' showBackButton={true} />
                 {entityState.current ? (
-                    <View className="w-full h-screen items-center ">
+                    <View className="w-full h-full items-center ">
                         <Card className='border-gray-100'>
                             <CancelSubmitButton submitText='Save'
                                 onSubmit={onSubmit}
@@ -81,7 +81,7 @@ export default function ViewWord() {
                                 onCancel={() => router.replace('/word/word-list')}
                                 submitIcon='save' />
                         </Card>
-                        <ScrollView className='w-full pb-20'>
+                        <ScrollView className='w-full'>
                             <AddEditWord form={entityState.current} handleFormUpdate={handleFormUpdate} />
                         </ScrollView>
                     </View>

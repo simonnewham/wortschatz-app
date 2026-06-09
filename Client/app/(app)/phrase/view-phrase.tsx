@@ -87,7 +87,7 @@ export default function ViewPhrase() {
                 ) : error ? (
                     <Text className="text-red-500 font-bold p-4">{error}</Text>
                 ) : phrase ? (
-                    <View className="w-full h-screen items-center">
+                    <View className="w-full h-full items-center">
                         <Card className='border-gray-100'>
                             <CancelSubmitButton
                                 submitText='Save'

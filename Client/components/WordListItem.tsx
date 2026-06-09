@@ -14,6 +14,13 @@ export function WordListItem(props: IWordListItemProps) {
     return (
         <View className="w-full ">
             <Card className="bg-white shadow-sm flex-col border-gray-200 hover:bg-accent/20">
+                <View className="flex-col items-end justify-between border-gray-100">
+                    {item.createdDate && (
+                        <Text className="text-sm text-gray-400 right-0">
+                            {new Date(item.createdDate).toLocaleDateString()}
+                        </Text>
+                    )}
+                </View>
                 <View>
                     <View className="flex-row justify-between ">
                         <View className="flex-row items-center gap-4">
@@ -25,13 +32,7 @@ export function WordListItem(props: IWordListItemProps) {
                                 {item.translateWord != null && item.translateWord != '' ? item.translateWord : '❔'}
                             </Text>
                         </View>
-                        <View className="flex-col items-end justify-between border-gray-100">
-                            {item.createdDate && (
-                                <Text className="text-sm text-gray-400 right-0">
-                                    Created: {new Date(item.createdDate).toLocaleDateString()}
-                                </Text>
-                            )}
-                        </View>
+
                     </View>
                     <View className="flex-row justify-between">
                         <Text className="text-sm text-gray-600">

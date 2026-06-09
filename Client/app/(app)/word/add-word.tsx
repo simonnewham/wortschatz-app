@@ -56,7 +56,7 @@ export default function AddWord() {
                 <Card className='border-gray-200'>
                     <CancelSubmitButton onSubmit={() => onSubmit(false)} onSubmitAndNewAction={() => onSubmit(true)} />
                 </Card>
-                <ScrollView className='w-full h-screen'>
+                <ScrollView className='w-full h-full'>
                     <AddEditWord form={form} handleFormUpdate={handleFormUpdate} />
                 </ScrollView>
             </ContainerContent>

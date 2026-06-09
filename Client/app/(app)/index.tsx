@@ -41,7 +41,7 @@ export default function Home() {
         <ContainerView>
             <ContainerContent>
                 <ScrollView className='w-full'>
-                    <View>
+                    <View className='h-full'>
                         <View className='justify-center items-center'>
                             <Text className='font-semibold text-black p-2' style={{ fontSize: 20 }}>
                                 {getGreeting()} {userInfo?.firstName} 👋

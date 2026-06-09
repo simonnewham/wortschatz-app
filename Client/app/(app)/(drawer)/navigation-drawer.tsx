@@ -48,7 +48,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
     }
 
     return (
-        <View className='bg-gray-800 flex-1 h-screen'>
+        <View className='bg-gray-800 flex-1 h-full'>
             <DrawerContentScrollView {...props}>
                 <View className='flex-row w-full items-center justify-between pb-4'>
                     <Logo textSize='2xl' />

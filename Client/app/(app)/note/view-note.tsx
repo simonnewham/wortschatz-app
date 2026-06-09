@@ -64,7 +64,7 @@ export default function ViewNote() {
             <ContainerContent>
                 <PageToolbar icon='note' title='View Note' showBackButton={true} />
                 {note &&
-                    <View className="w-full items-center">
+                    <View className="w-full h-full items-center">
                         <Card className='border-gray-100'>
                             <CancelSubmitButton submitText='Save'
                                 submitIcon='save'
@@ -72,7 +72,7 @@ export default function ViewNote() {
                                 onDelete={onDeleteNote}
                                 onCancel={() => router.replace('/note/note-list')} />
                         </Card>
-                        <ScrollView className='w-full h-screen'>
+                        <ScrollView className='w-full'>
                             <AddEditNote note={note} handleFormUpdate={handleFormUpdate} />
                         </ScrollView>
                     </View>}
