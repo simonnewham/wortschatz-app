@@ -61,7 +61,7 @@ export default function Login() {
             <View className='max-w-lg w-full'>
                 <Card className='bg-zinc-900 shadow-gray-900'>
                     <View className='items-center p-4'>
-                        <Logo />
+                        <Logo logoSize={30} />
                         <Text className='tracking-tighter italic pb-2 text-white'>
                             Your personal German learning companion
                         </Text>

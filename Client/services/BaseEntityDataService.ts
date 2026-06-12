@@ -16,8 +16,9 @@ class BaseEntityDataService {
         return dataService.Delete(`${entity}`, id);
     }
 
-    public async GetList(entity: string, body?: any): Promise<Response> {
-        return dataService.Post(`${entity}/getList`, body);
+    public async GetList(entity: string, queryParams?: string, body?: any): Promise<Response> {
+        const url = queryParams ? `${entity}/getList?${queryParams}` : `${entity}/getList`;
+        return dataService.Post(url, body);
     }
 
     public async GetDetail(entity: string, id?: string): Promise<Response> {

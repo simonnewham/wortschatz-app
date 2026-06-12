@@ -11,12 +11,33 @@ import { WordListDto } from "../../../models/IWord";
 
 export default function WordList() {
     const [data, setData] = useState<WordListDto[]>([]);
+    ;
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const fetchWords = useCallback(async () => {
+    const fetchWords = useCallback(async (currentSearch: string = '', currentDate: string | null = null) => {
         setIsLoading(true);
-        const result = await baseEntityDataService.GetList('Word');
+        const filters: string[] = [];
+
+        const safeSearch = currentSearch.replace(/'/g, "''").toLowerCase();
+        if (safeSearch) {
+            filters.push(`contains(tolower(NativeWord), '${safeSearch}')`);
+        }
+
+        if (currentDate) {
+            //const parts = currentDate.split('-');
+            // const year = parseInt(parts[0]);
+            // const month = parseInt(parts[1]) - 1;
+            // const day = parseInt(parts[2]);
+            // const selected = new Date(Date.UTC(year, month, day));
+            const next = new Date(currentDate);
+
+            filters.push(`CreatedDate eq ${next.toISOString()}`);
+        }
+
+        const queryParams = filters.length > 0 ? `$filter=${filters.join(' and ')}` : undefined;
+
+        const result = await baseEntityDataService.GetList('Word', queryParams);
         if (result.ok) {
             const list = await result.json();
             setData(list);
@@ -30,16 +51,26 @@ export default function WordList() {
         }, [fetchWords])
     );
 
+    const handleSearchChange = (searchQuery: { searchTerm: string, searchDate: string }) => {
+        fetchWords(searchQuery.searchTerm, searchQuery.searchDate);
+    };
+
     return (
         <ContainerView>
             <ContainerDrawer title='Word list' />
             <ContainerContent>
-                {isLoading ? (
-                    <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
-                ) : (
-                    <View className="w-full h-full">
-                        <PageToolbar icon="view-list" title="Word List" actionLabel="Add a new word" actionIcon="add"
-                            action={() => router.navigate('/word/add-word')} />
+                <View className="w-full h-full">
+                    <PageToolbar
+                        icon="view-list"
+                        title="Word List"
+                        actionLabel="Add a new word"
+                        actionIcon="add"
+                        action={() => router.navigate('/word/add-word')}
+                        onSearchChange={handleSearchChange}
+                    />
+                    {isLoading ? (
+                        <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
+                    ) : (
                         <FlatList
                             showsVerticalScrollIndicator={true}
                             scrollEnabled={true}
@@ -51,10 +82,10 @@ export default function WordList() {
                                 </Pressable>
                             }
                         />
-                    </View>
-                )
-                }
+                    )}
+                </View>
             </ContainerContent>
         </ContainerView >
     )
 }
+

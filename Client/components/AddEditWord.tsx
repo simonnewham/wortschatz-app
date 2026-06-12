@@ -16,7 +16,7 @@ export function AddEditWord(props: IAddWordComponentProps) {
     return (
         <View>
             <Card className='border-gray-200'>
-                <Text style={[styles.text]}>🇩🇪 Deutsch</Text>
+                <Text style={[styles.text]}>🇩🇪 Deutsch*</Text>
                 <TextInput style={styles.input}
                     value={form.nativeWord}
                     placeholder='Deutsches Wort...'
@@ -42,17 +42,18 @@ export function AddEditWord(props: IAddWordComponentProps) {
                 <Text style={[styles.text]}>Translation</Text>
                 <TextInput style={styles.input}
                     value={form.translateWord}
-                    placeholder='translation...'
+                    placeholder='Translation...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
                 <Text style={[styles.text]}>Usage</Text>
                 <TextInput style={styles.input}
-                    placeholder='usage...'
+                    placeholder='Usage...'
                     placeholderTextColor={'gray'}
                     value={form.usage}
                     onChangeText={text => handleFormUpdate(text, 'usage')}></TextInput>
             </Card>
-            {form.id &&
+            {
+                form.id &&
                 <Card className='border-gray-200 w-full'>
                     <Text className="font-semibold">✨Wortkiste Result</Text>
                     <TextInput
@@ -63,7 +64,8 @@ export function AddEditWord(props: IAddWordComponentProps) {
                         editable={false}
                         textAlignVertical="top"
                     />
-                </Card>}
-        </View>
+                </Card>
+            }
+        </View >
     );
 }

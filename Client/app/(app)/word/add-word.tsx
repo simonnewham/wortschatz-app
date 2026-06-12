@@ -27,7 +27,7 @@ export default function AddWord() {
 
     const onSubmit = useCallback(async (isAndNew: boolean) => {
         if (!form.nativeWord) {
-            toast.show('Please enter a native word.', Status.Error);
+            toast.show('Please enter a word', Status.Error);
             return;
         }
 

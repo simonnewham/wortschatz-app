@@ -28,7 +28,7 @@ export function PhraseListItem(props: IPhraseListItemProps) {
                         <View className="flex-col items-end justify-between border-gray-100">
                             {item.createdDate && (
                                 <Text className="text-sm text-gray-400 right-0">
-                                    Created: {new Date(item.createdDate).toLocaleDateString()}
+                                    {new Date(item.createdDate).toLocaleDateString()}
                                 </Text>
                             )}
                         </View>

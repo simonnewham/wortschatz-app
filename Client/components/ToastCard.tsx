@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Platform, StyleSheet, Text } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Status } from "../constants/Status";
 
 export interface IToastCardProps {
@@ -19,38 +19,36 @@ export function ToastCard(props: IToastCardProps) {
         }).start();
     }, [props.visible]);
 
-    let backgroundColor = '#3b82f6'; // blue-500
-    if (props.status === Status.Success) backgroundColor = '#22c55e'; // green-500
-    if (props.status === Status.Warning) backgroundColor = '#eab308'; // yellow-500
-    if (props.status === Status.Error) backgroundColor = '#ef4444'; // red-500
+    let backgroundColor = '#3b82f6';
+    switch (props.status) {
+        case Status.Success:
+            backgroundColor = '#22c55e';
+            break;
+        case Status.Warning:
+            backgroundColor = '#eab308';
+            break;
+        case Status.Error:
+            backgroundColor = '#ef4444';
+            break;
+    }
 
     return (
-        <Animated.View
-            style={[
-                styles.container,
-                { opacity: fadeAnim, backgroundColor: backgroundColor }
-            ]}
-            pointerEvents="none">
-            <Text className='text-white'>{props.message}</Text>
-        </Animated.View>
+        <Animated.View style={[styles.container, { opacity: fadeAnim }]} pointerEvents="none">
+            <View className='w-full justify-center flex-1'>
+                <View className='p-2 px-8 rounded-lg w-full' style={[
+                    { minWidth: 120, maxWidth: 500, alignSelf: 'center', backgroundColor: backgroundColor }]}>
+                    <Text className='text-white text-center' >{props.message}</Text>
+                </View>
+            </View>
+        </Animated.View >
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: Platform.OS === 'ios' ? 60 : 40,
-        left: '50%',
-        padding: 16,
-        borderRadius: 12,
-        elevation: 5,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        top: 50,
         zIndex: 9999,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 300
+        width: '100%',
     }
 });
