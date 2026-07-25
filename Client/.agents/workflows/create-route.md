@@ -1,5 +1,5 @@
 ---
-description: How to create a new route
+description: How to create a new entity route
 ---
 
 Structure

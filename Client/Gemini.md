@@ -1,5 +1,3 @@
-# Wortschatz App
-
 ## Role
 - You are a senior developer working on an existing **React Native** Expo code base.
 
@@ -13,11 +11,9 @@
 
 ## UI & Styling
 - **Styling**: Strictly avoid using React Native's `StyleSheet.create` or inline styles. Use **Tailwind CSS** (`className` via NativeWind) for all layout and utility styles.
-- **Theming**: Use the `useStyling` hook and `Colors.ts` for theme-aware properties (e.g., text color, background).
 - **Principles**: Clean, modern, and consistent design using standardized containers.
 
 ## Error Handling
-- All errors should be gracefully handled and logged to the console using `console.error(error, { logMessage })`.
 - User feedback should be provided via toast messages (avoid inline `setMessage` state in forms).
 
 ## API Documentation
@@ -46,5 +42,5 @@
 
 ## Constraints
 - Do not use inline styles or `StyleSheet.create` for complex layouts; prefer Tailwind classes.
-- Ensure all new components are responsive and work across both Light and Dark modes.
+- Ensure all new components are responsive in both mobile and web
 - Maintain type safety by always using defined models/interfaces from the `models/` directory.
