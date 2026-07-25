@@ -40,7 +40,7 @@ export default function AddNote() {
         <ContainerView>
             <ContainerDrawer title='Add a new note' />
             <ContainerContent>
-                <Card className='border-gray-100'>
+                <Card>
                     <CancelSubmitButton onSubmit={onSubmit} />
                 </Card>
                 <ScrollView className='w-full h-full'>

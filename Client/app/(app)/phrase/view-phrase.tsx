@@ -6,7 +6,7 @@ import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Phrase } from '@/models/IPhrase';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 import { Card } from '../../../components/Card';
 import { ContainerContent } from '../../../components/ContainerContent';
@@ -88,7 +88,7 @@ export default function ViewPhrase() {
                     <Text className="text-red-500 font-bold p-4">{error}</Text>
                 ) : phrase ? (
                     <View className="w-full h-full items-center">
-                        <Card className='border-gray-100'>
+                        <Card>
                             <CancelSubmitButton
                                 submitText='Save'
                                 submitIcon='save' onSubmit={onSubmit}
@@ -101,7 +101,7 @@ export default function ViewPhrase() {
                         </ScrollView>
                     </View>
                 ) : (
-                    <Text className="text-zinc-500">Phrase not found.</Text>
+                    <Text className="text-primary">Phrase not found.</Text>
                 )}
             </ContainerContent>
         </ContainerView>

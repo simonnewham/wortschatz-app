@@ -6,7 +6,7 @@ import { PageToolbar } from '@/components/PageToolbar';
 import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { INote } from '@/models/INote';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Card } from '../../../components/Card';
 import { ContainerContent } from '../../../components/ContainerContent';
@@ -65,7 +65,7 @@ export default function ViewNote() {
                 <PageToolbar icon='note' title='View Note' showBackButton={true} />
                 {note &&
                     <View className="w-full h-full items-center">
-                        <Card className='border-gray-100'>
+                        <Card>
                             <CancelSubmitButton submitText='Save'
                                 submitIcon='save'
                                 onSubmit={onSubmit}

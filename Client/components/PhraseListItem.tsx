@@ -13,28 +13,28 @@ export function PhraseListItem(props: IPhraseListItemProps) {
 
     return (
         <View className="w-full">
-            <Card className="bg-white shadow-sm flex-col border-gray-200 hover:bg-accent/20">
+            <Card className="bg-accent shadow-sm flex-col hover:bg-accent/20">
                 <View>
                     <View className="flex-row justify-between ">
                         <View className="flex-row items-center gap-4">
-                            <Text className="text-lg font-semibold">
+                            <Text className="text-lg text-primary font-semibold">
                                 {item.nativePhrase}
                             </Text>
-                            <MaterialIcons name="arrow-right" size={20} color="black" />
-                            <Text className="text-lg font-semibold text-gray-700">
+                            <MaterialIcons className="text-primary" name="arrow-right" size={20} />
+                            <Text className="text-lg font-semibold text-primary">
                                 {item.translatePhrase != null && item.translatePhrase != '' ? item.translatePhrase : '❔'}
                             </Text>
                         </View>
                         <View className="flex-col items-end justify-between border-gray-100">
                             {item.createdDate && (
-                                <Text className="text-sm text-gray-400 right-0">
+                                <Text className="text-sm text-primary right-0">
                                     {new Date(item.createdDate).toLocaleDateString()}
                                 </Text>
                             )}
                         </View>
                     </View>
                     <View className="flex-col items-end justify-between border-gray-100">
-                        <MaterialIcons className='right-0 px-2' name="arrow-forward" size={24} color="black" />
+                        <MaterialIcons className='right-0 px-2 text-primary' name="arrow-forward" size={24} />
                     </View>
                 </View>
             </Card>

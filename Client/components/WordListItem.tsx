@@ -38,7 +38,7 @@ export function WordListItem(props: IWordListItemProps) {
                         <Text className="text-sm text-primary">
                             <Text className="font-bold text-primary">Usage:</Text> {item.usage}
                         </Text>
-                        <MaterialIcons className='right-0 px-2' name="arrow-forward" size={24} color="black" />
+                        <MaterialIcons className='text-primary right-0 px-2' name="arrow-forward" size={24} />
                     </View>
                 </View>
             </Card>

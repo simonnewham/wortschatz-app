@@ -59,20 +59,20 @@ export default function Login() {
     return (
         <View className='bg-background h-full w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
-                <Card className='bg-zinc-900 shadow-gray-900'>
+                <Card className='shadow-gray-900'>
                     <View className='items-center p-4'>
                         <Logo logoSize={30} />
                         <Text className='tracking-tighter italic pb-2 text-white'>
                             Your personal German learning companion
                         </Text>
                     </View>
-                    <View className='items-center m-5 min-w-lg'>
-                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
+                    <View className='items-center'>
+                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-input text-primary'
                             placeholder='Username'
                             placeholderTextColor='gray'
                             value={email}
                             onChangeText={setEmail} />
-                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-white h-10 text-black border-2 border-stone-300'
+                        <TextInput className='p-2 mb-4 w-min-xs w-full max-w-sm rounded-md bg-input text-primary'
                             placeholder='Password'
                             placeholderTextColor='gray'
                             secureTextEntry={true}
@@ -81,30 +81,32 @@ export default function Login() {
                         <Text className='text-center text-xs text-primary/50 p pb-4'>* Min 8 characters, uppercase, alphanumeric</Text>
                         {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-primary/80 hover:bg-primary
-                           items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 items-center flex-row gap-2 justify-center
+                                border-2 border-[#d4fd52] bg-[#d4fd52]/80 hover:bg-[#d4fd52]
+                           ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onLogin}
                             disabled={isLoading}>
                             {isLoading ? (
-                                <ActivityIndicator size="small" color="black" />
+                                <ActivityIndicator className='text-secondary' size="small" />
                             ) : (
                                 <>
-                                    <MaterialIcons name="login" size={24} color="black" />
-                                    <Text className='text-black'>Login</Text>
+                                    <MaterialIcons className='text-secondary' name="login" size={24} />
+                                    <Text className='text-secondary'>Login</Text>
                                 </>
                             )}
                         </Pressable>
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-primary/50 border-2 hover:border-primary
-                                items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 items-center flex-row gap-2 justify-center
+                                border-primary/50 border-2 bg-primary/80 hover:bg-primary
+                           ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onRegister}
                             disabled={isLoading}>
                             {isLoading ? (
-                                <ActivityIndicator size="small" color="white" />
+                                <ActivityIndicator className='text-secondary' size="small" />
                             ) : (
                                 <>
-                                    <MaterialIcons name="person-add" size={24} color="white" />
-                                    <Text className='text-white'>Register</Text>
+                                    <MaterialIcons className='text-secondary' name="person-add" size={24} />
+                                    <Text className='text-secondary'>Register</Text>
                                 </>
                             )}
                         </Pressable>

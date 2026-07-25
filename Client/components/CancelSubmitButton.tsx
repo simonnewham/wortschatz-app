@@ -27,13 +27,15 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
     return (
         <View className='flex-row gap-2 justify-between flex-wrap'>
             <View className="flex-row justify-between gap-2">
-                <Pressable className=" flex-row gap-2 py-1 px-4 rounded-md bg-gray-400 items-center"
+                <Pressable className=" flex-row gap-2 py-1 px-4 rounded-md items-center
+                 border-2 border-gray-400 bg-gray-400/80 hover:bg-gray-400"
                     onPress={() => props.onCancel ? props.onCancel() : router.back()}>
                     <MaterialIcons name="cancel" size={20} color="white" />
                     <Text className="text-white font-semibold">{props.cancelText ?? 'Cancel'}</Text>
                 </Pressable>
                 {props.onDelete &&
-                    <Pressable className="flex-row gap-2 px-4 rounded-md bg-red-500 items-center"
+                    <Pressable className="flex-row gap-2 px-4 rounded-md items-center
+                     border-2 border-red-500 bg-red-500/80 hover:bg-red-500"
                         disabled={enhancing || submitting || deleting}
                         onPress={async () => {
                             setDeleting(true);
@@ -51,7 +53,8 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
             <View className="flex-row gap-2">
                 {props.onEnhance &&
                     <Pressable
-                        className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400`}
+                        className={`flex-row gap-2 py-1 px-4 rounded-md border-2 border-blue-500 
+                            bg-blue-500/80 items-center gap-1 hover:bg-blue-500`}
                         disabled={enhancing || submitting || deleting}
                         onPress={async () => {
                             setEnhancing(true);
@@ -66,7 +69,8 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                     </Pressable>
                 }
                 {props.onSubmit &&
-                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md text-secondary border-2 border-[#d4fd52] bg-[#d4fd52]/80 items-center hover:bg-[#d4fd52]"
+                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md text-secondary items-center 
+                    border-2 border-[#d4fd52] bg-[#d4fd52]/80 hover:bg-[#d4fd52]"
                         disabled={enhancing || submitting || deleting}
                         onPress={async () => {
                             setSubmitting(true);

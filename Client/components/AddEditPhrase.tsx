@@ -16,8 +16,9 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
     return (
         <View>
             <Card>
-                <Text style={[styles.text, { paddingBottom: 5 }]}>🇩🇪 Deutsch</Text>
-                <TextInput style={styles.input}
+                <Text className="text-primary mb-2">🇩🇪 Deutsch</Text>
+                <TextInput className="bg-input"
+                    style={styles.input}
                     multiline={true}
                     value={form.nativePhrase}
                     placeholder='deutsch...'
@@ -25,18 +26,19 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
                     onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
             </Card>
             <Card>
-                <Text style={[styles.text]}>English</Text>
-                <TextInput style={styles.input}
+                <Text className="text-primary mb-2">English</Text>
+                <TextInput className="bg-input"
+                    style={styles.input}
                     multiline={true}
                     value={form.translatePhrase}
                     placeholder='english...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translatePhrase')}></TextInput>
             </Card>
-            {form.id &&
-                <Card className='border-gray-200 w-full'>
-                    <Text className="font-semibold">✨ Wortkiste Result</Text>
-                    <TextInput className="h-full"
+            {form.id && form.enhanceResult &&
+                <Card className='w-full'>
+                    <Text className="text-primary font-semibold mb-2">✨ Wortkiste Result</Text>
+                    <TextInput className="bg-input h-full"
                         numberOfLines={form.enhanceResult ? 25 : 4}
                         value={form.enhanceResult}
                         scrollEnabled={true}

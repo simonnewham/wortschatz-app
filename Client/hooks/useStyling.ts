@@ -16,11 +16,8 @@ export function useStyling() {
 
         },
         input: {
-            height: 40,
-            borderWidth: 1,
             marginVertical: 10,
             padding: 5,
-            width: '100%',
             borderRadius: 4,
         },
         text: {

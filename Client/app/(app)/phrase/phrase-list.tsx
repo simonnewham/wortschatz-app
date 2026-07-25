@@ -37,7 +37,12 @@ export default function PhraseList() {
                     <ActivityIndicator className='p-10' size="large" color="#d4fd52" />
                 ) : (
                     <View className="w-full h-full">
-                        <PageToolbar icon="view-list" title="Phrase List" actionLabel="Add a new phrase" actionIcon="add"
+                        <PageToolbar
+                            onSearchChange={() => { }}
+                            icon="view-list"
+                            title="Phrase List"
+                            actionLabel="Add a new phrase"
+                            actionIcon="add"
                             action={() => router.navigate('/phrase/add-phrase')} />
                         <FlatList
                             showsVerticalScrollIndicator={true}

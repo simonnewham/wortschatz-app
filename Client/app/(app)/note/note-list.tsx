@@ -44,33 +44,39 @@ export default function NoteList() {
                     <ActivityIndicator size="large" color="#d4fd52" />
                 ) : (
                     <View className="w-full">
-                        <PageToolbar icon="view-list" title="Note List" actionLabel="Add a new note" actionIcon="add" action={() => router.navigate('/note/add-note')} />
+                        <PageToolbar
+                            onSearchChange={() => { }}
+                            icon="view-list"
+                            title="Note List"
+                            actionLabel="Add a new note"
+                            actionIcon="add"
+                            action={() => router.navigate('/note/add-note')} />
                         {data.map((note, index) => (
                             <Pressable key={note.id || index.toString()} onPress={() => note.id && router.navigate(`/note/view-note?id=${note.id}`)}>
-                                <Card className="bg-zinc-50 border border-gray-200 hover:bg-accent/20">
+                                <Card className="hover:bg-accent/20">
                                     <View className="flex-row justify-between items-start">
                                         <View className="flex">
-                                            <Text className="text-xl font-bold text-zinc-900 mb-2">{note.title || 'Untitled Note'}</Text>
+                                            <Text className="text-xl font-bold text-primary mb-2">{note.title || 'Untitled Note'}</Text>
                                             {note.description ? (
-                                                <Text className="text-md text-zinc-600 mb-2">{note.description}</Text>
+                                                <Text className="text-md text-primary mb-2">{note.description}</Text>
                                             ) : null}
                                         </View>
                                         <View className="flex-col items-end justify-between border-gray-100">
                                             {note.createdDate && (
-                                                <Text className="text-sm text-gray-400 right-0">
+                                                <Text className="text-sm text-primary right-0">
                                                     Created: {new Date(note.createdDate).toLocaleDateString()}
                                                 </Text>
                                             )}
                                         </View>
                                     </View>
                                     <View className="p-2 flex-row justify-end">
-                                        <MaterialIcons name="arrow-forward" size={24} color="black" />
+                                        <MaterialIcons className="text-primary" name="arrow-forward" size={24} />
                                     </View>
                                 </Card>
                             </Pressable>
                         ))}
                         {data.length === 0 && (
-                            <Text className="text-center text-gray-500 mt-10">➕ No notes found. Add your first note!</Text>
+                            <Text className="text-center text-primary mt-10">➕ No notes found. Add your first note!</Text>
                         )}
                     </View>
                 )}

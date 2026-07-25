@@ -9,7 +9,7 @@ import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Phrase } from '@/models/IPhrase';
 import { useToast } from '@/providers/ToastProvider';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 export default function AddPhrase() {
@@ -53,7 +53,7 @@ export default function AddPhrase() {
         <ContainerView>
             <ContainerDrawer title='Add a new phrase' />
             <ContainerContent>
-                <Card className='border-gray-100'>
+                <Card>
                     <CancelSubmitButton onSubmit={() => onSubmit(false)} onSubmitAndNewAction={() => onSubmit(true)} />
                 </Card>
                 <ScrollView className="flex-col h-full p-2 max-w-full w-full">

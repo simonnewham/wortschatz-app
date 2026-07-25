@@ -40,15 +40,15 @@ export function StreakCard() {
             <View className="flex-row justify-around w-full py-2">
                 <View className="items-center flex-1">
                     <Text className="text-primary mb-1 font-sans">Word Streak</Text>
-                    <Text className="text-lg font-semibold mb-1">
-                        {streaks?.wordStreak && streaks.wordStreak > 0 ? '🔥' : '❄️'}
+                    <Text className="text-lg font-semibold text-primary mb-1">
+                        {streaks?.wordStreak && streaks.wordStreak > 0 ? '🔥 ' : '❄️ '}
                         {streaks?.wordStreak ?? 0}
                     </Text>
                 </View>
                 <View className="items-center flex-1 border-l border-gray-200">
                     <Text className="text-primary mb-1 font-sans">Phrase Streak</Text>
-                    <Text className="text-lg font-semibold mb-1">
-                        {streaks?.phraseStreak && streaks.phraseStreak > 0 ? '🔥' : '❄️'}
+                    <Text className="text-lg font-semibold text-primary  mb-1">
+                        {streaks?.phraseStreak && streaks.phraseStreak > 0 ? '🔥 ' : '❄️ '}
                         {streaks?.phraseStreak ?? 0}
                     </Text>
                 </View>
