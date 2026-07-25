@@ -59,7 +59,7 @@ export default function Login() {
     return (
         <View className='bg-background h-full w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
-                <Card className='shadow-gray-900'>
+                <Card>
                     <View className='items-center p-4'>
                         <Logo logoSize={30} />
                         <Text className='tracking-tighter italic pb-2 text-white'>
@@ -87,11 +87,11 @@ export default function Login() {
                             onPress={onLogin}
                             disabled={isLoading}>
                             {isLoading ? (
-                                <ActivityIndicator className='text-secondary' size="small" />
+                                <ActivityIndicator className='text-black' size="small" />
                             ) : (
                                 <>
-                                    <MaterialIcons className='text-secondary' name="login" size={24} />
-                                    <Text className='text-secondary'>Login</Text>
+                                    <MaterialIcons className='text-black' name="login" size={24} />
+                                    <Text className='text-black'>Login</Text>
                                 </>
                             )}
                         </Pressable>

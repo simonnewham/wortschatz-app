@@ -12,20 +12,20 @@ export function AddEditNote({ note, handleFormUpdate }: AddEditNoteProps) {
         <View>
             <Card>
                 <Text className="font-sans text-primary text-lg">🇩🇪 Title</Text>
-                <TextInput className="border-2 bg-input rounded-md p-2"
+                <TextInput className="bg-input rounded-md p-2"
                     value={note?.title}
                     placeholder='Title...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'title')} />
                 <Text className="font-sans text-primary text-lg">Description</Text>
-                <TextInput className="border-2 bg-input rounded-md p-2" style={{ height: 80 }}
+                <TextInput className="bg-input rounded-md p-2" style={{ height: 80 }}
                     multiline={true}
                     value={note?.description}
                     placeholder='Description...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'description')} />
                 <Text className="font-sans text-primary text-lg">Notes</Text>
-                <TextInput className="border-2 bg-input rounded-md p-2 flex-grow h-auto"
+                <TextInput className="bg-input rounded-md p-2 flex-grow h-auto"
                     multiline={true}
                     numberOfLines={25}
                     value={note?.notes}

@@ -17,17 +17,16 @@ export function NavigationDrawer() {
             drawerPosition: 'left',
             drawerStyle: {
                 width: isDesktop ? 280 : "85%",
-                borderRightWidth: 0,
-                backgroundColor: '#1f2937'
+                borderRightWidth: 0
             },
             sceneStyle: {
-                backgroundColor: '#1f2937'
+                backgroundColor: '#232323'
             },
             headerShown: !isDesktop,
             headerShadowVisible: true,
             headerTintColor: 'white',
-            headerTitleStyle: { color: 'white' },
-            headerStyle: { backgroundColor: '#1f2937' },
+            headerTitleStyle: { color: '#232323' },
+            headerStyle: { backgroundColor: '#232323' },
             headerTitle: () => <Logo textSize='2xl' />
         }}
             drawerContent={(props) => <CustomDrawerContent {...props} />}>
@@ -53,11 +52,11 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <Logo logoSize={25} textSize='2xl' />
                     {!isDesktop &&
                         <Pressable className='pr-4 items-center' onPress={props.navigation.closeDrawer}>
-                            <MaterialIcons name="close" size={28} color="white" />
+                            <MaterialIcons className='text-primary' name="close" size={28} />
                         </Pressable>}
                 </View>
                 <Pressable className='pt-2 items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
-                    <MaterialIcons name="home" size={24} color="white" />
+                    <MaterialIcons className='text-primary' name="home" size={24} />
                     <Text className='text-lg text-primary'>Home</Text>
                 </Pressable>
                 {/* <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/add-word')}>
@@ -73,23 +72,23 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <Text className='text-lg text-white'>Add new note</Text>
                 </Pressable> */}
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
-                    <MaterialIcons name="abc" size={24} color="white" />
+                    <MaterialIcons className='text-primary' name="abc" size={24} />
                     <Text className='text-lg text-primary'>Wörter</Text>
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/phrase/phrase-list')}>
-                    <MaterialIcons name="list" size={24} color="white" />
+                    <MaterialIcons className='text-primary' name="list" size={24} />
                     <Text className='text-lg text-primary'>Phrasen</Text>
                 </Pressable>
                 <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
-                    <MaterialIcons name="list-alt" size={24} color="white" />
+                    <MaterialIcons className='text-primary' name="list-alt" size={24} />
                     <Text className='text-lg text-primary'>Notizen</Text>
                 </Pressable>
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
-                    <MaterialIcons name="settings" size={24} color="white" />
-                    <Text className='text-lg text-white'>Einstellungen</Text>
+                    <MaterialIcons className='text-primary' name="settings" size={24} />
+                    <Text className='text-lg text-primary'>Einstellungen</Text>
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={onSignOut}>
-                    <MaterialIcons name="logout" size={24} color="white" />
+                    <MaterialIcons className='text-primary' name="logout" size={24} />
                     <Text className='text-lg text-primary'>Ausloggen</Text>
                 </Pressable>
             </DrawerContentScrollView >

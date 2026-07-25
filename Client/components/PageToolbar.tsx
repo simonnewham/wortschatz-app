@@ -69,7 +69,7 @@ export function PageToolbar(props: {
                     <Pressable onPress={props.action} className="p-2 rounded-md bg-[#d4fd52]/80 hover:bg-[#d4fd52] 
                     flex-row justify-center items-center border-2 border-[#d4fd52]" >
                         <MaterialIcons name={props.actionIcon as any} className="animate-pulse text-secondary" size={20} color="black" />
-                        <Text className="font-semibold text-secondary ml-1">{props.actionLabel}</Text>
+                        <Text className="font-semibold text-black ml-1">{props.actionLabel}</Text>
                     </Pressable>
                 </View>
             )}

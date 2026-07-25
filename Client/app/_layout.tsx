@@ -1,10 +1,10 @@
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ToastProvider } from '@/providers/ToastProvider';
-import { Slot } from 'expo-router';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import '@/global.css';
@@ -31,10 +31,10 @@ export default function AppRoot() {
   return (
     <AuthProvider>
       <ToastProvider>
-    <GluestackUIProvider mode="dark">
-      <Slot />
-    </GluestackUIProvider>
-    </ToastProvider>
+        <GluestackUIProvider mode="dark">
+          <Slot />
+        </GluestackUIProvider>
+      </ToastProvider>
     </AuthProvider>
   );
 }

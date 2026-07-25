@@ -1,5 +1,4 @@
 import Drawer from 'expo-router/drawer';
-import React from 'react';
 
 interface ContainerDrawerProps {
     title: string;

@@ -11,7 +11,7 @@ interface ICardProps {
 }
 
 export function Card(props: PropsWithChildren<ICardProps>) {
-    return <View className={"p-1 mt-2 mb-2 w-full rounded-lg bg-card border-accent shadow-sm shadow-gray border-2 " + props.className}>
+    return <View className={"p-1 mt-2 mb-2 w-full rounded-lg bg-card border-accent shadow-sm shadow-accent border-2 " + props.className}>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             {props.icon && <MaterialIcons className="text-primary" name={props.icon} size={24} />}
             {props.title &&
