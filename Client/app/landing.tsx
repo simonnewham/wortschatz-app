@@ -29,7 +29,7 @@ const HeroSection = () => {
         <View style={{ minHeight: windowHeight * 0.8 }} className="relative w-full overflow-hidden flex-1 
             justify-center items-center px-4">
             <View>
-                <Logo textSize='5xl' logoSize={50} />
+                <Logo />
                 <Animated.View entering={FadeInUp.delay(100).duration(500).springify()}>
                     <Text className="text-white text-2xl md:text-6xl font-extrabold tracking-tighter mb-2">
                         Stop forgetting words.

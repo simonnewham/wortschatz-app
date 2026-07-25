@@ -9,7 +9,7 @@ import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { Word } from '@/models/IWord';
 import { useToast } from '@/providers/ToastProvider';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 export default function AddWord() {
@@ -53,7 +53,7 @@ export default function AddWord() {
         <ContainerView>
             <ContainerDrawer title='Add a new word' />
             <ContainerContent>
-                <Card className='border-gray-200'>
+                <Card>
                     <CancelSubmitButton onSubmit={() => onSubmit(false)} onSubmitAndNewAction={() => onSubmit(true)} />
                 </Card>
                 <ScrollView className='w-full h-full'>

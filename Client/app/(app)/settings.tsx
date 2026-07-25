@@ -8,7 +8,7 @@ import { useAuthSession } from '@/providers/AuthProvider';
 import { useToast } from '@/providers/ToastProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, Text, TextInput } from 'react-native';
 import { Card } from '../../components/Card';
 
@@ -35,7 +35,7 @@ export default function SettingsButton() {
         <ContainerView>
             <ContainerContent>
                 <ContainerDrawer title='Settings' />
-                <Card className='border-gray-200'>
+                <Card className='border-accent'>
                     <CancelSubmitButton onSubmit={onSubmit}
                         submitText='Save'
                         submitIcon='save'
@@ -43,23 +43,23 @@ export default function SettingsButton() {
                         onCancel={() => router.replace('/(app)')} />
                 </Card>
                 <ScrollView className='w-full' style={[styles.formContainer]}>
-                    <Card title='Settings' icon={'settings'} className='border-gray-200'>
-                        <Text className='pb-2 font-semibold'>Username</Text>
-                        <Text className='pb-2 text-md'>{form.userName}</Text>
-                        <Text className='font-semibold'>First name</Text>
-                        <TextInput style={styles.input}
+                    <Card title='Settings' icon={'settings'} className='border-accent'>
+                        <Text className='pb-2 font-semibold text-primary'>Username</Text>
+                        <Text className='pb-2 text-md text-primary'>{form.userName}</Text>
+                        <Text className='font-semibold text-primary'>First name</Text>
+                        <TextInput className='bg-input' style={styles.input}
                             value={form.firstName}
                             placeholder='First name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'firstName')} />
-                        <Text className='font-semibold'>Last name</Text>
-                        <TextInput style={styles.input}
+                        <Text className='font-semibold text-primary'>Last name</Text>
+                        <TextInput className='bg-input' style={styles.input}
                             value={form.lastName}
                             placeholder='Last name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'lastName')} />
-                        <Text className='font-semibold'>Gemini API Key</Text>
-                        <TextInput style={styles.input}
+                        <Text className='font-semibold text-primary'>Gemini API Key</Text>
+                        <TextInput className='bg-input' style={styles.input}
                             value={form.lastName}
                             secureTextEntry
                             placeholder='Gemini API Key...'

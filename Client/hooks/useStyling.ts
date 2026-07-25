@@ -1,9 +1,9 @@
-import { useTheme } from '@react-navigation/native';
+//import { useTheme } from '@react-navigation/native';
 import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 export function useStyling() {
-    const theme = useTheme();
+    //    const theme = useTheme();
 
     const styles = useMemo(() => StyleSheet.create({
         container: {
@@ -22,13 +22,9 @@ export function useStyling() {
             padding: 5,
             width: '100%',
             borderRadius: 4,
-            backgroundColor: theme.colors.card,
-            color: theme.colors.text,
-            borderColor: theme.colors.text,
         },
         text: {
             fontSize: 14,
-            color: theme.colors.text
         },
         textInput: {
             backgroundColor: "#212125",
@@ -58,12 +54,9 @@ export function useStyling() {
         picker: {
             width: '100%',
             padding: 5,
-            marginVertical: 10,
-            backgroundColor: theme.colors.card,
-            color: theme.colors.text,
-            borderColor: theme.colors.text,
+            marginVertical: 10
         }
-    }), [theme]);
+    }), []);
 
     return styles;
 }

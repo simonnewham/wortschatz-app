@@ -6,6 +6,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/global.css';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -28,8 +31,10 @@ export default function AppRoot() {
   return (
     <AuthProvider>
       <ToastProvider>
-        <Slot />
-      </ToastProvider>
+    <GluestackUIProvider mode="dark">
+      <Slot />
+    </GluestackUIProvider>
+    </ToastProvider>
     </AuthProvider>
   );
 }

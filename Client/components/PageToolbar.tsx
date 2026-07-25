@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
 export function PageToolbar(props: {
@@ -24,10 +24,10 @@ export function PageToolbar(props: {
         <View className="flex-row items-center justify-between w-full flex-wrap gap-2">
             {props.onSearchChange && (
                 <View className="flex-row items-center flex-wrap gap-2">
-                    <View className="flex-row items-center border border-zinc-200 rounded-md bg-white px-2 flex-grow max-w-xs">
-                        <MaterialIcons className="pr-1" name="search" size={20} color="black" />
+                    <View className="flex-row items-center border border-zinc-200 rounded-md bg-input px-2 flex-grow max-w-xs">
+                        <MaterialIcons className="pr-1 text-primary" name="search" size={20} />
                         <TextInput
-                            className="py-2 text-black flex-grow"
+                            className="py-2 text-primary flex-grow bg-input"
                             placeholder={props.searchPlaceholder ?? "Search..."}
                             placeholderTextColor="#888"
                             value={searchQuery.searchTerm}
@@ -66,9 +66,9 @@ export function PageToolbar(props: {
 
             {props.actionLabel && (
                 <View>
-                    <Pressable onPress={props.action} className="p-2 rounded-md bg-accent/80 hover:bg-accent flex-row justify-center items-center" >
-                        <MaterialIcons name={props.actionIcon as any} className="animate-pulse" size={20} color="black" />
-                        <Text className="font-semibold text-black ml-1">{props.actionLabel}</Text>
+                    <Pressable onPress={props.action} className="p-2 rounded-md bg-[#d4fd52]/80 hover:bg-[#d4fd52] flex-row justify-center items-center" >
+                        <MaterialIcons name={props.actionIcon as any} className="animate-pulse text-secondary" size={20} color="black" />
+                        <Text className="font-semibold text-secondary ml-1">{props.actionLabel}</Text>
                     </Pressable>
                 </View>
             )}

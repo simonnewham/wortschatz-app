@@ -3,7 +3,7 @@ import { useAuthSession } from '@/providers/AuthProvider';
 import authService from '@/services/AuthService';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Card } from '../components/Card';
@@ -57,7 +57,7 @@ export default function Login() {
     });
 
     return (
-        <View className='bg-gray-900 h-full w-full items-center justify-center'>
+        <View className='bg-background h-full w-full items-center justify-center'>
             <View className='max-w-lg w-full'>
                 <Card className='bg-zinc-900 shadow-gray-900'>
                     <View className='items-center p-4'>
@@ -78,10 +78,10 @@ export default function Login() {
                             secureTextEntry={true}
                             value={password}
                             onChangeText={setPassword} />
-                        <Text className='text-center text-xs text-accent/50 p pb-4'>* Min 8 characters, uppercase, alphanumeric</Text>
+                        <Text className='text-center text-xs text-primary/50 p pb-4'>* Min 8 characters, uppercase, alphanumeric</Text>
                         {error && <Text className='text-red-500 font-bold p-2 font-sans'>Invalid login, please try again.</Text>}
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-accent/80 hover:bg-accent
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 bg-primary/80 hover:bg-primary
                            items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onLogin}
                             disabled={isLoading}>
@@ -95,7 +95,7 @@ export default function Login() {
                             )}
                         </Pressable>
                         <Pressable
-                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-accent/50 border-2 hover:border-accent
+                            className={`h-10 w-min-xs w-full max-w-sm rounded-md mt-2 border-primary/50 border-2 hover:border-primary
                                 items-center flex-row gap-2 justify-center ${isLoading ? 'opacity-70' : ''}`}
                             onPress={onRegister}
                             disabled={isLoading}>
@@ -111,10 +111,11 @@ export default function Login() {
                         {/* <Text className='font-sans pt-5 italic text-white underline'>
                             Forgot Password?
                         </Text> */}
+                        <View className='items-center mt-4'>
+                            <Text className='text-center text-xs text-primary/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
+                        </View>
                     </View>
-                    <View>
-                        <Text className='text-center text-xs text-white/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
-                    </View>
+
                 </Card>
             </View>
         </View>

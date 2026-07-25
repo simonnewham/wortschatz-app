@@ -8,7 +8,7 @@ import { useBaseEntity } from '@/hooks/useBaseEntity';
 import { useEntityState } from '@/hooks/useEntityState';
 import { Word } from '@/models/IWord';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { ContainerContent } from '../../../components/ContainerContent';
 
@@ -73,7 +73,7 @@ export default function ViewWord() {
                 <PageToolbar icon='menu-book' title='View Word' showBackButton={true} />
                 {entityState.current ? (
                     <View className="w-full h-full items-center ">
-                        <Card className='border-gray-100'>
+                        <Card>
                             <CancelSubmitButton submitText='Save'
                                 onSubmit={onSubmit}
                                 onDelete={onDeleteWord}

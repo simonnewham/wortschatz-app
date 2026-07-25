@@ -27,7 +27,7 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
     return (
         <View className='flex-row gap-2 justify-between flex-wrap'>
             <View className="flex-row justify-between gap-2">
-                <Pressable className=" flex-row  gap-2 py-1 px-4 rounded-md bg-gray-400 items-center"
+                <Pressable className=" flex-row gap-2 py-1 px-4 rounded-md bg-gray-400 items-center"
                     onPress={() => props.onCancel ? props.onCancel() : router.back()}>
                     <MaterialIcons name="cancel" size={20} color="white" />
                     <Text className="text-white font-semibold">{props.cancelText ?? 'Cancel'}</Text>
@@ -49,7 +49,6 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                 }
             </View>
             <View className="flex-row gap-2">
-
                 {props.onEnhance &&
                     <Pressable
                         className={`flex-row gap-2 py-1 px-4 rounded-md bg-blue-500 items-center gap-1 hover:bg-blue-400`}
@@ -67,7 +66,7 @@ export function CancelSubmitButton(props: ICancelSubmitButtonProps) {
                     </Pressable>
                 }
                 {props.onSubmit &&
-                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md border-2 border-accent bg-accent/80 items-center hover:bg-accent"
+                    <Pressable className="flex-row gap-2 py-1 px-4 rounded-md text-secondary border-2 border-[#d4fd52] bg-[#d4fd52]/80 items-center hover:bg-[#d4fd52]"
                         disabled={enhancing || submitting || deleting}
                         onPress={async () => {
                             setSubmitting(true);

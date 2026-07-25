@@ -15,15 +15,15 @@ export function AddEditWord(props: IAddWordComponentProps) {
 
     return (
         <View>
-            <Card className='border-gray-200'>
-                <Text style={[styles.text]}>🇩🇪 Deutsch*</Text>
-                <TextInput style={styles.input}
+            <Card>
+                <Text className="text-primary" style={[styles.text]}>🇩🇪 Deutsch</Text>
+                <TextInput className="bg-input" style={styles.input}
                     value={form.nativeWord}
                     placeholder='Deutsches Wort...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'nativeWord')}></TextInput>
             </Card>
-            <Card className='border-gray-200'>
+            <Card>
                 {/* <View style={{ flexDirection: 'row', gap: 10, marginVertical: 10 }}>
                     <Label style={[styles.text]}>noun</Label>
                     <Switch onValueChange={setIsEnabled} value={isEnabled}></Switch>
@@ -39,14 +39,14 @@ export function AddEditWord(props: IAddWordComponentProps) {
                         )}
                     </Picker>
                 } */}
-                <Text style={[styles.text]}>Translation</Text>
-                <TextInput style={styles.input}
+                <Text className="text-primary" style={[styles.text]}>Translation</Text>
+                <TextInput className="bg-input" style={styles.input}
                     value={form.translateWord}
                     placeholder='Translation...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
-                <Text style={[styles.text]}>Usage</Text>
-                <TextInput style={styles.input}
+                <Text className="text-primary" style={[styles.text]}>Usage</Text>
+                <TextInput className="bg-input" style={styles.input}
                     placeholder='Usage...'
                     placeholderTextColor={'gray'}
                     value={form.usage}
@@ -54,8 +54,8 @@ export function AddEditWord(props: IAddWordComponentProps) {
             </Card>
             {
                 form.id &&
-                <Card className='border-gray-200 w-full'>
-                    <Text className="font-semibold">✨Wortkiste Result</Text>
+                <Card className='w-full'>
+                    <Text className="text-primary font-semibold">✨Wortkiste Result</Text>
                     <TextInput
                         numberOfLines={form.enhanceResult ? 25 : 4}
                         value={form.enhanceResult}

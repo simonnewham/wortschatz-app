@@ -2,10 +2,9 @@ import { Logo } from '@/components/Logo';
 import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { MaterialIcons } from '@expo/vector-icons';
-import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
 import { router } from "expo-router";
-import { Drawer } from 'expo-router/drawer';
-import React, { useMemo } from 'react';
+import { Drawer, DrawerContentComponentProps, DrawerContentScrollView } from 'expo-router/drawer';
+import { useMemo } from 'react';
 import { Pressable, Text, View, useWindowDimensions } from 'react-native';
 
 export function NavigationDrawer() {
@@ -48,10 +47,10 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
     }
 
     return (
-        <View className='bg-gray-800 flex-1 h-full'>
+        <View className='bg-accent flex-1 h-full'>
             <DrawerContentScrollView {...props}>
                 <View className='flex-row w-full items-center justify-between pb-4'>
-                    <Logo textSize='2xl' />
+                    <Logo logoSize={25} textSize='2xl' />
                     {!isDesktop &&
                         <Pressable className='pr-4 items-center' onPress={props.navigation.closeDrawer}>
                             <MaterialIcons name="close" size={28} color="white" />
@@ -59,7 +58,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </View>
                 <Pressable className='pt-2 items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
                     <MaterialIcons name="home" size={24} color="white" />
-                    <Text className='text-lg text-white'>Home</Text>
+                    <Text className='text-lg text-primary'>Home</Text>
                 </Pressable>
                 {/* <Pressable className='items-center' style={[styles.headerButton]} onPress={() => router.replace('/word/add-word')}>
                     <MaterialIcons name="add" size={24} color="white" />
@@ -75,15 +74,15 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </Pressable> */}
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons name="abc" size={24} color="white" />
-                    <Text className='text-lg text-white'>Wörter</Text>
+                    <Text className='text-lg text-primary'>Wörter</Text>
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/phrase/phrase-list')}>
                     <MaterialIcons name="list" size={24} color="white" />
-                    <Text className='text-lg text-white'>Phrasen</Text>
+                    <Text className='text-lg text-primary'>Phrasen</Text>
                 </Pressable>
                 <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons name="list-alt" size={24} color="white" />
-                    <Text className='text-lg text-white'>Notizen</Text>
+                    <Text className='text-lg text-primary'>Notizen</Text>
                 </Pressable>
                 <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
                     <MaterialIcons name="settings" size={24} color="white" />
@@ -91,11 +90,11 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 </Pressable>
                 <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={onSignOut}>
                     <MaterialIcons name="logout" size={24} color="white" />
-                    <Text className='text-lg text-white'>Ausloggen</Text>
+                    <Text className='text-lg text-primary'>Ausloggen</Text>
                 </Pressable>
             </DrawerContentScrollView >
             <View>
-                <Text className='text-center text-xs text-accent/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
+                <Text className='text-center text-xs text-primary/50 p pb-4'>Version {process.env.EXPO_PUBLIC_VERSION}</Text>
             </View>
         </View>
     );

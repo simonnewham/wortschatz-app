@@ -8,7 +8,7 @@ export function Logo(props: { textSize?: string; logoSize?: number }) {
             <Text className={`text-white text-${props.textSize ?? '4xl'} font-semibold tracking-tighter`}>
                 Wort
             </Text>
-            <Text className={`text-accent text-${props.textSize ?? '4xl'} font-bold tracking-tighter`}>
+            <Text className={`text-[#d4fd52] text-${props.textSize ?? '4xl'} font-bold tracking-tighter`}>
                 ki
             </Text>
             <Text className={`text-white text-${props.textSize ?? '4xl'} tracking-tighter`}>

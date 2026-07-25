@@ -15,7 +15,7 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
 
     return (
         <View>
-            <Card className='border-gray-200'>
+            <Card>
                 <Text style={[styles.text, { paddingBottom: 5 }]}>🇩🇪 Deutsch</Text>
                 <TextInput style={styles.input}
                     multiline={true}
@@ -24,7 +24,7 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'nativePhrase')}></TextInput>
             </Card>
-            <Card className='border-gray-200'>
+            <Card>
                 <Text style={[styles.text]}>English</Text>
                 <TextInput style={styles.input}
                     multiline={true}

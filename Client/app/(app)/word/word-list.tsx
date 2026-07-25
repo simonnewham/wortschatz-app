@@ -25,13 +25,7 @@ export default function WordList() {
         }
 
         if (currentDate) {
-            //const parts = currentDate.split('-');
-            // const year = parseInt(parts[0]);
-            // const month = parseInt(parts[1]) - 1;
-            // const day = parseInt(parts[2]);
-            // const selected = new Date(Date.UTC(year, month, day));
             const next = new Date(currentDate);
-
             filters.push(`CreatedDate eq ${next.toISOString()}`);
         }
 

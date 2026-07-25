@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
+//import { useTheme } from "@react-navigation/native";
 import { PropsWithChildren } from "react";
 import { Text, View } from "react-native";
 
@@ -11,13 +11,11 @@ interface ICardProps {
 }
 
 export function Card(props: PropsWithChildren<ICardProps>) {
-    const theme = useTheme();
-
-    return <View className={"p-1 mt-2 mb-2 w-full rounded-lg bg-neutral-100 shadow-sm shadow-gray border-2 " + props.className}>
+    return <View className={"p-1 mt-2 mb-2 w-full rounded-lg bg-card border-accent shadow-sm shadow-gray border-2 " + props.className}>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
-            {props.icon && <MaterialIcons name={props.icon} size={24} color={theme.colors.text} />}
+            {props.icon && <MaterialIcons className="text-primary" name={props.icon} size={24} />}
             {props.title &&
-                <Text style={{ color: theme.colors.text, fontSize: 24, marginBottom: 5 }}>{props.title}</Text>
+                <Text className="text-primary" style={{ fontSize: 24, marginBottom: 5 }}>{props.title}</Text>
             }</View>
         <View className="w-full">
             {props.children}
