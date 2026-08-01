@@ -1,5 +1,5 @@
 import userService from '@/services/UserService';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Card } from './Card';
 
@@ -33,8 +33,8 @@ const ActivityTracker = () => {
     };
 
     return (
-        <Card className="border-gray-200 p-4">
-            <Text className="text-lg font-sans mb-4 text-center"> 🔥{currentMonthName} Activity</Text>
+        <Card className="h-full">
+            <Text className="text-lg text-primary font-sans mb-4 text-center"> 🔥{currentMonthName} Activity</Text>
             <View style={styles.grid}>
                 {daysInMonth.map(day => (
                     <View
@@ -48,7 +48,7 @@ const ActivityTracker = () => {
                     </View>
                 ))}
             </View>
-            <View className="flex-row justify-center mt-4">
+            {/* <View className="flex-row justify-center m-4">
                 <View className="flex-row items-center mr-4">
                     <View style={[styles.daySquare, styles.activeDay, { width: 12, height: 12, marginRight: 4 }]} />
                     <Text className="text-xs text-gray-500">Note Added</Text>
@@ -57,7 +57,7 @@ const ActivityTracker = () => {
                     <View style={[styles.daySquare, styles.inactiveDay, { width: 12, height: 12, marginRight: 4 }]} />
                     <Text className="text-xs text-gray-500">No Activity</Text>
                 </View>
-            </View>
+            </View> */}
         </Card>
     );
 };

@@ -1,5 +1,4 @@
 import { Logo } from '@/components/Logo';
-import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from "expo-router";
@@ -35,7 +34,7 @@ export function NavigationDrawer() {
 }
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
-    const styles = useStyling();
+
     const dimensions = useWindowDimensions();
     const { logout } = useAuthSession();
 
@@ -55,7 +54,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                             <MaterialIcons className='text-primary' name="close" size={28} />
                         </Pressable>}
                 </View>
-                <Pressable className='pt-2 items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/(app)')}>
+                <Pressable className='pt-2 py-2 items-center rounded-lg hover:bg-accent/20 flex-row gap-2' onPress={() => router.replace('/(app)')}>
                     <MaterialIcons className='text-primary' name="home" size={24} />
                     <Text className='text-lg text-primary'>Home</Text>
                 </Pressable>
@@ -71,23 +70,27 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                     <MaterialIcons name="add" size={24} color="white" />
                     <Text className='text-lg text-white'>Add new note</Text>
                 </Pressable> */}
-                <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/word/word-list')}>
+                <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={() => router.replace('/word/word-list')}>
                     <MaterialIcons className='text-primary' name="abc" size={24} />
                     <Text className='text-lg text-primary'>Wörter</Text>
                 </Pressable>
-                <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/phrase/phrase-list')}>
+                <Pressable className='items-center rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={() => router.replace('/phrase/phrase-list')}>
                     <MaterialIcons className='text-primary' name="list" size={24} />
                     <Text className='text-lg text-primary'>Phrasen</Text>
                 </Pressable>
-                <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/note/note-list')}>
+                <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={() => router.replace('/note/note-list')}>
                     <MaterialIcons className='text-primary' name="list-alt" size={24} />
                     <Text className='text-lg text-primary'>Notizen</Text>
                 </Pressable>
-                <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={() => router.replace('/settings')}>
+                <Pressable className='items-center pb-4 rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={() => router.replace('/diary-entry/diary-entry-list')}>
+                    <MaterialIcons className='text-primary' name="book" size={24} />
+                    <Text className='text-lg text-primary'>Tagebuch</Text>
+                </Pressable>
+                <Pressable className='items-center mt-2 rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={() => router.replace('/settings')}>
                     <MaterialIcons className='text-primary' name="settings" size={24} />
                     <Text className='text-lg text-primary'>Einstellungen</Text>
                 </Pressable>
-                <Pressable className='items-center rounded-lg hover:bg-accent/20' style={[styles.headerButton]} onPress={onSignOut}>
+                <Pressable className='items-center rounded-lg hover:bg-accent/20 py-2 flex-row gap-2' onPress={onSignOut}>
                     <MaterialIcons className='text-primary' name="logout" size={24} />
                     <Text className='text-lg text-primary'>Ausloggen</Text>
                 </Pressable>

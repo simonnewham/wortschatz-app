@@ -1,4 +1,3 @@
-import { useStyling } from "@/hooks/useStyling";
 import { Phrase } from "@/models/IPhrase";
 import { Text, TextInput, View } from 'react-native';
 import { Card } from "./Card";
@@ -9,16 +8,14 @@ export interface IAddPhraseComponentProps {
 }
 
 export function AddEditPhrase(props: IAddPhraseComponentProps) {
-    const styles = useStyling();
-
     const { form, handleFormUpdate } = props;
 
     return (
         <View>
             <Card>
-                <Text className="text-primary mb-2">🇩🇪 Deutsch</Text>
-                <TextInput className="bg-input"
-                    style={styles.input}
+                <Text className="text-primary mb-2">Deutsch</Text>
+                <TextInput
+                    className="bg-input p-2 rounded-md"
                     multiline={true}
                     value={form.nativePhrase}
                     placeholder='deutsch...'
@@ -27,8 +24,8 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
             </Card>
             <Card>
                 <Text className="text-primary mb-2">English</Text>
-                <TextInput className="bg-input"
-                    style={styles.input}
+                <TextInput
+                    className="bg-input p-2 rounded-md"
                     multiline={true}
                     value={form.translatePhrase}
                     placeholder='english...'
@@ -38,7 +35,8 @@ export function AddEditPhrase(props: IAddPhraseComponentProps) {
             {form.id && form.enhanceResult &&
                 <Card className='w-full'>
                     <Text className="text-primary font-semibold mb-2">✨ Wortkiste Result</Text>
-                    <TextInput className="bg-input h-full"
+                    <TextInput
+                        className="bg-input p-2 rounded-md h-full"
                         numberOfLines={form.enhanceResult ? 25 : 4}
                         value={form.enhanceResult}
                         scrollEnabled={true}

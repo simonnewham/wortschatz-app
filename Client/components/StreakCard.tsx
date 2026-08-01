@@ -35,7 +35,7 @@ export function StreakCard() {
     }
 
     return (
-        <Card className='p-4'>
+        <Card className='p-4 h-full'>
             <Text className="text-lg font-sans mb-2 text-center text-primary">⚡ Activity Streaks</Text>
             <View className="flex-row justify-around w-full py-2">
                 <View className="items-center flex-1">

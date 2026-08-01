@@ -3,7 +3,6 @@ import { ContainerContent } from '@/components/ContainerContent';
 import { ContainerDrawer } from '@/components/ContainerDrawer';
 import ContainerView from '@/components/ContainerView';
 import { Status } from '@/constants/Status';
-import { useStyling } from '@/hooks/useStyling';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { useToast } from '@/providers/ToastProvider';
 import baseEntityDataService from '@/services/BaseEntityDataService';
@@ -13,7 +12,6 @@ import { ScrollView, Text, TextInput } from 'react-native';
 import { Card } from '../../components/Card';
 
 export default function SettingsButton() {
-    const styles = useStyling();
     const { userInfo, refreshUserInfo } = useAuthSession();
     const toast = useToast();
 
@@ -42,24 +40,24 @@ export default function SettingsButton() {
                         cancelText='Back'
                         onCancel={() => router.replace('/(app)')} />
                 </Card>
-                <ScrollView className='w-full' style={[styles.formContainer]}>
+                <ScrollView className='w-full'>
                     <Card title='Settings' icon={'settings'} className='border-accent'>
-                        <Text className='pb-2 font-semibold text-primary'>Username</Text>
-                        <Text className='pb-2 text-md text-primary'>{form.userName}</Text>
-                        <Text className='font-semibold text-primary'>First name</Text>
-                        <TextInput className='bg-input' style={styles.input}
+                        <Text className='py-2 font-semibold text-primary'>Username</Text>
+                        <Text className='text-md text-primary'>{form.userName}</Text>
+                        <Text className='py-2 font-semibold text-primary'>First name</Text>
+                        <TextInput className='bg-input p-2 rounded-md'
                             value={form.firstName}
                             placeholder='First name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'firstName')} />
-                        <Text className='font-semibold text-primary'>Last name</Text>
-                        <TextInput className='bg-input' style={styles.input}
+                        <Text className='py-2 font-semibold text-primary'>Last name</Text>
+                        <TextInput className='bg-input p-2 rounded-md'
                             value={form.lastName}
                             placeholder='Last name...'
                             placeholderTextColor={'gray'}
                             onChangeText={text => handleFormUpdate(text, 'lastName')} />
-                        <Text className='font-semibold text-primary'>Gemini API Key</Text>
-                        <TextInput className='bg-input' style={styles.input}
+                        <Text className='py-2 font-semibold text-primary'>Gemini API Key</Text>
+                        <TextInput className='bg-input p-2 rounded-md'
                             value={form.lastName}
                             secureTextEntry
                             placeholder='Gemini API Key...'

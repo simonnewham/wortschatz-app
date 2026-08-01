@@ -1,4 +1,3 @@
-import { useStyling } from "@/hooks/useStyling";
 import { Word } from "@/models/IWord";
 import { Text, TextInput, View } from 'react-native';
 import { Card } from "./Card";
@@ -9,15 +8,14 @@ export interface IAddWordComponentProps {
 }
 
 export function AddEditWord(props: IAddWordComponentProps) {
-    const styles = useStyling();
-
     const { form, handleFormUpdate } = props;
 
     return (
         <View>
             <Card>
-                <Text className="text-primary" style={[styles.text]}>🇩🇪 Deutsch</Text>
-                <TextInput className="bg-input" style={styles.input}
+                <Text className="text-primary">Deutsch</Text>
+                <TextInput
+                    className="bg-input p-2 rounded-md"
                     value={form.nativeWord}
                     placeholder='Deutsches Wort...'
                     placeholderTextColor={'gray'}
@@ -39,14 +37,14 @@ export function AddEditWord(props: IAddWordComponentProps) {
                         )}
                     </Picker>
                 } */}
-                <Text className="text-primary" style={[styles.text]}>Translation</Text>
-                <TextInput className="bg-input" style={styles.input}
+                <Text className="text-primary">Translation</Text>
+                <TextInput className="bg-input p-2 rounded-md"
                     value={form.translateWord}
                     placeholder='Translation...'
                     placeholderTextColor={'gray'}
                     onChangeText={text => handleFormUpdate(text, 'translateWord')}></TextInput>
-                <Text className="text-primary" style={[styles.text]}>Usage</Text>
-                <TextInput className="bg-input" style={styles.input}
+                <Text className="text-primary">Usage</Text>
+                <TextInput className="bg-input p-2 rounded-md"
                     placeholder='Usage...'
                     placeholderTextColor={'gray'}
                     value={form.usage}

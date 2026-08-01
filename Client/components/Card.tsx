@@ -15,7 +15,7 @@ export function Card(props: PropsWithChildren<ICardProps>) {
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             {props.icon && <MaterialIcons className="text-primary" name={props.icon} size={24} />}
             {props.title &&
-                <Text className="text-primary" style={{ fontSize: 24, marginBottom: 5 }}>{props.title}</Text>
+                <Text className="py-2 text-primary text-2xl font-semibold">{props.title}</Text>
             }</View>
         <View className="w-full">
             {props.children}
